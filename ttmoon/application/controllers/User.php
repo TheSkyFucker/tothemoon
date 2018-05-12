@@ -191,11 +191,12 @@ class User extends CI_Controller {
 	 */
 	public function register_list()
 	{
-		//login
+		//register_list
 		try
 		{
+			$token = get_token();
 			$this->load->model('User_model','user');
-			$data = $this->user->register_list(get_token());
+			$data = $this->user->register_list($token);
 		}
 		catch(Exception $e)
 		{
