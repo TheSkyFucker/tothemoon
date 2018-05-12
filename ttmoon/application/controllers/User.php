@@ -208,4 +208,61 @@ class User extends CI_Controller {
 
 	}
 
+	/**
+	 * 处理申请
+	 */
+	public function handle_application()
+	{
+		//config
+		$rules = array(
+			array(
+				'field' => 'username',
+				'label' => '用户名',
+				'rules' => 'required'
+				),
+			array(
+				'field' => 'result',
+				'label' => '处理结果',
+				'rules' => 'required'
+				)
+		);
+
+		//handle
+		try
+		{
+			//get input
+			$form = array(
+				'username' => $this->input->get('username'),
+				'result' => $this->input->get('result')
+				);
+
+			//check form
+			$this->load->library('form_validation');
+			$this->form_validation->set_data($form);
+			$this->form_validation->set_rules($rules);
+			if ( ! $this->form_validation->run())
+			{
+				$this->load->helper('form');
+				foreach ($rules as  $rule) 
+				{
+					if (form_error($rule['field']))
+					{
+						throw new Exception(strip_tags(form_error($rule['field'])));
+					}
+				}
+				return;
+			}
+			$this->load->model('User_model', 'user');
+			$data = $this->user->handle_application($form);
+		}
+		catch(Exception $e)
+		{
+			output_data($e->getCode(), $e->getMessage(), array());
+			return;
+		}
+
+		//return
+		output_data(1, '处理成功', $data);
+
+	}
 }

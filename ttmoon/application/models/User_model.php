@@ -186,4 +186,44 @@ class User_model extends CI_Model {
 		return $list;
 	}
 
+
+	/**
+	 * 处理申请
+	 */
+	public function handle_application($form)
+	{
+		//check user & level
+		$token = get_token();
+		$required_level = 10;
+		$this->check_user($token, $required_level);
+
+		//check username
+		$where = array('username' => $form['username']);
+		if ( ! $application = $this->db->where($where)
+			->get('user_application')
+			->result_array())
+		{
+			throw new Exception("该用户名不在申请列表中");
+		}
+		$application = $application[0];
+
+		//check result
+		if ($form['result'] == 0)
+		{
+			$this->db->delete('user_application', $where);
+			throw new Exception("拒绝成功", 1);
+		}
+		if ($form['result'] == 1)
+		{
+
+			$form = json_decode($application['form'], true);
+			$user_base = array('username', 'password', 'realname');
+			$user_detail = array('username', 'sex', 'born', 'grade', 'college', 'major', 'register');
+			$this->db->insert('user_base', filter($form, $user_base));
+			$this->db->insert('user_detail', filter($form, $user_detail));
+			$this->db->delete('user_application', $where);
+			throw new Exception("通过成功", 1);
+		}
+		throw new Exception("处理结果只能为 0 or 1");
+	}
 }
