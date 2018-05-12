@@ -14,18 +14,22 @@ class User_model extends CI_Model {
 	/**
 	 * 生成一个未被占用的Utoken
 	 */
-	/*private function create_token()
+	private function create_token()
 	{
 		$this->load->helper('string');
-		$token=random_string('alnum',30);
-		while ($this->db->where(array('Utoken'=>$token))
-			->get('user')
+
+		$token = random_string('alnum', 30);
+		$where = array(
+			'token' => $token
+			);
+		while ($this->db->where($where)
+			->get('token_user')
 			->result_array());
 		{
-			$token=random_string('alnum',30);
+			$token = random_string('alnum',30);
 		}
 		return $token;
-	}*/
+	}
 
 
 	/**
@@ -110,11 +114,45 @@ class User_model extends CI_Model {
 			);
 		$this->db->insert('user_application', $user_application);
 
-		//
-//		$form['Utoken'] = $this->create_token();
-//		$this->db->insert('user', filter($form, $members_user));
-//		$this->db->insert('user_info', filter($form, $members_info));
 	}
 
+	/**
+	 * 登陆
+	 */
+	public function login($user)
+	{
+		//check user
+		$where = array(
+			'username' => $user['username'],
+			'password' => $user['password']
+			);
+		if ( ! $this->db->where($where)
+			->get('user_base')
+			->result_array())
+		{
+			throw new Exception('用户不存在');
+		}
 
+		//update token
+		$where = array('username' => $user['username']);
+		$new_data = array(
+			'token' => $this->create_token(),
+			'last_visit' => date('Y-m-d H:i:s', time())
+			);
+		if ( ! $result  = $this->db->where($where)
+			->get('token_user')
+			->result_array())
+		{
+			$new_data['username'] = $user['username'];
+			$this->db->insert('token_user', $new_data);
+		}
+		else
+		{
+			$this->db->update('token_user', $new_data, $where);
+		}
+
+		//return
+		$ret = array('token' => $new_data['token']);
+		return $ret;
+	}
 }

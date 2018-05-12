@@ -121,7 +121,70 @@ class User extends CI_Controller {
 
 	}
 
+	/**
+	 * 登陆
+	 */
+	public function login() 
+	{
 
+		//config
+		$rules = array(
+			array(
+				'field' => 'username',
+				'label' => '用户名',
+				'rules' => 'required'
+				),
+			array(
+				'field' => 'password',
+				'label' => '密码',
+				'rules' => 'required'
+				)
+		);
+		$fields = array();
+		foreach ($rules as $rule) 
+		{
+			array_push($fields, $rule['field']);
+		}
+
+		//login
+		try
+		{
+
+			//get post
+			$post = get_post();
+
+			//check form
+			$this->load->library('form_validation');
+			$this->form_validation->set_data($post);
+			$this->form_validation->set_rules($rules);
+			if ( ! $this->form_validation->run())
+			{
+				$this->load->helper('form');
+				foreach ($rules as  $rule) 
+				{
+					if (form_error($rule['field']))
+					{
+						throw new Exception(strip_tags(form_error($rule['field'])));
+					}
+				}
+				return;
+			}
+
+			//过滤 && login
+			$this->load->model('User_model','user');
+			$data = $this->user->login(filter($post, $fields));
+
+		}
+		catch(Exception $e)
+		{
+			output_data($e->getCode(), $e->getMessage(), array());
+			return;
+		}
+
+		//return
+		output_data(1, '登陆成功', $data);
+
+	}
 
 
 }
