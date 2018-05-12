@@ -265,4 +265,53 @@ class User extends CI_Controller {
 		output_data(1, '处理成功', $data);
 
 	}
+
+	/**
+	 * 用户信息
+	 */
+	public function profile()
+	{
+		//config
+		$rules = array(
+			array(
+				'field' => 'username',
+				'label' => '用户名',
+				'rules' => 'required'
+				)
+		);
+
+		//gao
+		try
+		{
+			//get input
+			$form = $this->input->get();
+
+			//check form
+			$this->load->library('form_validation');
+			$this->form_validation->set_data($form);
+			$this->form_validation->set_rules($rules);
+			if ( ! $this->form_validation->run())
+			{
+				$this->load->helper('form');
+				foreach ($rules as  $rule) 
+				{
+					if (form_error($rule['field']))
+					{
+						throw new Exception(strip_tags(form_error($rule['field'])));
+					}
+				}
+				return;
+			}
+			$this->load->model('User_model', 'user');
+			$data = $this->user->profile($form);
+		}
+		catch(Exception $e)
+		{
+			output_data($e->getCode(), $e->getMessage(), array());
+			return;
+		}
+
+		//return
+		output_data(1, '查询成功', $data);
+	}
 }

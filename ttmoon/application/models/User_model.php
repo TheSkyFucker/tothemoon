@@ -226,4 +226,25 @@ class User_model extends CI_Model {
 		}
 		throw new Exception("处理结果只能为 0 or 1");
 	}
+
+	/**
+	 * 用户信息
+	 */
+	public function profile($form)
+	{
+		$where = array('username' => $form['username']);
+		if ( ! $user = $this->db->where($where)
+			->get('user_base')
+			->result_array())
+		{
+			throw new Exception("该用户不存在");
+		}
+		$user = $user[0];
+		$user_detail = $this->db->where($where)
+			->get('user_detail')
+			->result_array()[0];
+		$user = array_merge($user, $user_detail);
+		unset($user['password']);
+		return $user;
+	}
 }
