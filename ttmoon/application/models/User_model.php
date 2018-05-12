@@ -35,13 +35,13 @@ class User_model extends CI_Model {
 	/**
 	 * 检测时间差
 	 */
-	/*private function is_timeout($last_visit)
+	private function is_timeout($last_visit)
 	{
 		$this->load->helper('date');
 		$pre_unix = human_to_unix($last_visit);
 		$now_unix = time();
 		return $now_unix - $pre_unix > 10000;
-	}*/
+	}
 
 
 	/**********************************************************************************************
@@ -52,33 +52,39 @@ class User_model extends CI_Model {
 	/**
 	 * 检测凭据
 	 */
-	/*public function check_token($token) 
+	public function check_user($token, $level_limit) 
 	{
 
-		//不存在
-		$where = array('Utoken' => $token);
-		if ( ! $result = $this->db->select('Ulast_visit')
-			->where(array('Utoken' => $token))
-			->get('user')
+		//check token
+		$where = array('token' => $token);
+		if ( ! $result = $this->db->where($where)
+			->get('token_user')
 			->result_array())
 		{
 			throw new Exception('会话已过期，请重新登陆', 401);
 		}
-		else
+		$user = $result[0];
+		if ($this->is_timeout($user['last_visit']))
 		{
-			$user = $result[0];
-			if ($this->is_timeout($user['Ulast_visit']))
-			{
-				throw new Exception('会话已过期，请重新登陆', 401);
-			}
-			else 
-			{
-				//刷新访问时间
-				$new_data = array('Ulast_visit' => date('Y-m-d H:i:s',time()));
-				$this->db->update('user', $new_data, $where);
-			}
+			throw new Exception('会话已过期，请重新登陆', 401);
 		}
-	}*/
+		else 
+		{
+			//刷新访问时间
+			$new_data = array('last_visit' => date('Y-m-d H:i:s',time()));
+			$this->db->update('token_user', $new_data, $where);
+		}
+
+		//check level
+		$where = array('username' => $user['username']);
+		$user = $this->db->where($where)
+			->get('user_base')
+			->result_array()[0];
+		if ($user['role'] < $level_limit)
+		{
+			throw new Exception("你的权限为".$user['role'].", 该操作需要权限".$level_limit);
+		}
+	}
 
 
 	/**********************************************************************************************
@@ -154,5 +160,28 @@ class User_model extends CI_Model {
 		//return
 		$ret = array('token' => $new_data['token']);
 		return $ret;
+	}
+
+	/**
+	 * 获取注册列表
+	 */
+	public function register_list($token)
+	{
+		//check user & level
+		$required_level = 10;
+		$this->check_user($token, $required_level);
+
+		//return list
+		$applications = $this->db->get('user_application')
+			->result_array();
+		$list = array();
+		foreach ($applications as $application)
+		{
+			$temp = json_decode($application['form'], true);
+			unset($temp['password']);
+			unset($temp['passconf']);
+			array_push($list, $temp);
+		}
+		return $list;
 	}
 }

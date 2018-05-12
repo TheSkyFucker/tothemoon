@@ -186,5 +186,27 @@ class User extends CI_Controller {
 
 	}
 
+	/**
+	 * 申请列表
+	 */
+	public function register_list()
+	{
+		//login
+		try
+		{
+			$this->load->model('User_model','user');
+			$data = $this->user->register_list(get_token());
+		}
+		catch(Exception $e)
+		{
+			output_data($e->getCode(), $e->getMessage(), array());
+			return;
+		}
+
+		//return
+		output_data(1, '获取成功', $data);
+
+	}
+	
 
 }

@@ -919,8 +919,7 @@ if ( ! function_exists('get_token'))
                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;  
            }
        	}  
-
-		if ( ! isset($headers['Utoken']))
+		if ( ! isset($headers['Token']))
 		{
 			if ($hard_mode)
 			{
@@ -931,6 +930,6 @@ if ( ! function_exists('get_token'))
 				return NULL;
 			}
 		}
-		return $headers['Utoken'];
+		return $headers['Token'];
 	}
 }
