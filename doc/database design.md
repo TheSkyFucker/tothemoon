@@ -72,7 +72,15 @@
 | `username` | 用户名 | `string` | $[6, 16]$  | -     |
 | `form`     | 表单   | `text`   | $[1, 500]$ | -     |
 
+## Token
 
+###  token_user
+
+| part         | mean     | type     | min / max  | label                    |
+| ------------ | -------- | -------- | ---------- | ------------------------ |
+| `username`   | 用户名   | `string` | -          | 必须与 `user` 表中有对应 |
+| `token`      | 凭据     | `string` | $[30, 30]$ |                          |
+| `last_visit` | 最近访问 | `date`   | -          |                          |
 
 
 

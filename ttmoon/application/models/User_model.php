@@ -116,4 +116,5 @@ class User_model extends CI_Model {
 //		$this->db->insert('user_info', filter($form, $members_info));
 	}
 
+
 }
