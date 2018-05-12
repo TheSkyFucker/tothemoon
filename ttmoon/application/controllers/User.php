@@ -194,9 +194,8 @@ class User extends CI_Controller {
 		//application_list
 		try
 		{
-			$token = get_token();
 			$this->load->model('User_model','user');
-			$data = $this->user->application_list($token);
+			$data = $this->user->application_list();
 		}
 		catch(Exception $e)
 		{
@@ -208,6 +207,5 @@ class User extends CI_Controller {
 		output_data(1, '获取成功', $data);
 
 	}
-	
 
 }

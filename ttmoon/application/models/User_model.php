@@ -165,9 +165,10 @@ class User_model extends CI_Model {
 	/**
 	 * 获取注册列表
 	 */
-	public function application_list($token)
+	public function application_list()
 	{
 		//check user & level
+		$token = get_token();
 		$required_level = 10;
 		$this->check_user($token, $required_level);
 
