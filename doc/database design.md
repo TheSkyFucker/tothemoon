@@ -41,26 +41,38 @@
 
 ## `user_base` 
 
-| part                | mean   | type     | min / max | type | label |
-| ------------------- | ------ | -------- | --------- | ---- | ----- |
-| `username` （主键） | 用户名 | `string` |           |      |       |
-| `password`          | 密码   | `string` |           |      |       |
-| `realname`          | 姓名   | `string` |           |      |       |
-| `role`              | 角色   | `string` |           |      |       |
+| part                | mean   | type     | min / max | label     |
+| ------------------- | ------ | -------- | --------- | --------- |
+| `username` （主键） | 用户名 | `string` | $[6, 16]$ | `a-zA-Z_` |
+| `password`          | 密码   | `string` | $[6, 16]$ | -         |
+| `realname`          | 姓名   | `string` | $[1, 10]$ | -         |
+| `role`              | 角色   | `int`    | $[1, 10]$ | -         |
 
 
 
 ## `user_detail` 
 
-| part                | mean     | **type** | min / max | type | label |
-| ------------------- | -------- | -------- | --------- | ---- | ----- |
-| `username` （主键） | 用户名   | `string` |           |      |       |
-| `sex`               | 性别     | `int`    |           |      |       |
-| `born`              | 生日     | `date`   |           |      |       |
-| `grade`             | 年级     | `int`    |           |      |       |
-| `college`           | 学院     | `string` |           |      |       |
-| `major`             | 专业     | `string` |           |      |       |
-| `register`          | 注册时间 | `date`   |           |      |       |
+| part                | mean     | **type**       | min / max | label                     |
+| ------------------- | -------- | -------------- | --------- | ------------------------- |
+| `username` （主键） | 用户名   | `string`       | -         | 应对应`user_base`中的一项 |
+| `sex`               | 性别     | `int`          | $[1, 1]$  | 1男2女                    |
+| `born`              | 生日     | `string(date)` | $[1, 30]$ | -                         |
+| `grade`             | 年级     | `int`          | $[1, 2]$  | -                         |
+| `college`           | 学院     | `string`       | $[1, 20]$ | -                         |
+| `major`             | 专业     | `string`       | $[1, 20]$ | -                         |
+| `register`          | 注册时间 | `string(date)` | $[1, 30]$ | -                         |
+
+
+
+## `user_application`
+
+| part       | mean   | type     | min / max  | label |
+| ---------- | ------ | -------- | ---------- | ----- |
+| `id`       | 编号   | `int`    | -          | -     |
+| `username` | 用户名 | `string` | $[6, 16]$  | -     |
+| `form`     | 表单   | `text`   | $[1, 500]$ | -     |
+
+
 
 
 
@@ -70,21 +82,21 @@
 
 ## `sign_user` 
 
-| part               | mean             | type     | min / max | type | label |
-| ------------------ | ---------------- | -------- | --------- | ---- | ----- |
-| `username`（主键） | 用户名           | `string` |           |      |       |
-| `last_sign`        | 上次签到         | `date`   |           |      |       |
-| `begin_sign`       | 开始签到（未断） | `date`   |           |      |       |
+| part               | mean             | type     | min / max | label |
+| ------------------ | ---------------- | -------- | --------- | ----- |
+| `username`（主键） | 用户名           | `string` |           |       |
+| `last_sign`        | 上次签到         | `date`   |           |       |
+| `begin_sign`       | 开始签到（未断） | `date`   |           |       |
 
 
 
 ## `sign_application` 
 
-| part       | mean     | type     | min / max | type | label |
-| ---------- | -------- | -------- | --------- | ---- | ----- |
-| `id`       | 编号     | `int`    |           |      |       |
-| `username` | 申请用户 | `string` |           |      |       |
-| `date`     | 日期     | `date`   |           |      |       |
+| part       | mean     | type     | min / max | label |
+| ---------- | -------- | -------- | --------- | ----- |
+| `id`       | 编号     | `int`    |           |       |
+| `username` | 申请用户 | `string` |           |       |
+| `date`     | 日期     | `date`   |           |       |
 
  
 

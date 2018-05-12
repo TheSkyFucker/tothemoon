@@ -266,11 +266,11 @@ class CI_Form_validation {
 	 */
 	public function set_data(array $data)
 	{
-		if ( ! empty($data))
+		if (empty($data))
 		{
-			$this->validation_data = $data;
+			$data['abcdefghijklmn'] = '1'; //prevent $this->form_validation->run() error..
 		}
-
+		$this->validation_data = $data;
 		return $this;
 	}
 
