@@ -189,14 +189,14 @@ class User extends CI_Controller {
 	/**
 	 * 申请列表
 	 */
-	public function register_list()
+	public function application_list()
 	{
-		//register_list
+		//application_list
 		try
 		{
 			$token = get_token();
 			$this->load->model('User_model','user');
-			$data = $this->user->register_list($token);
+			$data = $this->user->application_list($token);
 		}
 		catch(Exception $e)
 		{
