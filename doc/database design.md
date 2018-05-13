@@ -90,16 +90,6 @@
 
 
 
-## `sign_user` 
-
-| part               | mean             | type     | min / max | label |
-| ------------------ | ---------------- | -------- | --------- | ----- |
-| `username`（主键） | 用户名           | `string` |           |       |
-| `last_sign`        | 上次签到         | `date`   |           |       |
-| `begin_sign`       | 开始签到（未断） | `date`   |           |       |
-
-
-
 ## `sign_application` 
 
 | part       | mean     | type     | min / max | label |
@@ -107,6 +97,7 @@
 | `id`       | 编号     | `int`    |           |       |
 | `username` | 申请用户 | `string` |           |       |
 | `date`     | 日期     | `date`   |           |       |
+| `label`    | 备注     | `string` |           |       |
 
  
 
@@ -117,6 +108,18 @@
 | `id`       | 记录编号 | `int`    |           |      |       |
 | `username` | 签到用户 | `string` |           |      |       |
 | `date`     | 日期     | `date`   |           |      |       |
+
+
+
+## `sign_user`
+
+| part               | mean             | type     | min / max | label |
+| ------------------ | ---------------- | -------- | --------- | ----- |
+| `username`（主键） | 用户名           | `string` |           |       |
+| `last_sign`        | 上次签到         | `date`   |           |       |
+| `begin_sign`       | 开始签到（未断） | `date`   |           |       |
+
+
 
 
 

@@ -10,6 +10,14 @@ class Sign_model extends CI_Model {
 	 * private 接口
 	 *****************************************************************************************************/
 
+	public function is_morning()
+	{
+		$this->load->helper('date');
+		$time = time();
+		$begin = mysql_to_unix(date('Y-m-d ', $time).'00:00:00');
+		$end = mysql_to_unix(date('Y-m-d ', $time).'10:30:00');
+		return $begin <= $time && $time <= $end;
+	}
 
 	/**********************************************************************************************
 	 * public 接口
@@ -34,18 +42,37 @@ class Sign_model extends CI_Model {
 		$this->load->model('User_model', 'user');
 		$username = $this->user->check_user($token, $level_limit);
 
+		//check label
+		if ($this->is_morning())
+		{
+			$label = date('Y-m-d ', time()).'早上';
+		}
+		else
+		{
+			throw new Exception("当前非合法签到时间");
+		}
+
+
 		//check statu
-		$where = array("username" => $username);
+		$where = array(
+			"username" => $username,
+			"label" => $label
+			);
 		if ($this->db->where($where)
 			->get('sign_application')
 			->result_array())
 		{
-			throw new Exception("您已提交申请，请联系签到负责人。");
+			throw new Exception("已提交过 ".$label." 的签到申请，请联系签到负责人。");
 		}
 
 		//add to application list
-		$data = array('username' => $username);
+		$data = array(
+			"username" => $username,
+			"label" => $label
+			);
 		$this->db->insert('sign_application', $data);
+		throw new Exception("成功提交 ".$label." 的签到申请，请联系签到负责人。", 1);
+		
 	}
 
 	/**

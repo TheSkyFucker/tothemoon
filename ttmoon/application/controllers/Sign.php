@@ -35,9 +35,7 @@ class Sign extends CI_Controller {
 			output_data($e->getCode(), $e->getMessage(), array());
 			return;
 		}
-
-		//return
-		output_data(1, '申请成功，请找签到负责人确认。', array());
+		
 	}
 
 	/**
