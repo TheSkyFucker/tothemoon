@@ -84,6 +84,8 @@ class User_model extends CI_Model {
 		{
 			throw new Exception("你的权限为".$user['role'].", 该操作需要权限".$level_limit);
 		}
+
+		return $user['username'];
 	}
 
 
