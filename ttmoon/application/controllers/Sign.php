@@ -61,4 +61,62 @@ class Sign extends CI_Controller {
 		output_data(1, '获取成功', $data);		
 	}
 
+	/**
+	 * 处理签到申请
+	 */
+	public function handle_application()
+	{
+		//config
+		$rules = array(
+			array(
+				'field' => 'id',
+				'label' => '申请编号',
+				'rules' => 'required|numeric'
+				),
+			array(
+				'field' => 'result',
+				'label' => '处理结果',
+				'rules' => 'required|numeric'
+				)
+		);
+
+		//handle
+		try
+		{
+			//get input
+			foreach ($rules as $rule)
+			{
+				$field = $rule['field'];
+				$form[$field] = $this->input->get($field);
+			}
+
+			//check form
+			$this->load->library('form_validation');
+			$this->form_validation->set_data($form);
+			$this->form_validation->set_rules($rules);
+			if ( ! $this->form_validation->run())
+			{
+				$this->load->helper('form');
+				foreach ($rules as  $rule) 
+				{
+					if (form_error($rule['field']))
+					{
+						throw new Exception(strip_tags(form_error($rule['field'])));
+					}
+				}
+				return;
+			}
+			$this->load->model('Sign_model', 'sign');
+			$data = $this->sign->handle_application($form);
+		}
+		catch(Exception $e)
+		{
+			output_data($e->getCode(), $e->getMessage(), array());
+			return;
+		}
+
+		//return
+		output_data(1, '处理成功', $data);		
+	}
+
 }

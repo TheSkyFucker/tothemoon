@@ -67,4 +67,44 @@ class Sign_model extends CI_Model {
 		return $result;
 	}
 
+	/**
+	 * 处理签到申请
+	 */
+	public function handle_application($form)
+	{
+		//config
+		$level_limit = 10;
+
+		//check token
+		$token = get_token();
+		$this->load->model('User_model', 'user');
+		$username = $this->user->check_user($token, $level_limit);
+
+		//check id
+		$where = array('id' => $form['id']);
+		if ( ! $result = $this->db->where($where)
+			->get('sign_application')
+			->result_array())
+		{
+			throw new Exception("不存在该申请。");
+		}
+
+		//check result
+		if ($form['result'] == 1)
+		{
+			echo "TODO 加入sign_log";
+			$where = array('id' => $form['id']);
+			$this->db->delete('sign_application', $where);
+			throw new Exception("已通过", 1);
+		}
+		if ($form['result'] == 0)
+		{
+			$where = array('id' => $form['id']);
+			$this->db->delete('sign_application', $where);
+			throw new Exception("已拒绝", 1);
+		}
+		throw new Exception("处理结果只能为 0 or 1", 0);
+		
+	}
+
 }
