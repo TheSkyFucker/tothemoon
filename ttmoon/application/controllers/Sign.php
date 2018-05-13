@@ -40,4 +40,25 @@ class Sign extends CI_Controller {
 		output_data(1, '申请成功，请找签到负责人确认。', array());
 	}
 
+	/**
+	 * 获取签到列表
+	 */
+	public function application_list()
+	{
+		//application_list
+		try
+		{
+			$this->load->model('Sign_model','sign');
+			$data = $this->sign->application_list();
+		}
+		catch(Exception $e)
+		{
+			output_data($e->getCode(), $e->getMessage(), array());
+			return;
+		}
+
+		//return
+		output_data(1, '获取成功', $data);		
+	}
+
 }

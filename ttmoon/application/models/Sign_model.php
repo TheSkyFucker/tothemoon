@@ -26,11 +26,13 @@ class Sign_model extends CI_Model {
 	 */
 	public function register()
 	{
+		//config
+		$level_limit = 0;
 
 		//check token
 		$token = get_token();
 		$this->load->model('User_model', 'user');
-		$username = $this->user->check_user($token, 0);
+		$username = $this->user->check_user($token, $level_limit);
 
 		//check statu
 		$where = array("username" => $username);
@@ -44,6 +46,25 @@ class Sign_model extends CI_Model {
 		//add to application list
 		$data = array('username' => $username);
 		$this->db->insert('sign_application', $data);
+	}
+
+	/**
+	 * 获取签到列表
+	 */
+	public function application_list()
+	{
+		//config
+		$level_limit = 10;
+
+		//check token
+		$token = get_token();
+		$this->load->model('User_model', 'user');
+		$username = $this->user->check_user($token, $level_limit);
+
+		//application list
+		$result = $this->db->get('sign_application')
+			->result_array();
+		return $result;
 	}
 
 }
