@@ -28,6 +28,15 @@ class Sign_model extends CI_Model {
 		return $begin <= $time && $time <= $end;
 	}
 
+	public function is_evening()
+	{
+		$this->load->helper('date');
+		$time = time();
+		$begin = mysql_to_unix(date('Y-m-d ', $time).'10:00:00');
+		$end = mysql_to_unix(date('Y-m-d ', $time).'20:30:00');
+		return $begin <= $time && $time <= $end;
+	}
+
 	/**********************************************************************************************
 	 * public 接口
 	 **********************************************************************************************/
@@ -59,6 +68,10 @@ class Sign_model extends CI_Model {
 		else if ($this->is_afternoon())
 		{
 			$label = date('Y-m-d ', time()).'下午';
+		}
+		else if ($this->is_evening())
+		{
+			$label = date('Y-m-d ', time()).'晚上';
 		}
 		else 
 		{
