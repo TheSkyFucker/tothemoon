@@ -234,6 +234,8 @@ class User_model extends CI_Model {
 	 */
 	public function profile($form)
 	{
+
+		//check user
 		$where = array('username' => $form['username']);
 		if ( ! $user = $this->db->where($where)
 			->get('user_base')
@@ -242,11 +244,34 @@ class User_model extends CI_Model {
 			throw new Exception("该用户不存在");
 		}
 		$user = $user[0];
+
+		//get user.detail
 		$user_detail = $this->db->where($where)
 			->get('user_detail')
 			->result_array()[0];
 		$user = array_merge($user, $user_detail);
 		unset($user['password']);
+
+		//get sign.history
+		$this->load->model('Sign_model', 'sign');
+		$sign_log = $this->sign->log($user['username']);
+		$user['sign_history'] = array();
+		foreach ($sign_log as $log)
+		{
+			if ($log['result'] == 1)
+			{
+				$msg = $log['label']." ".substr($log['date'], 11)." 签到成功";
+			}
+			else if ($log['result'] == 0)
+			{
+				$msg = $log['label']." ".substr($log['date'], 11)." 签到被无情拒绝";
+			}
+			else
+			{
+				$msg = "未知结果，请联系管理员。";
+			}
+			array_push($user['sign_history'], $msg);
+		}
 		return $user;
 	}
 }

@@ -41,6 +41,15 @@ class Sign_model extends CI_Model {
 	 * public 接口
 	 **********************************************************************************************/
 
+	public function log($username)
+	{
+		$where = array('username' => $username);
+		$result = $this->db->where($where)
+			->order_by('date', 'ASC')
+			->get('sign_log')
+			->result_array();
+		return $result;
+	}
 
 	/**********************************************************************************************
 	 * 接口 for 前端
