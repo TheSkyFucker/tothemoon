@@ -10,7 +10,7 @@ class Sign_model extends CI_Model {
 	 * private 接口
 	 *****************************************************************************************************/
 
-	public function is_morning()
+	private function is_morning()
 	{
 		$this->load->helper('date');
 		$time = time();
@@ -19,7 +19,7 @@ class Sign_model extends CI_Model {
 		return $begin <= $time && $time <= $end;
 	}
 
-	public function is_afternoon()
+	private function is_afternoon()
 	{
 		$this->load->helper('date');
 		$time = time();
@@ -28,13 +28,51 @@ class Sign_model extends CI_Model {
 		return $begin <= $time && $time <= $end;
 	}
 
-	public function is_evening()
+	private function is_evening()
 	{
 		$this->load->helper('date');
 		$time = time();
-		$begin = mysql_to_unix(date('Y-m-d ', $time).'10:00:00');
+		$begin = mysql_to_unix(date('Y-m-d ', $time).'18:00:00');
 		$end = mysql_to_unix(date('Y-m-d ', $time).'20:30:00');
 		return $begin <= $time && $time <= $end;
+	}
+
+	private function update_visit($data)
+	{
+		//config
+		$username = $data['username'];
+		$label = $data['label'];
+
+		//sign before
+		$where = array('username' => $username);
+		if ( ! $sign_user = $this->db->where($where)
+			->get('sign_user')
+			->result_array())
+		{
+			$sign_user = array(
+				'username' => $username,
+				'last_sign' => $label,
+				'begin_sign' => $label
+				);
+			$this->db->insert('sign_user', $sign_user);
+			return;
+		}
+		$sign_user = $sign_user[0];
+
+		//check last_visit
+		$pre_unix = mysql_to_unix(substr($sign_user['last_sign'], 0, 11)."00:00:00");
+		$now_unix = mysql_to_unix(substr($label, 0, 11)."00:00:00");
+		if ($now_unix - $pre_unix > 86400)
+		{
+			$sign_user['begin_sign'] = $label; 
+		}
+		$sign_user['last_sign'] = $label;
+
+		//update sign.user
+		$where = array('username' => $sign_user['username']);
+		unset($sign_user['username']);
+		$this->db->update('sign_user', $sign_user, $where);
+	
 	}
 
 	/**********************************************************************************************
@@ -116,7 +154,7 @@ class Sign_model extends CI_Model {
 	public function application_list()
 	{
 		//config
-		$level_limit = 10;
+		$level_limit = 9;
 
 		//check token
 		$token = get_token();
@@ -136,7 +174,7 @@ class Sign_model extends CI_Model {
 	public function handle_application($form)
 	{
 		//config
-		$level_limit = 10;
+		$level_limit = 9;
 
 		//check token
 		$token = get_token();
@@ -155,11 +193,14 @@ class Sign_model extends CI_Model {
 		//check result
 		if ($form['result'] == 1)
 		{
+			//handle
 			$data = $result[0];
 			$data['result'] = $form['result'];
 			$this->db->insert('sign_log', $data);
 			$where = array('id' => $form['id']);
 			$this->db->delete('sign_application', $where);
+			//update last_visit
+			$this->update_visit($data);
 			throw new Exception("已通过", 1);
 		}
 		if ($form['result'] == 0)

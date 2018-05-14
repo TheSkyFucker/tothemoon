@@ -118,8 +118,8 @@
 | part               | mean             | type     | min / max | label |
 | ------------------ | ---------------- | -------- | --------- | ----- |
 | `username`（主键） | 用户名           | `string` |           |       |
-| `last_sign`        | 上次签到         | `date`   |           |       |
-| `begin_sign`       | 开始签到（未断） | `date`   |           |       |
+| `last_sign`        | 上次签到         | `string` |           |       |
+| `begin_sign`       | 开始签到（未断） | `string` |           |       |
 
 
 
