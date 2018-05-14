@@ -94,20 +94,22 @@
 
 | part       | mean     | type     | min / max | label |
 | ---------- | -------- | -------- | --------- | ----- |
-| `id`       | 编号     | `int`    |           |       |
-| `username` | 申请用户 | `string` |           |       |
-| `date`     | 日期     | `date`   |           |       |
-| `label`    | 备注     | `string` |           |       |
+| `id`       | 编号     | `int`    | -         | -     |
+| `username` | 申请用户 | `string` | -         | -     |
+| `date`     | 日期     | `date`   | -         | -     |
+| `label`    | 备注     | `string` | - / 30    | -     |
 
  
 
 ## `sign_log` 
 
-| part       | mean     | type     | min / max | type | label |
-| ---------- | -------- | -------- | --------- | ---- | ----- |
-| `id`       | 记录编号 | `int`    |           |      |       |
-| `username` | 签到用户 | `string` |           |      |       |
-| `date`     | 日期     | `date`   |           |      |       |
+| part       | mean     | type     | min / max | label |
+| ---------- | -------- | -------- | --------- | ----- |
+| `id`       | 记录编号 | `int`    | -         | -     |
+| `username` | 签到用户 | `string` | -         | -     |
+| `date`     | 日期     | `date`   | -         | -     |
+| `result`   | 处理结果 | `int`    | -         | -     |
+| `label`    | 备注     | `string` | - / 30    | -     |
 
 
 

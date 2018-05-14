@@ -146,7 +146,9 @@ class Sign_model extends CI_Model {
 		//check result
 		if ($form['result'] == 1)
 		{
-			echo "TODO 加入sign_log";
+			$data = $result[0];
+			$data['result'] = $form['result'];
+			$this->db->insert('sign_log', $data);
 			$where = array('id' => $form['id']);
 			$this->db->delete('sign_application', $where);
 			throw new Exception("已通过", 1);
