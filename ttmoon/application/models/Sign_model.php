@@ -14,8 +14,17 @@ class Sign_model extends CI_Model {
 	{
 		$this->load->helper('date');
 		$time = time();
-		$begin = mysql_to_unix(date('Y-m-d ', $time).'00:00:00');
+		$begin = mysql_to_unix(date('Y-m-d ', $time).'07:00:00');
 		$end = mysql_to_unix(date('Y-m-d ', $time).'10:30:00');
+		return $begin <= $time && $time <= $end;
+	}
+
+	public function is_afternoon()
+	{
+		$this->load->helper('date');
+		$time = time();
+		$begin = mysql_to_unix(date('Y-m-d ', $time).'14:00:00');
+		$end = mysql_to_unix(date('Y-m-d ', $time).'16:10:00');
 		return $begin <= $time && $time <= $end;
 	}
 
@@ -47,7 +56,11 @@ class Sign_model extends CI_Model {
 		{
 			$label = date('Y-m-d ', time()).'早上';
 		}
-		else
+		else if ($this->is_afternoon())
+		{
+			$label = date('Y-m-d ', time()).'下午';
+		}
+		else 
 		{
 			throw new Exception("当前非合法签到时间");
 		}
