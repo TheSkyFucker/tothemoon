@@ -115,7 +115,8 @@ class Sign_model extends CI_Model {
 		$username = $this->user->check_user($token, $level_limit);
 
 		//application list
-		$result = $this->db->get('sign_application')
+		$result = $this->db->order_by('date', 'ASC')
+			->get('sign_application')
 			->result_array();
 		return $result;
 	}
