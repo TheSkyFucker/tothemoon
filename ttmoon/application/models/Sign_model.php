@@ -32,7 +32,7 @@ class Sign_model extends CI_Model {
 	{
 		$this->load->helper('date');
 		$time = time();
-		$begin = mysql_to_unix(date('Y-m-d ', $time).'18:00:00');
+		$begin = mysql_to_unix(date('Y-m-d ', $time).'10:00:00');
 		$end = mysql_to_unix(date('Y-m-d ', $time).'20:30:00');
 		return $begin <= $time && $time <= $end;
 	}
@@ -215,13 +215,19 @@ class Sign_model extends CI_Model {
 		{
 			throw new Exception("不存在该申请。");
 		}
-
-		//handle
 		$data = $result[0];
+
+		//just cancel application ?
 		$data['result'] = $form['result'];
-		$this->db->insert('sign_log', $data);
 		$where = array('id' => $form['id']);
 		$this->db->delete('sign_application', $where);
+		if ($data['result'] == -1)
+		{
+			throw new Exception("已删除该申请", 1);
+		}
+
+		//handle
+		$this->db->insert('sign_log', $data);
 		if ($form['result'] == 1)
 		{
 			$this->update_visit($data);
