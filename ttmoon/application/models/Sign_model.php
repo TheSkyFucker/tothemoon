@@ -126,7 +126,7 @@ class Sign_model extends CI_Model {
 		}
 
 
-		//check statu
+		//check apply again
 		$where = array(
 			"username" => $username,
 			"label" => $label
@@ -135,8 +135,34 @@ class Sign_model extends CI_Model {
 			->get('sign_application')
 			->result_array())
 		{
-			throw new Exception("已提交过 ".$label." 的签到申请，请联系签到负责人。");
+			throw new Exception("请勿重复提交 ".$label." 的签到申请，请联系签到负责人。");
 		}
+
+		//check sign again
+		$where = array(
+			'username' => $username,
+			'label' => $label
+			);
+		if ($log = $this->db->where($where)
+			->get('sign_log')
+			->result_array())
+		{
+			$log = $log[0];
+			if ($log['result'] == 1)
+			{
+				$msg = "通过";
+			}
+			else if ($log['result'] == 0)
+			{
+				$msg = "被无情拒绝";
+			}
+			else
+			{
+				$msg = "未知结果，请联系管理员。";
+			}
+			throw new Exception($label." 已经签到，结果为：".$msg);
+		}
+
 
 		//add to application list
 		$data = array(
@@ -190,23 +216,19 @@ class Sign_model extends CI_Model {
 			throw new Exception("不存在该申请。");
 		}
 
-		//check result
+		//handle
+		$data = $result[0];
+		$data['result'] = $form['result'];
+		$this->db->insert('sign_log', $data);
+		$where = array('id' => $form['id']);
+		$this->db->delete('sign_application', $where);
 		if ($form['result'] == 1)
 		{
-			//handle
-			$data = $result[0];
-			$data['result'] = $form['result'];
-			$this->db->insert('sign_log', $data);
-			$where = array('id' => $form['id']);
-			$this->db->delete('sign_application', $where);
-			//update last_visit
 			$this->update_visit($data);
 			throw new Exception("已通过", 1);
 		}
 		if ($form['result'] == 0)
 		{
-			$where = array('id' => $form['id']);
-			$this->db->delete('sign_application', $where);
 			throw new Exception("已拒绝", 1);
 		}
 		throw new Exception("处理结果只能为 0 or 1", 0);
