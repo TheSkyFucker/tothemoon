@@ -32,14 +32,15 @@ class Position_model extends CI_Model {
 	public function register($form)
 	{
 		//config
-		$level_limit = 5;
 		$position_min = 1;
 		$position_max = 36;
+		$role_limit = 5;
 
 		//check token
 		$token = get_token();
 		$this->load->model('User_model', 'user');
-		$username = $this->user->check_user($token, $level_limit);
+		$username = $this->user->check_user($token);
+		$this->user->check_role($username, $role_limit);
 
 		//check has position or not
 		$where = array('username' => $username);

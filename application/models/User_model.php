@@ -99,6 +99,26 @@ class User_model extends CI_Model {
 		return $user['username'];
 	}
 
+	public function check_role($username, $role_limit)
+	{
+		$where = array('username' => $username);
+		$user = $this->db->where($where)
+			->get('user_base')
+			->result_array()[0];
+		if ($user['role'] < $role_limit)
+		{
+			if ($role_limit == 5)
+			{
+				throw new Exception("只有正式成员可以进行该操作");
+			}
+			else
+			{
+				throw new Exception("未知角色要求");
+			}
+		}
+
+	}
+
 
 	/**********************************************************************************************
 	 * 接口 for 前端
