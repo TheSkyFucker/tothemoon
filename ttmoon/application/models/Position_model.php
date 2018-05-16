@@ -67,4 +67,28 @@ class Position_model extends CI_Model {
 		
 	}
 
+	/**
+	 * 位置信息
+	 */
+	public function profile($form)
+	{
+		//all
+		if ( ! $form['id'])
+		{
+			$result = $this->db->get('position_user')->result_array();
+			print_r($result);
+			return $result;
+		}
+
+		//one
+		$where = array('id' => $form['id']);
+		if ( ! $result = $this->db->where($where)
+			->get('position_user')
+			->result_array())
+		{
+			throw new Exception("位置".$form['id']."无记录", 0);
+		}
+		return $result[0];
+	}
+
 }
