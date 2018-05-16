@@ -29,7 +29,7 @@ class User extends CI_Controller {
 			array(
 				'field' => 'username',
 				'label' => '用户名',
-				'rules' => 'required|min_length[6]|max_length[16]|alpha_dash'
+				'rules' => 'required|min_length[3]|max_length[16]|alpha_dash'
 				),
 			array(
 				'field' => 'password',
