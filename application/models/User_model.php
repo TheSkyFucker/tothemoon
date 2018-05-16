@@ -190,28 +190,10 @@ class User_model extends CI_Model {
 			$this->db->update('token_user', $new_data, $where);
 		}
 
-		//check manager
-		$ret = array('token' => $new_data['token']);
-		$where = array('username' => $user['username']);
-		if ( ! $results = $this->db->where($where)
-			->get('manager_user')
-			->result_array())
-		{
-			$ret['is_manager'] = false;
-		}
-		else 
-		{
-			$manager = $results[0];
-			if (strtotime($manager['deadline']) < time())
-			{
-				$ret['is_manager'] = false;
-			}
-			else 
-			{
-				$ret['is_manager'] = true;
-				$ret['level'] = $manager['level'];
-			}
-		}
+		//get profile
+		$form = array('username' => $user['username']);
+		$ret = $this->profile($form);
+		$ret['token'] = $new_data['token'];
 		return $ret;
 	}
 
@@ -332,6 +314,28 @@ class User_model extends CI_Model {
 			$user['role'] = '?';
 		}
 
+		//check manger
+		$where = array('username' => $user['username']);
+		if ( ! $results = $this->db->where($where)
+			->get('manager_user')
+			->result_array())
+		{
+			$user['is_manager'] = false;
+		}
+		else 
+		{
+			$manager = $results[0];
+			if (strtotime($manager['deadline']) < time())
+			{
+				$user['is_manager'] = false;
+			}
+			else 
+			{
+				$user['is_manager'] = true;
+				$user['level'] = $manager['level'];
+			}
+		}
+		
 		//get sign.history
 		$this->load->model('Sign_model', 'sign');
 		$sign_log = $this->sign->log($user['username']);
