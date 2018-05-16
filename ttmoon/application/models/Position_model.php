@@ -14,6 +14,14 @@ class Position_model extends CI_Model {
 	 * public 接口
 	 **********************************************************************************************/
 
+	public function log($where)
+	{
+		return $this->db->where($where)
+			->order_by('date', 'DESC')
+			->get('position_log')
+			->result_array();
+	}
+
 	/**********************************************************************************************
 	 * 接口 for 前端
 	 **********************************************************************************************/
@@ -81,20 +89,41 @@ class Position_model extends CI_Model {
 		//all
 		if ( ! $form['id'])
 		{
-			$result = $this->db->get('position_user')->result_array();
-			print_r($result);
-			return $result;
+			$results = $this->db->get('position_user')->result_array();
+			return $results;
 		}
 
 		//one
 		$where = array('id' => $form['id']);
-		if ( ! $result = $this->db->where($where)
+		if ( ! $results = $this->db->where($where)
 			->get('position_user')
 			->result_array())
 		{
 			throw new Exception("位置".$form['id']."无记录", 0);
 		}
-		return $result[0];
+
+		$position = $results[0];
+		$position['history'] = array();
+		$where = array('position_id' => $form['id']);
+		$logs = $this->log($where);
+		foreach ($logs as $log)
+		{
+			if ($log['result'] == 1)
+			{
+				$msg = substr($log['date'], 0, 11)." ".$log['username']." 获得了位置 ".$log['position_id'];
+			}
+			else if ($log['result'] == -1)
+			{
+				$msg = substr($log['date'], 0, 11)." ".$log['username']." 失去了位置 ".$log['position_id'];
+			}
+			else 
+			{
+				$msg = substr($log['date'], 0, 11)." "."未知结果，请联系管理员。";
+			}
+			array_push($position['history'], $msg);
+		}
+		return $position;
+
 	}
 
 }
