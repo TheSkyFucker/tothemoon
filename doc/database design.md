@@ -172,12 +172,11 @@
 
 ## `manager_user`
 
-| part               |   mean   | type     | min / max | label         |
-| ------------------ | :------: | -------- | --------- | ------------- |
-| `username`（主键） |  用户名  | `string` | -         | -             |
-| `level`            |   级别   | `int`    | -         | -             |
-| `statu`            | 权限状态 | `int`    | -         | 0 关闭 1 开启 |
-|                    |          |          |           |               |
+| part               | mean       | type     | min / max | label |
+| ------------------ | ---------- | -------- | --------- | ----- |
+| `username`（主键） | 用户名     | `string` | -         | -     |
+| `level`            | 权限级别   | `int`    | -         | -     |
+| `deadline`         | 权限有效期 | `date`   | -         | -     |
 
 
 
