@@ -190,8 +190,28 @@ class User_model extends CI_Model {
 			$this->db->update('token_user', $new_data, $where);
 		}
 
-		//return
+		//check manager
 		$ret = array('token' => $new_data['token']);
+		$where = array('username' => $user['username']);
+		if ( ! $results = $this->db->where($where)
+			->get('manager_user')
+			->result_array())
+		{
+			$ret['is_manager'] = false;
+		}
+		else 
+		{
+			$manager = $results[0];
+			if (strtotime($manager['deadline']) < time())
+			{
+				$ret['is_manager'] = false;
+			}
+			else 
+			{
+				$ret['is_manager'] = true;
+				$ret['level'] = $manager['level'];
+			}
+		}
 		return $ret;
 	}
 
@@ -283,6 +303,34 @@ class User_model extends CI_Model {
 			->result_array()[0];
 		$user = array_merge($user, $user_detail);
 		unset($user['password']);
+
+		//check sex
+		if ($user['sex'] == 0)
+		{
+			$user['sex'] = '女';
+		}
+		else if ($user['sex'] == 1)
+		{
+			$user['sex'] = '男';
+		}
+		else
+		{
+			$user['sex'] = '?';			
+		}
+
+		//check user role
+		if ($user['role'] == 1)
+		{
+			$user['role'] = '摸鱼选手';
+		}
+		else if ($user['role'] == 5)
+		{
+			$user['role'] = '正式成员';
+		}
+		else
+		{
+			$user['role'] = '?';
+		}
 
 		//get sign.history
 		$this->load->model('Sign_model', 'sign');
