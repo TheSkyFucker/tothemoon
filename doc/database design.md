@@ -134,7 +134,7 @@
 | `id`（主键）       | 座位编号 | `int`    | -         | $[1, 36]$ |
 | `username`（唯一） | 用户名   | `string` | -         | -         |
 
-## position_log
+## `position_log`
 
 | part          | mean     | type     | min / max | label       |
 | ------------- | -------- | -------- | --------- | ----------- |
@@ -144,11 +144,29 @@
 | `result`      | 结果     | `int`    | -         | -1失去1获得 |
 | `date`        | 日期     | `data`   | -         | -           |
 
+# Activity
 
 
 
+## `activity_base`
+
+| part         | mean         | type         | min / max   | label |
+| ------------ | ------------ | ------------ | ----------- | ----- |
+| `id`（主键） | 编号         | `int`        | -           | -     |
+| `title`      | 活动标题     | `string`     | $[1, 100]$  | -     |
+| `begin`      | 活动开始时间 | `date`       | -           | -     |
+| `end`        | 活动结束时间 | `date`       | -           | -     |
+| `place`      | 活动地点     | `string`     | $[1, 200]$  | -     |
+| `organizer`  | 组织人员集   | `arr2string` | $[1, 1000]$ | -     |
 
 
+
+## `activity_participant`
+
+| part     | mean           | type     | min / max   | label |
+| -------- | -------------- | -------- | ----------- | ----- |
+| `id`     | 活动id         | `int`    | -           | -     |
+| `member` | 参与人员及职务 | `string` | $[0, 1000]$ | -     |
 
 
 

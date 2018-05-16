@@ -32,7 +32,7 @@ class Sign_model extends CI_Model {
 	{
 		$this->load->helper('date');
 		$time = time();
-		$begin = mysql_to_unix(date('Y-m-d ', $time).'10:00:00');
+		$begin = mysql_to_unix(date('Y-m-d ', $time).'18:00:00');
 		$end = mysql_to_unix(date('Y-m-d ', $time).'20:30:00');
 		return $begin <= $time && $time <= $end;
 	}
@@ -83,7 +83,7 @@ class Sign_model extends CI_Model {
 	{
 		$where = array('username' => $username);
 		$result = $this->db->where($where)
-			->order_by('date', 'ASC')
+			->order_by('date', 'DESC')
 			->get('sign_log')
 			->result_array();
 		return $result;
