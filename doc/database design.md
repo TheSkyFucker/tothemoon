@@ -117,9 +117,18 @@
 
 | part               | mean             | type     | min / max | label |
 | ------------------ | ---------------- | -------- | --------- | ----- |
-| `username`（主键） | 用户名           | `string` |           |       |
-| `last_sign`        | 上次签到         | `string` |           |       |
-| `begin_sign`       | 开始签到（未断） | `string` |           |       |
+| `username`（主键） | 用户名           | `string` | -         | -     |
+| `last_sign`        | 上次签到         | `string` | -         | -     |
+| `begin_sign`       | 开始签到（未断） | `string` | -         | -     |
+
+# Position
+
+## `position_user`
+
+| Part               | mean     | type   | min / max | label     |
+| ------------------ | -------- | ------ | --------- | --------- |
+| `id`（主键）       | 座位编号 | id     | -         | $[1, 36]$ |
+| `username`（唯一） | 用户名   | string | -         | -         |
 
 
 
