@@ -52,7 +52,7 @@ class User_model extends CI_Model {
 	/**
 	 * 检测凭据
 	 */
-	public function check_user($token, $level_limit) 
+	public function check_user($token, $level_limit = null) 
 	{
 
 		//check token
@@ -76,13 +76,24 @@ class User_model extends CI_Model {
 		}
 
 		//check level
-		$where = array('username' => $user['username']);
-		$user = $this->db->where($where)
-			->get('user_base')
-			->result_array()[0];
-		if ($user['role'] < $level_limit)
+		if (isset($level_limit))
 		{
-			throw new Exception("你的权限为".$user['role'].", 该操作需要权限".$level_limit);
+			$where = array('username' => $user['username']);
+			if ( ! $result = $this->db->where($where)
+				->get('manager_user')
+				->result_array())
+			{
+				throw new Exception("只有管理员可以操作");
+			}
+			$manager = $result[0];
+			if (time() > strtotime($manager['deadline']))
+			{
+				throw new Exception("当前不是您的管理员权限可使用的时间");
+			}
+			if ($manager['level'] < $level_limit)
+			{
+				throw new Exception("你的权限为".$manager['level'].", 该操作需要权限".$level_limit);
+			}
 		}
 
 		return $user['username'];
