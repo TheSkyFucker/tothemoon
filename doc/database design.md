@@ -125,12 +125,24 @@
 
 # Position
 
+
+
 ## `position_user`
 
-| Part               | mean     | type   | min / max | label     |
-| ------------------ | -------- | ------ | --------- | --------- |
-| `id`（主键）       | 座位编号 | id     | -         | $[1, 36]$ |
-| `username`（唯一） | 用户名   | string | -         | -         |
+| Part               | mean     | type     | min / max | label     |
+| ------------------ | -------- | -------- | --------- | --------- |
+| `id`（主键）       | 座位编号 | `int`    | -         | $[1, 36]$ |
+| `username`（唯一） | 用户名   | `string` | -         | -         |
+
+## position_log
+
+| part          | mean     | type     | min / max | label       |
+| ------------- | -------- | -------- | --------- | ----------- |
+| `id`          | 记录编号 | `int`    | -         | -           |
+| `position_id` | 相关座位 | `string` | -         | -           |
+| `username`    | 相关用户 | `string` | $[0, 50]$ | -           |
+| `result`      | 结果     | `int`    | -         | -1失去1获得 |
+| `date`        | 日期     | `data`   | -         | -           |
 
 
 
