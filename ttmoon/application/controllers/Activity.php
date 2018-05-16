@@ -89,8 +89,15 @@ class Activity extends CI_Controller {
 		}
 
 		//return
-		echo "TODO";
+		echo "若看到此信息，联系后台人员(activity.register).";
 
 	}
 
+	/**
+	 * 获取活动列表
+	 */
+	public function list()
+	{
+		echo "hh";
+	}
 }
