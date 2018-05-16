@@ -250,6 +250,7 @@ class User_model extends CI_Model {
 		{
 
 			$form = json_decode($application['form'], true);
+			$form['register'] = date('Y-m-d H:i:s', time());
 			$user_base = array('username', 'password', 'realname');
 			$user_detail = array('username', 'sex', 'born', 'grade', 'college', 'major', 'register');
 			$this->db->insert('user_base', filter($form, $user_base));

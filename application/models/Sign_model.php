@@ -167,7 +167,8 @@ class Sign_model extends CI_Model {
 		//add to application list
 		$data = array(
 			"username" => $username,
-			"label" => $label
+			"label" => $label,
+			"date" => date('Y-m-d H:i:s', time())
 			);
 		$this->db->insert('sign_application', $data);
 		throw new Exception("成功提交 ".$label." 的签到申请，请联系签到负责人。", 1);

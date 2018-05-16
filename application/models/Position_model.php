@@ -75,7 +75,8 @@ class Position_model extends CI_Model {
 		$log = array(
 			'position_id' => $form['id'],
 			'username' => $username,
-			'result' => 1
+			'result' => 1,
+			'date' => date('Y-m-d H:i:s', time())
 			);
 		$this->db->insert('position_log', $log);
 		throw new Exception("申请成功，获得位置".$form['id'], 1);
