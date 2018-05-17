@@ -117,4 +117,23 @@ class Sign extends CI_Controller {
 		output_data(1, '处理成功', $data);		
 	}
 
+	/**
+	 * 仪表盘
+	 */
+	public function dashboard()
+	{
+		try
+		{
+			$this->load->model('Sign_model','sign');
+			$data = $this->sign->dashboard();
+		}
+		catch(Exception $e)
+		{
+			output_data($e->getCode(), $e->getMessage(), array());
+			return;
+		}
+		output_data(1, '获取成功', $data);		
+
+	}
+
 }

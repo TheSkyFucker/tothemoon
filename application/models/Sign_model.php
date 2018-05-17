@@ -75,6 +75,22 @@ class Sign_model extends CI_Model {
 	
 	}
 
+	private function count($day)
+	{
+		$temp = strtotime(date('Y-m-d', time()));
+		$ret = 0;
+		while ($day > 0)
+		{
+			$ret += sizeof($this->db->select(array('username'))
+			->like('label', date('Y-m-d', $temp))
+			->get('sign_log')
+			->result_array());
+			$temp -= 86400;
+			$day -= 1;
+		}
+		return $ret;
+	}
+
 	/**********************************************************************************************
 	 * public 接口
 	 **********************************************************************************************/
@@ -240,6 +256,30 @@ class Sign_model extends CI_Model {
 		}
 		throw new Exception("处理结果只能为 0 or 1", 0);
 		
+	}
+
+	/**
+	 * 仪表盘
+	 */
+	public function dashboard()
+	{
+		//config
+		$ret = array();
+
+		//count today
+		$result = $this->db->select(array('username', 'date', 'label'))
+			->like('label', date('Y-m-d', time()))
+			->order_by('date', 'DESC')
+			->get('sign_log')
+			->result_array();
+		$ret['today'] = sizeof($result);
+		$ret['today_log'] = $result;
+		$ret['3day'] = $this->count(3);
+		$ret['7day'] = $this->count(7);
+
+		//return
+		return $ret;
+
 	}
 
 }
