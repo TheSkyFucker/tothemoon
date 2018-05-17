@@ -70,6 +70,11 @@ class User extends CI_Controller {
 				'field' => 'major',
 				'label' => '专业',
 				'rules' => 'required|min_length[1]|max_length[30]'
+				),
+			array(
+				'field' => 'student_id',
+				'label' => '学号',
+				'rules' => 'required|min_length[1]|max_length[30]'
 				)
 		);
 		$members = array();
