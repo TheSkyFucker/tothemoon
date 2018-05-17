@@ -163,14 +163,19 @@ class User_model extends CI_Model {
 		//check user
 		$where = array(
 			'username' => $user['username'],
-			'password' => $user['password']
 			);
-		if ( ! $this->db->where($where)
+		if ( ! $result = $this->db->where($where)
 			->get('user_base')
 			->result_array())
 		{
 			throw new Exception('用户不存在');
 		}
+		$password = $result[0]['password'];
+		if ($user['password'] != $password)
+		{
+			throw new Exception("密码错误");
+		}
+
 
 		//update token
 		$where = array('username' => $user['username']);
