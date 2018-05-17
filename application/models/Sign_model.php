@@ -82,6 +82,7 @@ class Sign_model extends CI_Model {
 		while ($day > 0)
 		{
 			$ret += sizeof($this->db->select(array('username'))
+			->where('result', 1)
 			->like('label', date('Y-m-d', $temp))
 			->get('sign_log')
 			->result_array());
@@ -266,11 +267,25 @@ class Sign_model extends CI_Model {
 
 		//count today
 		$result = $this->db->select(array('username', 'date', 'label'))
+			->where('result', 1)
 			->like('label', date('Y-m-d', time()))
 			->order_by('date', 'DESC')
 			->get('sign_log')
 			->result_array();
 		$ret['today'] = sizeof($result);
+		$temp = array(
+			'morning' => '早上',
+			'afternoon' => '下午',
+			'evening' => '晚上'
+			);
+		foreach ($temp as $key => $value)
+		{
+			$ret[$key] = sizeof($this->db->select(array('username'))
+				->where('result', 1)
+				->like('label', date('Y-m-d', time())." ".$value)
+				->get('sign_log')
+				->result_array());			
+		}
 		$ret['today_log'] = $result;
 		$ret['3day'] = $this->count(3);
 		$ret['7day'] = $this->count(7);
