@@ -161,14 +161,20 @@ class User_model extends CI_Model {
 	public function login($user)
 	{
 		//check user
-		$where = array(
-			'username' => $user['username'],
-			);
+		$where = array('username' => $user['username']);
 		if ( ! $result = $this->db->where($where)
 			->get('user_base')
 			->result_array())
 		{
+			//check application list
+			if ($this->db->where($where)
+				->get('user_application')
+				->result_array())
+			{
+				throw new Exception("账号审核中，请通知管理人员。");
+			}
 			throw new Exception('用户不存在');
+
 		}
 		$password = $result[0]['password'];
 		if ($user['password'] != $password)
