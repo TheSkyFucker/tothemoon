@@ -300,20 +300,6 @@ class User_model extends CI_Model {
 			$user['sex'] = '?';			
 		}
 
-		//check user role
-		if ($user['role'] == 1)
-		{
-			$user['role'] = '摸鱼选手';
-		}
-		else if ($user['role'] == 5)
-		{
-			$user['role'] = '正式成员';
-		}
-		else
-		{
-			$user['role'] = '?';
-		}
-
 		//check manger
 		$where = array('username' => $user['username']);
 		if ( ! $results = $this->db->where($where)
