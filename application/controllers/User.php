@@ -271,37 +271,9 @@ class User extends CI_Controller {
 	 */
 	public function profile()
 	{
-		//config
-		$rules = array(
-			array(
-				'field' => 'username',
-				'label' => '用户名',
-				'rules' => 'required'
-				)
-		);
-
-		//gao
 		try
 		{
-			//get input
-			$form = $this->input->get();
-
-			//check form
-			$this->load->library('form_validation');
-			$this->form_validation->set_data($form);
-			$this->form_validation->set_rules($rules);
-			if ( ! $this->form_validation->run())
-			{
-				$this->load->helper('form');
-				foreach ($rules as  $rule) 
-				{
-					if (form_error($rule['field']))
-					{
-						throw new Exception(strip_tags(form_error($rule['field'])));
-					}
-				}
-				return;
-			}
+			$form = array('username' => $this->input->get('username'));
 			$this->load->model('User_model', 'user');
 			$data = $this->user->profile($form);
 		}

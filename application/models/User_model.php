@@ -273,6 +273,13 @@ class User_model extends CI_Model {
 	 */
 	public function profile($form)
 	{
+		//check form
+		if ( ! $form['username'])
+		{
+			$token = get_token();
+			$username = $this->check_user($token);
+			$form['username'] = $username;
+		}
 
 		//check user
 		$where = array('username' => $form['username']);
