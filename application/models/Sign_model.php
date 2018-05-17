@@ -32,8 +32,8 @@ class Sign_model extends CI_Model {
 	{
 		$this->load->helper('date');
 		$time = time();
-		$begin = mysql_to_unix(date('Y-m-d ', $time).'18:00:00');
-		$end = mysql_to_unix(date('Y-m-d ', $time).'20:30:00');
+		$begin = mysql_to_unix(date('Y-m-d ', $time).'00:00:00');
+		$end = mysql_to_unix(date('Y-m-d ', $time).'23:30:00');
 		return $begin <= $time && $time <= $end;
 	}
 
@@ -115,13 +115,11 @@ class Sign_model extends CI_Model {
 	 */
 	public function register()
 	{
-		//config
-		$level_limit = 0;
 
 		//check token
 		$token = get_token();
 		$this->load->model('User_model', 'user');
-		$username = $this->user->check_user($token, $level_limit);
+		$username = $this->user->check_user($token);
 
 		//check label
 		if ($this->is_morning())
