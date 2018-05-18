@@ -262,7 +262,7 @@ class Sign_model extends CI_Model {
 	 */
 	public function dashboard()
 	{
-		//config
+		//configs
 		$ret = array();
 
 		//count today
@@ -290,9 +290,53 @@ class Sign_model extends CI_Model {
 		$ret['3day'] = $this->count(3);
 		$ret['7day'] = $this->count(7);
 
-		//return
-		return $ret;
 
+		//config
+		$fields = array(
+			'id', 
+			'oj',
+			'link',
+			'name',
+			'start_time',
+			'week',
+			'access'
+			);
+
+		if ( ! $result = $this->db->get('todaycontest_lastfresh')
+			->result_array())
+		{
+			$lastfresh = '1990-01-01 00:00:00';
+		}
+		else
+		{
+			$lastfresh = $result[0]['lastfresh'];
+		}
+
+		//缓存
+		if (time() - strtotime($lastfresh) >= 6 * 60 * 60)
+		{
+			$url = "http://contests.acmicpc.info/contests.json";
+			$content = file_get_contents($url); 
+			$data = (array)json_decode($content);
+			$this->db->empty_table('todaycontest_base');	
+			foreach ($data as $contest) 
+			{
+				if (strtotime(substr($contest->start_time, 0, 10)) <= strtotime(date('Y-m-d', time())) + 86400 * 2)
+				{
+					$this->db->insert('todaycontest_base',filter((array)$contest, $fields));
+				}
+			}
+			$this->db->empty_table('todaycontest_lastfresh');
+			$temp = array('lastfresh' => date("y-m-d H:i:s"));
+			$this->db->insert('todaycontest_lastfresh', $temp);
+		}
+		
+		$data = $this->db->get('todaycontest_base')
+			->result_array();
+
+		//return
+		$ret['todaycontest'] = $data;
+		return $ret;
 	}
 
 }
