@@ -28,7 +28,7 @@ class Sign_model extends CI_Model {
 				),
 			array(
 				'begin' => strtotime($date.' 19:00:00'),
-				'end' => strtotime($date.'20:40:00'),
+				'end' => strtotime($date.'20:50:00'),
 				'label' => '晚上'
 				)
 			);
@@ -116,9 +116,32 @@ class Sign_model extends CI_Model {
 
 	public function sign_statu($username)
 	{
-//		if ( ! $this->is_morning())
-//		$where = array('username')
-		echo "TODO\n";
+		if ( ! $label = $this->is_signable())
+		{
+			return '非签到时间';
+		}
+		$where = array('label' => $label);
+		if ($this->db->where($where)
+			->get('sign_application')
+			->result_array())
+		{
+			return '审核中';
+		}
+		if ($results = $this->db->where($where)
+			->get('sign_log')
+			->result_array())
+		{
+			$log = $results[0];
+			if ($log['result'] == 1)
+			{
+				return '已签到';
+			}
+			else
+			{
+				return '签到失败';
+			}
+		}
+		return '可签到';
 	}
 
 	/**********************************************************************************************
