@@ -340,7 +340,7 @@ class User_model extends CI_Model {
 			}
 		}
 		
-		//get sign.history
+		//get sign
 		$this->load->model('Sign_model', 'sign');
 		$sign_log = $this->sign->log($user['username']);
 		$user['sign_history'] = array();
@@ -360,6 +360,8 @@ class User_model extends CI_Model {
 			}
 			array_push($user['sign_history'], $msg);
 		}
+		$user['sign_statu'] = $this->sign->sign_statu($user['username']);
+
 		return $user;
 	}
 }

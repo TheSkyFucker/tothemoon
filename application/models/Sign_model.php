@@ -10,31 +10,39 @@ class Sign_model extends CI_Model {
 	 * private 接口
 	 *****************************************************************************************************/
 
-	private function is_morning()
+	private function is_signable()
 	{
-		$this->load->helper('date');
+		//config
 		$time = time();
-		$begin = mysql_to_unix(date('Y-m-d ', $time).'07:00:00');
-		$end = mysql_to_unix(date('Y-m-d ', $time).'10:30:00');
-		return $begin <= $time && $time <= $end;
-	}
+		$date = date('Y-m-d', $time);
+		$options = array(
+			array(
+				'begin' => strtotime($date.' 07:00:00'),
+				'end' => strtotime($date.' 10:30:00'),
+				'label' => '早上'
+				),
+			array(
+				'begin' => strtotime($date.' 14:00:00'),
+				'end' => strtotime($date.' 16:10:00'),
+				'label' => '中午'
+				),
+			array(
+				'begin' => strtotime($date.' 19:00:00'),
+				'end' => strtotime($date.'20:40:00'),
+				'label' => '晚上'
+				)
+			);
 
-	private function is_afternoon()
-	{
+		//check		
 		$this->load->helper('date');
-		$time = time();
-		$begin = mysql_to_unix(date('Y-m-d ', $time).'14:00:00');
-		$end = mysql_to_unix(date('Y-m-d ', $time).'16:10:00');
-		return $begin <= $time && $time <= $end;
-	}
-
-	private function is_evening()
-	{
-		$this->load->helper('date');
-		$time = time();
-		$begin = mysql_to_unix(date('Y-m-d ', $time).'00:00:00');
-		$end = mysql_to_unix(date('Y-m-d ', $time).'23:30:00');
-		return $begin <= $time && $time <= $end;
+		foreach ($options as $option)
+		{
+			if ($option['begin'] <= $time && $time <= $option['end'])
+			{
+				return $date.' '.$option['label'];
+			}
+		}
+		return null;
 	}
 
 	private function update_visit($data)
@@ -106,6 +114,13 @@ class Sign_model extends CI_Model {
 		return $result;
 	}
 
+	public function sign_statu($username)
+	{
+//		if ( ! $this->is_morning())
+//		$where = array('username')
+		echo "TODO\n";
+	}
+
 	/**********************************************************************************************
 	 * 接口 for 前端
 	 **********************************************************************************************/
@@ -123,23 +138,10 @@ class Sign_model extends CI_Model {
 		$username = $this->user->check_user($token);
 
 		//check label
-		if ($this->is_morning())
-		{
-			$label = date('Y-m-d ', time()).'早上';
-		}
-		else if ($this->is_afternoon())
-		{
-			$label = date('Y-m-d ', time()).'下午';
-		}
-		else if ($this->is_evening())
-		{
-			$label = date('Y-m-d ', time()).'晚上';
-		}
-		else 
+		if ( ! $label = $this->is_signable())
 		{
 			throw new Exception("当前非合法签到时间");
 		}
-
 
 		//check apply again
 		$where = array(
