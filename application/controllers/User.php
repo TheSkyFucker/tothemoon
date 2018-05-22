@@ -23,7 +23,7 @@ class User extends CI_Controller {
 	 */
 	public function home()
 	{
-		echo "TODO";
+		$this->load->view('home.html');
 	}
 
 	/**
@@ -192,7 +192,7 @@ class User extends CI_Controller {
 
 			//login
 			$this->load->model('User_model','user');
-			$data = $this->user->login(filter($form, $fields));
+			$this->user->login(filter($form, $fields));
 
 		}
 		catch (Exception $e)
@@ -205,7 +205,6 @@ class User extends CI_Controller {
 		//return
 		set_message('success', '成功', '登陆成功');
 		echo "<script>window.location.href='home'</script>";
-		;
 	}
 
 	/**
@@ -221,13 +220,10 @@ class User extends CI_Controller {
 		}
 		catch(Exception $e)
 		{
-			output_data($e->getCode(), $e->getMessage(), array());
+			set_message('error', '失败', $e->getMessage());
+			echo "<script>window.location.href='home'</script>";
 			return;
 		}
-
-		//return
-		output_data(1, '获取成功', $data);
-
 	}
 
 	/**

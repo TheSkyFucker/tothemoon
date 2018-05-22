@@ -209,8 +209,8 @@ class User_model extends CI_Model {
 		//get profile
 		$form = array('username' => $user['username']);
 		$ret = $this->profile($form);
-		$ret['token'] = $new_data['token'];
-		return $ret;
+		$this->session->set_userdata('token', $new_data['token']);
+
 	}
 
 	/**

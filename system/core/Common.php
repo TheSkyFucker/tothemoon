@@ -912,14 +912,7 @@ if ( ! function_exists('get_token'))
 {
 	function get_token($hard_mode = TRUE)	//$hard_model 决定了是否要求获取到token，关闭后没获取到只会返回NULL不会报错
 	{
-		foreach ($_SERVER as $name => $value)   
-       	{  
-           if (substr($name, 0, 5) == 'HTTP_')   
-           {  
-               $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;  
-           }
-       	}  
-		if ( ! isset($headers['Token']))
+		if ( ! isset($_SESSION['token']))
 		{
 			if ($hard_mode)
 			{
@@ -930,7 +923,7 @@ if ( ! function_exists('get_token'))
 				return NULL;
 			}
 		}
-		return $headers['Token'];
+		return $_SESSION['token'];
 	}
 }
 
@@ -939,7 +932,7 @@ if ( ! function_exists('get_token'))
 if ( ! function_exists('set_message'))
 {
 	function set_message($type, $title, $text) {
-		$GLOBALS['message'] = array(
+		$_SESSION['msg'] = array(
 			'type' => $type,
 			'title' => $title,
 			'text' => $text
