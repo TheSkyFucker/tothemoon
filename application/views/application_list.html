@@ -17,45 +17,63 @@
 
 		<!-- main content start-->
 		<div id="page-wrapper">
-			<div class="main-page signup-page ">
+			<div class="main-page general">
 
-				<h2 class="title1">Sign In</h2>
-			
-				<div class="sign-up-row widget-shadow">
+				<div class="panel-group tool-tips widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
 
-					<form action="#" method="post">
+					<h4 class="title2"> Applications</h4>
+
+					<?php 
+					$users = $this->session->userdata('data'); 
+					$this->session->unset_userdata('data');
+					$first = true;
+					foreach ($users as $user)
+					{
+					?>
+
+				  	<div class="panel panel-default">
+
+	
+						<div class="panel-heading" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="<?php echo '#'.$user['username'] ?>" aria-expanded="false" aria-controls="<?php echo $user['username'] ?>" id="<?php echo 'heading'.$user['username'] ?>">
+				  		<div class="panel-title" >
+							  		<?php echo $user['realname'] ?>
+					  	</div>
+						</div>
+
 					
-						<div class="sign-u">
-							<?php $field = 'username'; $label = '用户名'?>
-							<?php echo form_error($field, '','') ?> 
-							<input type="text" class="user" name="<?php echo $field ?>" placeholder="<?php echo $label ?>" required="" value = "<?php echo set_value($field)?>">
-							<div class="clearfix"> </div>
-						</div>
-
-						<div class="sign-u">
-							<?php $field = 'password'; $label = '密码'?>
-							<?php echo form_error($field, '','') ?> 
-							<input type="password" class="user" name="<?php echo $field ?>" placeholder="<?php echo $label ?>" required="" value = "<?php echo set_value($field)?>">
-							<div class="clearfix"> </div>
-						</div>
-
-						<div class="forgot">
-							<a href="#">forgot password?</a>
-						</div>
-						<div class="clearfix"> </div>
+						<div id="<?php echo $user['username'] ?>" class="panel-collapse collapse <?php if ($first) { echo 'in'; $first = false; } ?>" role="tabpanel" aria-labelledby="<?php echo 'heading'.$user['username'] ?>">
 					
-						<div class="registration">
-							Don't have an account ?
-							<a class="" href="register">
-								Create an account
-							</a>
+						  	<div class="panel-body">
+							<table class="table table-bordered"> 
+								<thead> 
+									<tr>
+										<th>性别</th>
+										<th>生日</th>
+										<th>学院</th>
+										<th>专业</th>
+										<th>学号</th>
+										<th>年级</th>
+										<th>选项</th>										
+									</tr> 
+								</thead>
+								<tbody>
+									<tr> 
+										<td><?php echo $user['sex'] == 1 ? '汉子' : '妹纸'; ?></td> 
+										<td><?php echo $user['born']?></td> 
+										<td><?php echo $user['college']?></td> 
+										<td><?php echo $user['major']?></td> 
+										<td><?php echo $user['student_id']?></td> 
+										<td><?php echo $user['grade']?></td> 
+										<td><?php echo 'TODO'?></td> 
+									</tr>
+								</tbody>
+							</table>
+						 	</div>
 						</div>
-
-						<div class="sub_home">
-							<input type="submit" value="login">
-							<div class="clearfix"> </div>
-						</div>
-					</form>
+					</div>
+					<?php 
+					}
+					?>
 				</div>
 			</div>
 		</div>
@@ -67,6 +85,6 @@
 	</div>
 	
 	<?php require_once('js.php'); ?>
-   
+ 
 </body>
 </html>

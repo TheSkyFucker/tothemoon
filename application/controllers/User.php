@@ -216,7 +216,7 @@ class User extends CI_Controller {
 		try
 		{
 			$this->load->model('User_model','user');
-			$data = $this->user->application_list();
+			$this->session->set_userdata('data', $this->user->application_list());
 		}
 		catch(Exception $e)
 		{
@@ -224,6 +224,8 @@ class User extends CI_Controller {
 			echo "<script>window.location.href='home'</script>";
 			return;
 		}
+
+		$this->load->view('application_list.html');
 	}
 
 	/**
