@@ -21,11 +21,18 @@
 
 				<div class="panel-group tool-tips widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
 
-					<h4 class="title2"> Applications</h4>
 
 					<?php 
 					$users = $this->session->userdata('data'); 
 					$this->session->unset_userdata('data');
+					?>
+
+					<h4 class="title2"> Applications </h4>
+					<?= sizeof($users) ?> 条待处理
+					</br>
+					</br>
+
+					<?php
 					$first = true;
 					foreach ($users as $user)
 					{
@@ -53,6 +60,7 @@
 										<th>专业</th>
 										<th>学号</th>
 										<th>年级</th>
+										<th>用户名</th>
 										<th>选项</th>										
 									</tr> 
 								</thead>
@@ -64,10 +72,11 @@
 										<td><?= $user['major']?></td> 
 										<td><?= $user['student_id']?></td> 
 										<td><?= $user['grade']?></td> 
+										<td><?= $user['username']?></td>
 										<td> 
 											<a href="<?= '?username='.$user['username'].'&result=1' ?>"> <button type = "button" class = "btn btn-success">通过</button>	</a>
 											<a href="<?= '?username='.$user['username'].'&result=0' ?>"> <button type = "button" class = "btn btn-danger">十动然拒</button> </a>
-										</td> 
+										</td>
 									</tr>
 								</tbody>
 							</table>
