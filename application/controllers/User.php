@@ -19,12 +19,19 @@ class User extends CI_Controller {
 	 *****************************************************************************************************/
 
 	/**
+	 * 主页
+	 */
+	public function home()
+	{
+		echo "TODO";
+	}
+
+	/**
 	 * 注册
 	 */
 	public function register()
 	{
-		include_sweetalert();
-
+		
 		//config
 		$rules = array(
 			array(
@@ -158,16 +165,21 @@ class User extends CI_Controller {
 		try
 		{
 
-			//get post
-			$post = get_post();
+			//get form
+			$form = get_post();
+			$this->load->helper('form');
+			if ( ! $form)
+			{
+				$this->load->view('login.html');
+				return;
+			}
 
 			//check form
 			$this->load->library('form_validation');
-			$this->form_validation->set_data($post);
+			$this->form_validation->set_data($form);
 			$this->form_validation->set_rules($rules);
 			if ( ! $this->form_validation->run())
 			{
-				$this->load->helper('form');
 				foreach ($rules as  $rule) 
 				{
 					if (form_error($rule['field']))
@@ -178,20 +190,22 @@ class User extends CI_Controller {
 				return;
 			}
 
-			//过滤 && login
+			//login
 			$this->load->model('User_model','user');
-			$data = $this->user->login(filter($post, $fields));
+			$data = $this->user->login(filter($form, $fields));
 
 		}
-		catch(Exception $e)
+		catch (Exception $e)
 		{
-			output_data($e->getCode(), $e->getMessage(), array());
+			set_message('error', '失败', $e->getMessage());
+			$this->load->view('login.html');
 			return;
 		}
 
 		//return
-		output_data(1, '登陆成功', $data);
-
+		set_message('success', '成功', '登陆成功');
+		echo "<script>window.location.href='home'</script>";
+		;
 	}
 
 	/**

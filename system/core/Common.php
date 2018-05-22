@@ -936,38 +936,6 @@ if ( ! function_exists('get_token'))
 
 // ------------------------------------------------------------------------
 
-if ( ! function_exists('include_sweetalert'))
-{
-	function include_sweetalert() {
-		echo "
-	        <!DOCTYPE html><html><script type='text/javascript'>	         
-	        function sweet_alert(type,title,text) {
-	            swal(  
-	                    {
-	                        title:title,
-	                        text:text,  
-	                        type:type,  
-	                        //showCancelButton:true,  
-	                        confirmButtonColor:'#66ccff',  
-	                        confirmButtonText:'我知道了 0 0',  
-	                        closeOnConfirm:true,
-	                        closeOnCancel:true
-	                    },  
-	                    function(isConfirm)  
-	                    {  
-	                        if (isConfirm)  
-	                        {  
-	                        }
-	                    }  
-	                );
-	        }
-	    </script></html>"; 
-	    unset($GLOBALS['message']); 	
-    }
-}
-
-// ------------------------------------------------------------------------
-
 if ( ! function_exists('set_message'))
 {
 	function set_message($type, $title, $text) {
