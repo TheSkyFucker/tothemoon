@@ -23,6 +23,7 @@ class User extends CI_Controller {
 	 */
 	public function register()
 	{
+		include_sweetalert();
 
 		//config
 		$rules = array(
@@ -78,7 +79,7 @@ class User extends CI_Controller {
 				)
 		);
 		$members = array();
-		foreach ($rules as $rule) 
+		foreach ($rules as $rule)
 		{
 			array_push($members, $rule['field']);
 		}
@@ -87,43 +88,45 @@ class User extends CI_Controller {
 		try
 		{	
 
-			//get post
-			$post = get_post();
-
-			//check form
-			$this->load->library('form_validation');
-			$this->form_validation->set_data($post);
-			$this->form_validation->set_rules($rules);
-			if ( ! $this->form_validation->run() )
+			//get form
+			$this->load->helper('form');
+			if ( ! $form = get_post())
 			{
-				$this->load->helper('form');
-				foreach ($rules as $rule)
+				$this->load->view('signup.html');
+				return;
+			}
+			$this->load->library('form_validation');
+
+			//check form			
+			$this->form_validation->set_data($form);
+			$this->form_validation->set_rules($rules);
+			if ( ! $this->form_validation->run())
+			{
+				foreach ($rules as  $rule)
 				{
 					if (form_error($rule['field']))
 					{
 						throw new Exception(strip_tags(form_error($rule['field'])));
 					}
 				}
-				return;
 			}
 
-			//过滤 && register
-			if ( ! $this->load->model('User_model','user')) 
-			{
-				throw new Exception("载入 User_model 错误, 请联系管理员。");
-			}
-			$this->user->register(filter($post, $members));
+
+			//register
+			$this->load->model('User_model','user');
+			$this->user->register(filter($form, $members));
 			
 		}
 		catch (Exception $e)
 		{
-			output_data($e->getCode(), $e->getMessage(), array());
+			set_message('error', '失败', $e->getMessage());
+			$this->load->view('signup.html');
 			return;
 		}
 
 		//return
-		output_data(1, '申请成功', array());
-
+		set_message('success', '成功', '已提交申请');
+		$this->load->view('signup.html');
 	}
 
 	/**

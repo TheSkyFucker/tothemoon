@@ -130,7 +130,6 @@ class User_model extends CI_Model {
 	 */
 	public function register($user)
 	{
-
 		//check username
 		$where = array('username' => $user['username']);
 		if ($this->db->where($where)
@@ -144,6 +143,12 @@ class User_model extends CI_Model {
 			->result_array())
 		{
 			throw new Exception("该用户名已提交注册申请");
+		}
+
+		//check date
+		if ( ! strtotime($user['born']))
+		{
+			throw new Exception("生日格式错误");
 		}
 
 		//add into application table
@@ -362,6 +367,10 @@ class User_model extends CI_Model {
 		}
 		$user['sign_statu'] = $this->sign->sign_statu($user['username']);
 
+		//get position
+		$this->load->model('Position_model', 'position');
+		$where = array('username' => $user['username']);
+		$user['position'] = $this->position->position($where);
 		return $user;
 	}
 }

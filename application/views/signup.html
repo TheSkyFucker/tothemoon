@@ -1,0 +1,171 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Glance Design Dashboard an Admin Panel Category Flat Bootstrap Responsive Website Template | SignUp Page :: w3layouts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Glance Design Dashboard Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<!-- config -->
+<?php require_once('config.php'); ?>
+<!-- header -->
+
+
+</head> 
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+	<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+
+		<!--left-fixed -navigation-->	
+		<?php require_once('left_navigation.php'); ?>
+		<!--left-fixed -navigation-->
+
+		<!-- header-->
+		<?php require_once('header.php'); ?>
+		<!-- header-->
+
+		<!-- main content start-->
+		<div id="page-wrapper">
+
+			<div class="main-page signup-page">
+
+				<h2 class="title1">Sign Up</h2>
+
+				<div class="sign-up-row widget-shadow">
+
+					<h5>Personal Information :</h5>
+
+					<form action="#" method="post">
+
+						<div class="sign-u">
+							<?php $field = 'username'; $label = '用户名（3 ~ 16 位字母 下划线）'?>
+							<?php echo form_error($field, '','') ?> 
+							<input type="text" name="<?php echo $field ?>" placeholder="<?php echo $label ?>" required="" value = "<?php echo set_value($field)?>">
+							<div class="clearfix"> </div>
+						</div>
+
+						<div class="sign-u">
+							<?php $field = 'realname'; $label = '真实姓名'?>
+							<?php echo form_error($field, '','') ?> 
+							<input type="text" name="<?php echo $field ?>" placeholder="<?php echo $label ?>" required="" value = "<?php echo set_value($field)?>">
+							<div class="clearfix"> </div>
+						</div>
+
+						<div class="sign-u">
+							<?php $field = 'born'; $label = '生日（1998-03-09）'?>
+							<?php echo form_error($field, '','') ?> 
+							<input type="text" name="<?php echo $field ?>" placeholder="<?php echo $label ?>" required="" value = "<?php echo set_value($field)?>">
+							<div class="clearfix"> </div>
+						</div>
+
+						<div class="sign-u">
+							<?php $field = 'sex'; ?>
+							<?php echo form_error($field, '','') ?> 
+							<div class="sign-up2">
+<!--								<i class="fa fa-glide-g" aria-hidden="true"></i> -->
+								&nbsp;
+								<label>
+									<?php if (set_value($field) === '1') { ?>
+										<input type="radio" name="<?php echo $field; ?>" value = "1" required="" checked=""> 男
+									<?php } else {?>
+										<input type="radio" name="<?php echo $field; ?>" value = "1" required=""> 男
+									<?php } ?>
+								</label>
+								&nbsp;
+								<label>
+									<?php if (set_value($field) === '0') { ?>
+										<input type="radio" name="<?php echo $field; ?>" value = "0" required="" checked=""> 女
+									<?php } else {?>
+										<input type="radio" name="<?php echo $field; ?>" value = "0" required=""> 女
+									<?php } ?>
+								</label>
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+						
+
+						<h6>Student Information :</h6>
+
+						<div class="sign-u">
+							<?php $field = 'student_id'; $label = '学号'?>
+							<?php echo form_error($field, '','') ?> 
+							<input type="text" name="<?php echo $field ?>" placeholder="<?php echo $label ?>" required="" value = "<?php echo set_value($field)?>">
+							<div class="clearfix"> </div>
+						</div>
+
+						<div class="sign-u">
+							<?php $field = 'grade'; $label = '年级'?>
+							<?php echo form_error($field, '','') ?> 
+							<input type="text" name="<?php echo $field ?>" placeholder="<?php echo $label ?>" required="" value = "<?php echo set_value($field)?>">
+							<div class="clearfix"> </div>
+						</div>
+
+						<div class="sign-u">
+							<?php $field = 'college'; $label = '学院'?>
+							<?php echo form_error($field, '','') ?> 
+							<input type="text" name="<?php echo $field ?>" placeholder="<?php echo $label ?>" required="" value = "<?php echo set_value($field)?>">
+							<div class="clearfix"> </div>
+						</div>
+
+						<div class="sign-u">
+							<?php $field = 'major'; $label = '专业'?>
+							<?php echo form_error($field, '','') ?> 
+							<input type="text" name="<?php echo $field ?>" placeholder="<?php echo $label ?>" required="" value = "<?php echo set_value($field)?>">
+							<div class="clearfix"> </div>
+						</div>
+
+
+						<h6>Login Information :</h6>
+						
+						
+
+						<div class="sign-u">
+							<?php $field = 'password'; $label = '密码（ 6 ~ 16位）'?>
+							<?php echo form_error($field, '','') ?> 
+							<input type="password" name="<?php echo $field ?>" placeholder="<?php echo $label?>" required="" value = "<?php echo set_value($field); ?>">
+							<div class="clearfix"> </div>
+						</div>
+
+						<div class="sign-u">
+							<?php $field = 'passconf'; $label = '重复（必须和密码一致）'?>						
+							<?php echo form_error($field, '','') ?> 
+							<input type="password" name="<?php echo $field ?>" placeholder="<?php echo $label?>" required="" value = "<?php echo set_value($field); ?>">
+							<div class="clearfix"></div>
+						</div>
+
+						<div class="sub_home">
+							<input type="submit" value="Submit">
+							<div class="clearfix"> </div>
+						</div>
+						<div class="registration">
+							Already Registered. 
+							<a class="" href="login">
+								Login
+							</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!--footer-->
+		<?php require_once('footer.php'); ?>
+        <!--//footer-->
+
+	</div>
+	
+	<?php require_once('js.php'); ?>
+
+
+</body>
+</html>
+
+

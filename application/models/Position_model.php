@@ -22,6 +22,18 @@ class Position_model extends CI_Model {
 			->result_array();
 	}
 
+	public function position($where)
+	{
+		if ( ! $results = $this->db->where($where)
+			->get('position_user')
+			->result_array())
+		{
+			return -1;
+		}
+		$position = $results[0]['id'];
+		return $position;
+	}
+
 	/**********************************************************************************************
 	 * 接口 for 前端
 	 **********************************************************************************************/
