@@ -1,7 +1,12 @@
 <!-- config -->
 <?php require_once('config.php'); ?>
 <!-- config -->
-
+<style>
+#chartdiv {
+  width: 100%;
+  height: 295px;
+}
+</style>
 </head> 
 <body class="cbp-spmenu-push">
 	<div class="main-content">
@@ -16,8 +21,113 @@
 		<!-- header-->
 
 		<!-- main content start-->
-		home
+		<div id="page-wrapper">
+			<div class="main-page">
+				<div class="col_3">
 
+		        	<div class="col-md-3 widget widget1">
+		        		<div class="r3_counter_box">
+		                    <i class="pull-left fa fa-flag dollar2 icon-rounded"></i>
+		                    <div class="stats">
+		                      <h5><strong>233</strong></h5>
+		                      <span>今日签到</span>
+		                    </div>
+		                </div>
+		        	</div>
+
+		        	<div class="col-md-3 widget widget1">
+		        		<div class="r3_counter_box">
+		                    <i class="pull-left fa fa-user user2 icon-rounded"></i>
+		                    <div class="stats">
+		                      <h5><strong>199</strong></h5>
+		                      <span>今日人数</span>
+		                    </div>
+		                </div>
+		        	</div>
+
+		        	<div class="col-md-3 widget widget1">
+		        		<div class="r3_counter_box">
+		                    <i class="pull-left fa fa-users dollar1 icon-rounded"></i>
+		                    <div class="stats">
+		                      <h5><strong>199</strong></h5>
+		                      <span>近三天人数</span>
+		                    </div>
+		                </div>
+		        	</div>
+
+
+					<div class="col-md-3 widget widget1 sub_home" style="width: 102px; height: 102px">
+		        		<div class="r3_counter_box" style="width: 100px; height: 100px; padding: 0px;">
+							<input type="submit" style="width: 100px; height: 100px; margin: 0px; font-size: 33px;" value="签">
+		                </div>
+					</div>
+
+					<div class="clearfix"> </div>
+	        	</div>
+
+				<div class="row-one widgettable">
+
+
+	        		<div class="col-md-6 content-top-2 card">
+						<div class="agileinfo-cdr">
+							<div class="card-header">
+	                        	<h3>Today sign</h3>
+	                   	 	</div>
+							<div id="Linegraph" style="width: 100%; height: 335px">
+							</div>
+							
+						</div>
+					</div>
+					
+					<div class="col-md-2 stat">
+
+						<div class="content-top-1">
+							<div class="col-md-6 top-content">
+								<h5>Morning</h5>
+								<label>1283+</label>
+							</div>
+							<div class="col-md-6 top-content1">	   
+								<div id="demo-pie-1" class="pie-title-center" data-percent="45"> <span class="pie-value"></span> </div>
+							</div>
+						 	<div class="clearfix"> </div>
+						</div>
+						
+						<div class="content-top-1">
+							<div class="col-md-6 top-content">
+								<h5>Afternoon</h5>
+								<label>2262+</label>
+							</div>
+							
+							<div class="col-md-6 top-content1">	   
+								<div id="demo-pie-2" class="pie-title-center" data-percent="75"> <span class="pie-value"></span> </div>
+							</div>
+						 	
+						 	<div class="clearfix"> </div>
+						</div>
+
+						<div class="content-top-1">
+							<div class="col-md-6 top-content">
+								<h5>Evening</h5>
+								<label>12589+</label>
+							</div>
+							<div class="col-md-6 top-content1">	   
+								<div id="demo-pie-3" class="pie-title-center" data-percent="90"> <span class="pie-value"></span> </div>
+							</div>
+							 
+							 <div class="clearfix"> </div>
+						</div>
+						
+					</div>
+
+
+
+					<div class="clearfix"> </div>
+				
+				</div>
+						
+
+        	</div>
+        </div>
 
 
 		<!--footer-->
@@ -25,6 +135,170 @@
         <!--//footer-->
 
 	</div>
+
+	<!-- new added graphs chart js-->
+	
+    <script src="../../assets/js/Chart.bundle.js"></script>
+    <script src="../../assets/js/utils.js"></script>
+	
+	<script>
+        var MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        var color = Chart.helpers.color;
+        var barChartData = {
+            labels: ["January", "February", "March", "April", "May", "June", "July"],
+            datasets: [{
+                label: 'Dataset 1',
+                backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.red,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }, {
+                label: 'Dataset 2',
+                backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+                borderColor: window.chartColors.blue,
+                borderWidth: 1,
+                data: [
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor(),
+                    randomScalingFactor()
+                ]
+            }]
+
+        };
+
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myBar = new Chart(ctx, {
+                type: 'bar',
+                data: barChartData,
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Chart.js Bar Chart'
+                    }
+                }
+            });
+
+        };
+
+        document.getElementById('randomizeData').addEventListener('click', function() {
+            var zero = Math.random() < 0.2 ? true : false;
+            barChartData.datasets.forEach(function(dataset) {
+                dataset.data = dataset.data.map(function() {
+                    return zero ? 0.0 : randomScalingFactor();
+                });
+
+            });
+            window.myBar.update();
+        });
+
+        var colorNames = Object.keys(window.chartColors);
+        document.getElementById('addDataset').addEventListener('click', function() {
+            var colorName = colorNames[barChartData.datasets.length % colorNames.length];;
+            var dsColor = window.chartColors[colorName];
+            var newDataset = {
+                label: 'Dataset ' + barChartData.datasets.length,
+                backgroundColor: color(dsColor).alpha(0.5).rgbString(),
+                borderColor: dsColor,
+                borderWidth: 1,
+                data: []
+            };
+
+            for (var index = 0; index < barChartData.labels.length; ++index) {
+                newDataset.data.push(randomScalingFactor());
+            }
+
+            barChartData.datasets.push(newDataset);
+            window.myBar.update();
+        });
+
+        document.getElementById('addData').addEventListener('click', function() {
+            if (barChartData.datasets.length > 0) {
+                var month = MONTHS[barChartData.labels.length % MONTHS.length];
+                barChartData.labels.push(month);
+
+                for (var index = 0; index < barChartData.datasets.length; ++index) {
+                    //window.myBar.addData(randomScalingFactor(), index);
+                    barChartData.datasets[index].data.push(randomScalingFactor());
+                }
+
+                window.myBar.update();
+            }
+        });
+
+        document.getElementById('removeDataset').addEventListener('click', function() {
+            barChartData.datasets.splice(0, 1);
+            window.myBar.update();
+        });
+
+        document.getElementById('removeData').addEventListener('click', function() {
+            barChartData.labels.splice(-1, 1); // remove the label first
+
+            barChartData.datasets.forEach(function(dataset, datasetIndex) {
+                dataset.data.pop();
+            });
+
+            window.myBar.update();
+        });
+    </script>
+	<!-- new added graphs chart js-->
+
+	<!-- for index page weekly sales java script -->
+	<script src="../../assets/js/SimpleChart.js"></script>
+    <script>
+        var graphdata1 = {
+            linecolor: "#CCA300",
+            title: "Monday",
+            values: [
+
+            { X: "7:00", Y: 2 },
+            { X: "8:00", Y: 4 },
+            { X: "9:00", Y: 3 },
+            { X: "10:00", Y: 4 },
+
+            { X: "14:00", Y: 4 },
+            { X: "15:00", Y: 1 },
+
+            { X: "19:00", Y: 4 },
+            { X: "20:00", Y: 2 },
+            ]
+        };
+        $(function () {
+            $("#Linegraph").SimpleChart({
+                ChartType: "Line",
+                toolwidth: "25",
+                toolheight: "25",
+                axiscolor: "#E6E6E6",
+                textcolor: "#6E6E6E",
+                showlegends: false,
+                data: [graphdata1],
+                legendsize: "140",
+                legendposition: 'bottom',
+                xaxislabel: 'Hours',
+                title: 'Today sign',
+                yaxislabel: ''
+            });
+        });
+
+    </script>
+	<!-- //for index page weekly sales java script -->
+
 	
 	<?php require_once('js.php'); ?>
    

@@ -231,9 +231,20 @@ class User extends CI_Controller {
 			set_message($e->getCode() == 0 ? 'error' : 'success', $e->getCode() == 0 ? '失败' : '成功', $e->getMessage());
 		}
 
-		//get list		
-		$this->session->set_userdata('data', $this->user->application_list());
-		$this->load->view('application_list.html');
+
+
+		//get list
+		try
+		{
+			$this->session->set_userdata('data', $this->user->application_list());
+			$this->load->view('application_list.html');
+		}
+		catch(Exception $e)
+		{
+			$this->session->set_userdata('data', array());
+			echo "<script>window.location.href='home'</script>";
+		}
+		
 	}
 
 	/**
