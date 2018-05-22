@@ -58,13 +58,16 @@
 								</thead>
 								<tbody>
 									<tr> 
-										<td><?php echo $user['sex'] == 1 ? '汉子' : '妹纸'; ?></td> 
-										<td><?php echo $user['born']?></td> 
-										<td><?php echo $user['college']?></td> 
-										<td><?php echo $user['major']?></td> 
-										<td><?php echo $user['student_id']?></td> 
-										<td><?php echo $user['grade']?></td> 
-										<td><?php echo 'TODO'?></td> 
+										<td><?= $user['sex'] == 1 ? '汉子' : '妹纸'; ?></td> 
+										<td><?= $user['born'] ?></td> 
+										<td><?= $user['college']?></td> 
+										<td><?= $user['major']?></td> 
+										<td><?= $user['student_id']?></td> 
+										<td><?= $user['grade']?></td> 
+										<td> 
+											<a href="<?= '?username='.$user['username'].'&result=1' ?>"> <button type = "button" class = "btn btn-success">通过</button>	</a>
+											<a href="<?= '?username='.$user['username'].'&result=0' ?>"> <button type = "button" class = "btn btn-danger">删除</button> </a>
+										</td> 
 									</tr>
 								</tbody>
 							</table>
