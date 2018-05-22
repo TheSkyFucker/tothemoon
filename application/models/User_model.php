@@ -261,7 +261,7 @@ class User_model extends CI_Model {
 		//check result
 		if ($form['result'] == 0)
 		{
-			$this->db->delete('user_application', $where);
+			//$this->db->delete('user_application', $where);
 			throw new Exception("拒绝成功", 1);
 		}
 		if ($form['result'] == 1)
@@ -271,9 +271,9 @@ class User_model extends CI_Model {
 			$form['register'] = date('Y-m-d H:i:s', time());
 			$user_base = array('username', 'password', 'realname');
 			$user_detail = array('username', 'sex', 'born', 'grade', 'college', 'major', 'student_id', 'register');
-			$this->db->insert('user_base', filter($form, $user_base));
-			$this->db->insert('user_detail', filter($form, $user_detail));
-			$this->db->delete('user_application', $where);
+			//$this->db->insert('user_base', filter($form, $user_base));
+			//$this->db->insert('user_detail', filter($form, $user_detail));
+			//$this->db->delete('user_application', $where);
 			throw new Exception("通过成功", 1);
 		}
 		throw new Exception("处理结果只能为 0 or 1");

@@ -212,78 +212,28 @@ class User extends CI_Controller {
 	 */
 	public function application_list()
 	{
-		//application_list
-		try
-		{
-			$this->load->model('User_model','user');
-			$this->session->set_userdata('data', $this->user->application_list());
-		}
-		catch(Exception $e)
-		{
-			set_message('error', '失败', $e->getMessage());
-			echo "<script>window.location.href='home'</script>";
-			return;
-		}
-
-		$this->load->view('application_list.html');
-	}
-
-	/**
-	 * 处理申请
-	 */
-	public function handle_application()
-	{
-		//config
-		$rules = array(
-			array(
-				'field' => 'username',
-				'label' => '用户名',
-				'rules' => 'required'
-				),
-			array(
-				'field' => 'result',
-				'label' => '处理结果',
-				'rules' => 'required'
-				)
-		);
-
 		//handle
 		try
 		{
-			//get input
+			$this->load->model('User_model','user');
 			$form = array(
 				'username' => $this->input->get('username'),
 				'result' => $this->input->get('result')
 				);
-
-			//check form
-			$this->load->library('form_validation');
-			$this->form_validation->set_data($form);
-			$this->form_validation->set_rules($rules);
-			if ( ! $this->form_validation->run())
+			if ($form['username'] != null && $form['result'] != null)
 			{
-				$this->load->helper('form');
-				foreach ($rules as  $rule) 
-				{
-					if (form_error($rule['field']))
-					{
-						throw new Exception(strip_tags(form_error($rule['field'])));
-					}
-				}
-				return;
+				$this->user->handle_application($form);
 			}
-			$this->load->model('User_model', 'user');
-			$data = $this->user->handle_application($form);
+
 		}
 		catch(Exception $e)
 		{
-			output_data($e->getCode(), $e->getMessage(), array());
-			return;
+			set_message($e->getCode() == 0 ? 'error' : 'success', $e->getCode() == 0 ? '失败' : '成功', $e->getMessage());
 		}
 
-		//return
-		output_data(1, '处理成功', $data);
-
+		//get list		
+		$this->session->set_userdata('data', $this->user->application_list());
+		$this->load->view('application_list.html');
 	}
 
 	/**
