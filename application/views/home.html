@@ -31,7 +31,7 @@
 		        	<div class="col-md-3 widget widget1 sub_home" style="width: auto; ">
 		        		<div class="r3_counter_box" style="width: 200px; height: 175px">
 		                    <div class="stats">
-		                      <h5><strong style="font-size: 80px">5</strong><strong style="font-size: 50px">月&nbsp;23</strong></h5>
+		                      <h5><strong style="font-size: 80px"><?php $m = date('m'); if ($m[0] == '0') $m = substr($m, 1); echo $m?></strong><strong style="font-size: 50px">月&nbsp;<?=date('d')?></strong></h5>
 		                      <center>
 		                      	<span><?=date('H : i : s', time())?></span><br>
 		                      	<span>星 期 <?=date('w')?> , 实 验 室 , 晴</span>
@@ -59,7 +59,7 @@
 					<div class="col-md-3 widget widget1 sub_home" style="width: 100px; height: 102px">
 		        		<div class="r3_counter_box" style="width: 98px; height: 100px; ">
 		        		<a href="../Sign/register">
-		                    <i class="pull-left fa fa-<?=$icon?> user2 icon-rounded"></i>
+		                    <i class="pull-left fa fa-<?=$icon?> dollar2 icon-rounded"></i>
 						</a>
 		                </div>
 					</div>
@@ -162,15 +162,20 @@
                                 <div class="card-body card-padding">
                                     <div class="">
                                         <header class="widget-header">
-                                            <h4 class="widget-title">Sign History</h4>
+                                            <h4 class="widget-title">Sign History ( last 5 )</h4>
                                         </header>
                                         <hr class="widget-separator">
                                         <div class="widget-body">
                                             <div class="streamline">
 
                                             	<?php
+                                            	$count = 0;
                                             	foreach ($this->session->userdata('today')['log'] as $log)
                                             	{
+                                            		if (++$count > 5)
+                                            		{
+                                            			break;
+                                            		}
                                             	?>
                                                 <div class="sl-item sl-success">
                                                     <div class="sl-content">
@@ -181,7 +186,7 @@
                                                 <?php
                                                 }
                                                 ?>
-
+												...
                                               <!--  
                                                 <div class="sl-item sl-primary">
                                                     <div class="sl-content">
@@ -234,6 +239,9 @@
 
 	<!-- for index page weekly sales java script -->
 	<script src="../../assets/js/SimpleChart.js"></script>
+ 	<?php
+ 		if (true) {
+ 	?>
     <script>
 
         var graphdata1 = {
@@ -241,9 +249,7 @@
             title: "Monday",
             values: [
 
- 			
-
-            { X: "7:00", Y: 2 },
+            { X: "<?php echo 1 ?>:00", Y: 2 },
             { X: "8:00", Y: 4 },
             { X: "9:00", Y: 3 },
             { X: "10:00", Y: 4 },
@@ -273,9 +279,12 @@
             });
         });
 
-
-
     </script>
+
+	<?php
+    }
+    ?>
+
 	<!-- //for index page weekly sales java script -->
 
 	
