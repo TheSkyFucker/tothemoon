@@ -67,10 +67,15 @@
 
 		        	<div class="col-md-3 widget widget1">
 		        		<div class="r3_counter_box">
-		                    <i class="pull-left fa fa-flag dollar2 icon-rounded" style="background: #000000"></i>
+		                    <i class="pull-left fa fa-flag dollar2 icon-rounded" style="background: #ff4a43"></i>
 		                    <div class="stats">
-		                      <h5><strong>233</strong></h5>
-		                      <span>今日签到</span>
+		                    	<h5><strong>
+		                     	<?php
+									echo $this->session->userdata('todaysign');
+									$this->session->unset_userdata('todaysign');
+		                    	?>
+		                    	</strong></h5>
+		                    	<span>今日签到</span>
 		                    </div>
 		                </div>
 		        	</div>
@@ -79,7 +84,12 @@
 		        		<div class="r3_counter_box">
 		                    <i class="pull-left fa fa-user user2 icon-rounded"></i>
 		                    <div class="stats">
-		                      <h5><strong>199</strong></h5>
+		                      	<h5><strong>
+		                      	<?php
+									echo $this->session->userdata('todayuser');
+									$this->session->unset_userdata('todayuser');
+								?>
+		                      </strong></h5>
 		                      <span>今日人数</span>
 		                    </div>
 		                </div>
@@ -89,7 +99,12 @@
 		        		<div class="r3_counter_box">
 		                    <i class="pull-left fa fa-users dollar1 icon-rounded"></i>
 		                    <div class="stats">
-		                      <h5><strong>199</strong></h5>
+		                      	<h5><strong>
+		                      	<?php
+									echo $this->session->userdata('3dayuser');
+									$this->session->unset_userdata('3dayuser');
+								?>
+		                      </strong></h5>
 		                      <span>近三天人数</span>
 		                    </div>
 		                </div>

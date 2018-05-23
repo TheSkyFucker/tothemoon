@@ -23,6 +23,11 @@ class User extends CI_Controller {
 	 */
 	public function home()
 	{
+		//get data
+		$this->load->model('Sign_model', 'sign');
+		$this->session->set_userdata('todaysign', $this->sign->count(1));
+		$this->session->set_userdata('todayuser', $this->sign->count_user(1));
+		$this->session->set_userdata('3dayuser', $this->sign->count_user(3));
 		$this->load->view('home.html');
 	}
 

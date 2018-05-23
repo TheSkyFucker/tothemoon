@@ -83,22 +83,6 @@ class Sign_model extends CI_Model {
 	
 	}
 
-	private function count($day)
-	{
-		$temp = strtotime(date('Y-m-d', time()));
-		$ret = 0;
-		while ($day > 0)
-		{
-			$ret += sizeof($this->db->select(array('username'))
-			->where('result', 1)
-			->like('label', date('Y-m-d', $temp))
-			->get('sign_log')
-			->result_array());
-			$temp -= 86400;
-			$day -= 1;
-		}
-		return $ret;
-	}
 
 	/**********************************************************************************************
 	 * public 接口
@@ -142,6 +126,48 @@ class Sign_model extends CI_Model {
 			}
 		}
 		return '可签到';
+	}
+
+	public function count($day)
+	{
+		$temp = strtotime(date('Y-m-d', time()));
+		$ret = 0;
+		while ($day > 0)
+		{
+			$ret += sizeof($this->db->select(array('username'))
+			->where('result', 1)
+			->like('label', date('Y-m-d', $temp))
+			->get('sign_log')
+			->result_array());
+			$temp -= 86400;
+			$day -= 1;
+		}
+		return $ret;
+	}
+
+	public function count_user($day)
+	{
+		$users = array();
+		$temp = strtotime(date('Y-m-d', time()));
+		$ret = 0;
+		while ($day > 0)
+		{
+			$results = $this->db->select(array('username'))
+			->where('result', 1)
+			->like('label', date('Y-m-d', $temp))
+			->get('sign_log')
+			->result_array();
+			foreach ($results as $log) 
+			{
+				if ( ! in_array($log['username'], $users))
+				{
+					array_push($users, $log['username']);
+				}
+			}
+			$temp -= 86400;
+			$day -= 1;
+		}
+		return sizeof($users);
 	}
 
 	/**********************************************************************************************
