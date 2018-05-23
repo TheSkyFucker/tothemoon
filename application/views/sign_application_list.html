@@ -41,7 +41,7 @@
 					?>
 
 					<h4 class="title2"> Applications </h4>
-					<?= sizeof($applications) ?> 条待处理
+					<?= sizeof($temp) ?> 条待处理
 					</br>
 					</br>
 
@@ -56,7 +56,7 @@
 
 						<div class="panel-heading" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="<?='#'.$id?>" aria-expanded="false" aria-controls="<?= $id ?>" id="<?= 'heading'.$id ?>">
 				  			<div class="panel-title" >
-				  				<?= $label ?>
+				  				<?= $label." ( ".sizeof($applications[$label])." )" ?>
 					  		</div>
 						</div>
 						
@@ -82,8 +82,11 @@
 										<td><?= $application['realname'] ?></td> 
 										<td><?= $application['username'] ?></td> 
 										<td> 
-											<a href="#"> <button type = "button" class = "btn btn-success">通过</button>	</a>
-											<a href="#"> <button type = "button" class = "btn btn-danger">十动然拒</button> </a>
+											<a href="handle_application?id=<?=$application['id']?>&result=1"> <button type = "button" class = "btn btn-success">通过</button>	</a>
+											&nbsp;|
+											&nbsp;
+											<a href="handle_application?id=<?=$application['id']?>&result=0"> <button type = "button" class = "btn btn-danger">拒绝</button> </a>
+											<a href="handle_application?id=<?=$application['id']?>&result=-1"> <button type = "button" class = "btn btn-warning">删除</button> </a>
 										</td>
 									</tr>
 								</tbody>

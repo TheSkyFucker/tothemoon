@@ -105,16 +105,14 @@ class Sign extends CI_Controller {
 				return;
 			}
 			$this->load->model('Sign_model', 'sign');
-			$data = $this->sign->handle_application($form);
+			$this->sign->handle_application($form);
 		}
 		catch(Exception $e)
 		{
-			output_data($e->getCode(), $e->getMessage(), array());
-			return;
+			set_message($e->getCode() == 0 ? 'error' : 'success', $e->getCode() == 0 ? '失败' : '成功', $e->getMessage());
+			echo "<script>window.location.href='application_list'</script>";
 		}
 
-		//return
-		output_data(1, '处理成功', $data);		
 	}
 
 	/**
