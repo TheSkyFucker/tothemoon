@@ -11,13 +11,14 @@
           </div>
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="sidebar-menu">
-              <li class="header">MAIN NAVIGATION</li>
+              <li class="header">Navigation</li>
               <li class="treeview">
-                <a href="index.html">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <a href="../User/home">
+                <i class="fa fa-dashboard"></i> <span>主页</span>
                 </a>
               </li>
-			  <li class="treeview">
+              <!-- 
+              <li class="treeview">
                 <a href="#">
                 <i class="fa fa-laptop"></i>
                 <span>Components</span>
@@ -28,6 +29,7 @@
                   <li><a href="media.html"><i class="fa fa-angle-right"></i> Media Css</a></li>
                 </ul>
               </li>
+
               <li class="treeview">
                 <a href="charts.html">
                 <i class="fa fa-pie-chart"></i>
@@ -48,7 +50,7 @@
                   <li><a href="typography.html"><i class="fa fa-angle-right"></i> Typography</a></li>
                 </ul>
               </li>
-			  <li>
+			         <li>
                 <a href="widgets.html">
                 <i class="fa fa-th"></i> <span>Widgets</span>
                 <small class="label pull-right label-info">08</small>
@@ -95,12 +97,15 @@
                   <li><a href="blank-page.html"><i class="fa fa-angle-right"></i> Blank Page</a></li>
                 </ul>
               </li>
+              -->
               <li class="header">Manager</li>
               <li><a href="../User/application_list"><i class="fa fa-angle-right text-red"></i> <span>注册申请</span></a></li>
               <li><a href="../Sign/application_list"><i class="fa fa-angle-right text-red"></i> <span>签到申请</span></a></li>
+              <!--
               <li><a href="#"><i class="fa fa-angle-right text-red"></i> <span>Important</span></a></li>
               <li><a href="#"><i class="fa fa-angle-right text-yellow"></i> <span>Warning</span></a></li>
               <li><a href="#"><i class="fa fa-angle-right text-aqua"></i> <span>Information</span></a></li>
+              -->
             </ul>
           </div>
           <!-- /.navbar-collapse -->

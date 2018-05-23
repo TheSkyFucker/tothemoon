@@ -28,14 +28,27 @@
 			<div class="main-page">
 
 				<div class="col_3">
-		        	<div class="col-md-3 widget widget1 sub_home" style="width: 230px">
-		        		<div class="r3_counter_box" >
+		        	<div class="col-md-3 widget widget1 sub_home" style="width: auto; ">
+		        		<div class="r3_counter_box" style="width: 200px; height: 175px">
 		                    <div class="stats">
 		                      <h5><strong style="font-size: 80px">5</strong><strong style="font-size: 50px">月&nbsp;23</strong></h5>
-		                      <span>&nbsp;&nbsp;星&nbsp;期&nbsp;三 , 实 验 室 , 晴</span>
+		                      <center>
+		                      	<span><?=date('H : i : s', time())?></span><br>
+		                      	<span>星 期 <?=date('w')?> , 实 验 室 , 晴</span>
+		                      </center>
 		                    </div>
 		                </div>
 		        	</div>
+
+		        	<div class="col-md-3 widget widget1 sub_home" style="width: auto;">
+		        		<div class="r3_counter_box" style="width: 850px; height: 175px;">
+		                    <div class="stats">
+		                      <h5><strong style="font-size: 75px">&nbsp;It has happened before ,</strong></h5>
+		                      <span style="font-size: 30px">&nbsp;&nbsp;and it will happen again !</span><br>
+		                    </div>
+		                </div>
+		        	</div>
+
 				</div>
 
 				<div class="clearfix"> </div>
