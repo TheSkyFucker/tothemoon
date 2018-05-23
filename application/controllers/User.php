@@ -25,9 +25,8 @@ class User extends CI_Controller {
 	{
 		//get data
 		$this->load->model('Sign_model', 'sign');
-		$this->session->set_userdata('todaysign', $this->sign->count(1));
-		$this->session->set_userdata('todayuser', $this->sign->count_user(1));
-		$this->session->set_userdata('3dayuser', $this->sign->count_user(3));
+		$this->session->set_userdata('3day', $this->sign->dashboard(3));
+		$this->session->set_userdata('today', $this->sign->dashboard(1));;
 		$this->load->view('home.html');
 	}
 

@@ -88,16 +88,6 @@ class Sign_model extends CI_Model {
 	 * public 接口
 	 **********************************************************************************************/
 
-	public function log($username)
-	{
-		$where = array('username' => $username);
-		$result = $this->db->where($where)
-			->order_by('date', 'DESC')
-			->get('sign_log')
-			->result_array();
-		return $result;
-	}
-
 	public function sign_statu($username)
 	{
 		if ( ! $label = $this->is_signable())
@@ -149,7 +139,6 @@ class Sign_model extends CI_Model {
 	{
 		$users = array();
 		$temp = strtotime(date('Y-m-d', time()));
-		$ret = 0;
 		while ($day > 0)
 		{
 			$results = $this->db->select(array('username'))
@@ -168,6 +157,74 @@ class Sign_model extends CI_Model {
 			$day -= 1;
 		}
 		return sizeof($users);
+	}
+
+
+	public function dashboard($day)
+	{
+		//config
+		$users = array();
+		$labels = array(
+			'morning' => '早上',
+			'afternoon' => '下午',
+			'evening' => '晚上'
+			);
+		$time = strtotime(date('Y-m-d', time()));
+		$ret['count_sign'] = 0;
+		$ret['count_user'] = 0;
+		$ret['log'] =  array();
+		foreach ($labels as $key => $label)
+		{
+			$ret[$key] = 0;
+		}
+
+		while ($day > 0)
+		{
+			//count
+			$results = $this->db->select(array('username', 'date', 'label'))
+				->where('result', 1)
+				->like('label', date('Y-m-d', $time))
+				->order_by('date', 'DESC')
+				->get('sign_log')
+				->result_array();
+			$ret['count_sign'] += sizeof($results);
+			foreach ($results as $log)
+			{
+				array_push($ret['log'], $log);				
+			}
+
+			foreach ($results as $log) 
+			{
+				if ( ! in_array($log['username'], $users))
+				{
+					array_push($users, $log['username']);
+				}
+			}
+
+			foreach ($labels as $key => $label)
+			{
+				$ret[$key] += sizeof($this->db->select(array('username'))
+					->where('result', 1)
+					->like('label', date('Y-m-d', $time)." ".$label)
+					->get('sign_log')
+					->result_array());
+			}
+			$time -= 86400;
+			$day -= 1;
+		}
+
+		$ret['count_user'] = sizeof($users);
+
+		//get more info
+		foreach ($ret['log'] as $key => $log)
+		{
+			$where = array('username' => $log['username']);
+			$ret['log'][$key]['realname'] = $this->db->select('realname')
+				->where($where)
+				->get('user_base')
+				->result_array()[0]['realname'];
+		}
+		return $ret;
 	}
 
 	/**********************************************************************************************
@@ -319,7 +376,7 @@ class Sign_model extends CI_Model {
 	/**
 	 * 仪表盘
 	 */
-	public function dashboard()
+	/*public function dashboard()
 	{
 		//configs
 		$ret = array();
@@ -396,6 +453,6 @@ class Sign_model extends CI_Model {
 		//return
 		$ret['todaycontest'] = $data;
 		return $ret;
-	}
+	}*/
 
 }

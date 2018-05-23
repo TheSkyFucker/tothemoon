@@ -70,10 +70,7 @@
 		                    <i class="pull-left fa fa-flag dollar2 icon-rounded" style="background: #ff4a43"></i>
 		                    <div class="stats">
 		                    	<h5><strong>
-		                     	<?php
-									echo $this->session->userdata('todaysign');
-									$this->session->unset_userdata('todaysign');
-		                    	?>
+		                      	<?= $this->session->userdata('today')['count_sign'] ?>
 		                    	</strong></h5>
 		                    	<span>今日签到</span>
 		                    </div>
@@ -85,10 +82,7 @@
 		                    <i class="pull-left fa fa-user user2 icon-rounded"></i>
 		                    <div class="stats">
 		                      	<h5><strong>
-		                      	<?php
-									echo $this->session->userdata('todayuser');
-									$this->session->unset_userdata('todayuser');
-								?>
+		                      	<?= $this->session->userdata('today')['count_user'] ?>
 		                      </strong></h5>
 		                      <span>今日人数</span>
 		                    </div>
@@ -100,10 +94,7 @@
 		                    <i class="pull-left fa fa-users dollar1 icon-rounded"></i>
 		                    <div class="stats">
 		                      	<h5><strong>
-		                      	<?php
-									echo $this->session->userdata('3dayuser');
-									$this->session->unset_userdata('3dayuser');
-								?>
+		                      	<?= $this->session->userdata('3day')['count_user'] ?>
 		                      </strong></h5>
 		                      <span>近三天人数</span>
 		                    </div>
@@ -128,11 +119,11 @@
 					</div>
 					
 					<div class="col-md-2 stat">
-
+						
 						<div class="content-top-1">
 							<div class="col-md-6 top-content">
 								<h5>Morning</h5>
-								<label>1283+</label>
+								<label><?= $this->session->userdata('today')['morning'] ?></label>
 							</div>
 							<div class="col-md-6 top-content1">	   
 								<div id="demo-pie-1" class="pie-title-center" data-percent="45"> <span class="pie-value"></span> </div>
@@ -143,7 +134,7 @@
 						<div class="content-top-1">
 							<div class="col-md-6 top-content">
 								<h5>Afternoon</h5>
-								<label>2262+</label>
+								<label><?= $this->session->userdata('today')['afternoon'] ?></label>
 							</div>
 							
 							<div class="col-md-6 top-content1">	   
@@ -156,7 +147,7 @@
 						<div class="content-top-1">
 							<div class="col-md-6 top-content">
 								<h5>Evening</h5>
-								<label>12589+</label>
+								<label><?= $this->session->userdata('today')['evening'] ?></label>
 							</div>
 							<div class="col-md-6 top-content1">	   
 								<div id="demo-pie-3" class="pie-title-center" data-percent="90"> <span class="pie-value"></span> </div>
@@ -166,33 +157,42 @@
 						</div>
 						
 					</div>
-
                     	<div class="col-sm-4 w3-agile-crd widgettable">
                             <div class="card">
                                 <div class="card-body card-padding">
                                     <div class="">
                                         <header class="widget-header">
-                                            <h4 class="widget-title">Activities</h4>
+                                            <h4 class="widget-title">Sign History</h4>
                                         </header>
                                         <hr class="widget-separator">
                                         <div class="widget-body">
                                             <div class="streamline">
+
+                                            	<?php
+                                            	foreach ($this->session->userdata('today')['log'] as $log)
+                                            	{
+                                            	?>
+                                                <div class="sl-item sl-success">
+                                                    <div class="sl-content">
+                                                        <small class="text-muted"><?=$log['label'].' '.substr($log['date'], 11)?></small>
+                                                        <p><?=$log['username'].' ( '.$log['realname'].' ) '?> 签到成功</p>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                                }
+                                                ?>
+
+                                              <!--  
                                                 <div class="sl-item sl-primary">
                                                     <div class="sl-content">
                                                         <small class="text-muted">0 mins ago</small>
                                                         <p>Alexander has just joined</p>
                                                     </div>
                                                 </div>
-                                                <div class="sl-item sl-danger">
+                                              	<div class="sl-item sl-danger">
                                                     <div class="sl-content">
                                                         <small class="text-muted">15 minutes ago</small>
                                                         <p>Michael has sent a request for access</p>
-                                                    </div>
-                                                </div>
-                                                <div class="sl-item sl-success">
-                                                    <div class="sl-content">
-                                                        <small class="text-muted">18 minutes ago</small>
-                                                        <p>chris added you to his team</p>
                                                     </div>
                                                 </div>
                                                 <div class="sl-item">
@@ -207,6 +207,7 @@
                                                         <p>Jacob shared a folder with you</p>
                                                     </div>
                                                 </div>
+                                                -->
                                                 
                                             </div>
                                         </div>
@@ -239,6 +240,8 @@
             linecolor: "#CCA300",
             title: "Monday",
             values: [
+
+ 			
 
             { X: "7:00", Y: 2 },
             { X: "8:00", Y: 4 },
