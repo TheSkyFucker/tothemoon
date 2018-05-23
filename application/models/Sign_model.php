@@ -229,10 +229,18 @@ class Sign_model extends CI_Model {
 		$username = $this->user->check_user($token, $level_limit);
 
 		//application list
-		$result = $this->db->order_by('date', 'ASC')
+		$results = $this->db->order_by('date', 'DESC')
 			->get('sign_application')
 			->result_array();
-		return $result;
+		foreach ($results as $key => $application) 
+		{
+			$where = array('username' => $application['username']);
+			$results[$key]['realname'] = $this->db->select('realname')
+				->where($where)
+				->get('user_base')
+				->result_array()[0]['realname'];
+		}
+		return $results;
 	}
 
 	/**

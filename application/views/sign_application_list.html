@@ -1,0 +1,114 @@
+<!-- config -->
+<?php require_once('config.php'); ?>
+<!-- config -->
+
+</head> 
+<body class="cbp-spmenu-push">
+	<div class="main-content">
+	<div class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+
+		<!--left-fixed -navigation-->
+		<?php require_once('left_navigation.php'); ?>
+		<!--left-fixed -navigation-->		
+
+		<!-- header-->
+		<?php require_once('header.php'); ?>
+		<!-- header-->
+
+		<!-- main content start-->
+		<div id="page-wrapper">
+			<div class="main-page general">
+
+				<div class="panel-group tool-tips widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
+
+
+					<?php 
+					$temp = $this->session->userdata('data'); 
+					$this->session->unset_userdata('data');
+					$applications = array();
+					$labels = array();
+					foreach ($temp as $elem)
+					{
+						$label = $elem['label'];
+						if ( ! in_array($label, $labels))
+						{
+							array_push($labels, $label);
+							$applications[$label] = array();
+						}
+						array_push($applications[$label], $elem);
+					}
+
+					?>
+
+					<h4 class="title2"> Applications </h4>
+					<?= sizeof($applications) ?> 条待处理
+					</br>
+					</br>
+
+					<?php
+					$first = true;
+					foreach ($labels as $key => $label)
+					{
+						$id = $key;
+					?>
+
+				  	<div class="panel panel-default">
+
+						<div class="panel-heading" role="button" class="collapsed" data-toggle="collapse" data-parent="#accordion" href="<?='#'.$id?>" aria-expanded="false" aria-controls="<?= $id ?>" id="<?= 'heading'.$id ?>">
+				  			<div class="panel-title" >
+				  				<?= $label ?>
+					  		</div>
+						</div>
+						
+						<div id="<?=$id?>" class="panel-collapse collapse <?php if ($first) { echo 'in'; $first = false; } ?>" role="tabpanel" aria-labelledby="<?='heading'.$id?>">
+					
+						  	<div class="panel-body">
+							<table class="table table-bordered"> 
+								<thead> 
+									<tr>
+										<th>时间</th>
+										<th>姓名</th>
+										<th>用户</th>
+										<th>选项</th>										
+									</tr> 
+								</thead>
+								<?php
+								foreach ($applications[$label] as $application)
+								{
+								?>
+								<tbody>
+									<tr> 
+										<td><?= substr($application['date'], 11) ?></td> 
+										<td><?= $application['realname'] ?></td> 
+										<td><?= $application['username'] ?></td> 
+										<td> 
+											<a href="#"> <button type = "button" class = "btn btn-success">通过</button>	</a>
+											<a href="#"> <button type = "button" class = "btn btn-danger">十动然拒</button> </a>
+										</td>
+									</tr>
+								</tbody>
+								<?php
+								}
+								?>
+							</table>
+						 	</div>
+						</div>
+					</div>
+			
+					<?php
+					}
+					?>
+				</div>
+			</div>
+		</div>
+		
+		<!--footer-->
+		<?php require_once('footer.php'); ?>
+        <!--//footer-->
+
+	</div>
+	
+	<?php require_once('js.php'); ?>
+ 
+</body>
+</html>

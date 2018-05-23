@@ -96,7 +96,8 @@
                 </ul>
               </li>
               <li class="header">Manager</li>
-              <li><a href="application_list"><i class="fa fa-angle-right text-red"></i> <span>注册申请</span></a></li>
+              <li><a href="../User/application_list"><i class="fa fa-angle-right text-red"></i> <span>注册申请</span></a></li>
+              <li><a href="../Sign/application_list"><i class="fa fa-angle-right text-red"></i> <span>签到申请</span></a></li>
               <li><a href="#"><i class="fa fa-angle-right text-red"></i> <span>Important</span></a></li>
               <li><a href="#"><i class="fa fa-angle-right text-yellow"></i> <span>Warning</span></a></li>
               <li><a href="#"><i class="fa fa-angle-right text-aqua"></i> <span>Information</span></a></li>

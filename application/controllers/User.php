@@ -237,7 +237,7 @@ class User extends CI_Controller {
 		try
 		{
 			$this->session->set_userdata('data', $this->user->application_list());
-			$this->load->view('application_list.html');
+			$this->load->view('user_application_list.html');
 		}
 		catch(Exception $e)
 		{

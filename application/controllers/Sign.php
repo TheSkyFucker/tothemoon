@@ -43,20 +43,20 @@ class Sign extends CI_Controller {
 	 */
 	public function application_list()
 	{
-		//application_list
+
+		//get list
 		try
 		{
-			$this->load->model('Sign_model','sign');
-			$data = $this->sign->application_list();
+			$this->load->model('Sign_model', 'sign');
+			$this->session->set_userdata('data', $this->sign->application_list());
+			$this->load->view('sign_application_list.html');
 		}
 		catch(Exception $e)
 		{
-			output_data($e->getCode(), $e->getMessage(), array());
-			return;
+			set_message($e->getCode() == 0 ? 'error' : 'success', $e->getCode() == 0 ? '失败' : '成功', $e->getMessage());
+			echo "<script>window.location.href='home'</script>";
 		}
 
-		//return
-		output_data(1, '获取成功', $data);		
 	}
 
 	/**
