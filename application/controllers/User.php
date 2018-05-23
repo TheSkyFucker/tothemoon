@@ -241,7 +241,7 @@ class User extends CI_Controller {
 		}
 		catch(Exception $e)
 		{
-			$this->session->set_userdata('data', array());
+			set_message($e->getCode() == 0 ? 'error' : 'success', $e->getCode() == 0 ? '失败' : '成功', $e->getMessage());
 			echo "<script>window.location.href='home'</script>";
 		}
 		

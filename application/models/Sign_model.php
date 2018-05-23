@@ -18,7 +18,7 @@ class Sign_model extends CI_Model {
 		$options = array(
 			array(
 				'begin' => strtotime($date.' 07:00:00'),
-				'end' => strtotime($date.' 10:30:00'),
+				'end' => strtotime($date.' 11:30:00'),
 				'label' => '早上'
 				),
 			array(

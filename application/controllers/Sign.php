@@ -28,7 +28,7 @@ class Sign extends CI_Controller {
 		try
 		{	
 			$this->load->model('Sign_model', 'sign');
-			$this->sign->register();			
+			$this->sign->register();	 		
 		}
 		catch (Exception $e)
 		{
