@@ -55,14 +55,58 @@
 
 				<div class="col_3" style="margin-top: 20px">
 										
-					<?php $icon = 'pencil' ?>
+					<?php 
+					$icon = 'pencil';
+					$sign_button = $this->session->userdata('sign_button');
+					if ($sign_button == -1) { 
+					?>
 					<div class="col-md-3 widget widget1 sub_home" style="width: 100px; height: 102px">
 		        		<div class="r3_counter_box" style="width: 98px; height: 100px; ">
 		        		<a href="../Sign/register">
-		                    <i class="pull-left fa fa-<?=$icon?> dollar2 icon-rounded"></i>
+		                    <i class="pull-left fa fa-<?=$icon?> dollar2 icon-rounded" style="background: gray"></i>
 						</a>
 		                </div>
 					</div>
+					<?php 
+					}
+					else if ($sign_button == 2)
+					{
+					?>
+					<div class="col-md-3 widget widget1 sub_home" style="width: 100px; height: 102px">
+		        		<div class="r3_counter_box" style="width: 98px; height: 100px; ">
+		        		<a href="../Sign/register">
+		                    <i class="pull-left fa fa-<?=$icon?> dollar2 icon-rounded" style="background: green"></i>
+						</a>
+		                </div>
+					</div>
+					<?php
+					}
+					else if ($sign_button == 1)
+					{
+					?>
+					<div class="col-md-3 widget widget1 sub_home" style="width: 100px; height: 102px">
+		        		<div class="r3_counter_box" style="width: 98px; height: 100px; ">
+		        		<a href="#">
+		                    <i class="pull-left fa fa-check dollar2 icon-rounded" style="background: green"></i>
+						</a>
+		                </div>
+					</div>
+					<?php
+					}
+					else if ($sign_button == 0)
+					{
+					?>
+					<div class="col-md-3 widget widget1 sub_home" style="width: 100px; height: 102px">
+		        		<div class="r3_counter_box" style="width: 98px; height: 100px; ">
+		        		<a href="#">
+		                    <i class="pull-left fa fa-ban dollar2 icon-rounded" style="background: black"></i>
+						</a>
+		                </div>
+					</div>
+					<?php
+					}
+					?>
+
 
 
 		        	<div class="col-md-3 widget widget1">

@@ -17,7 +17,7 @@ class Sign_model extends CI_Model {
 		$date = date('Y-m-d', $time);
 		$options = array(
 			array(
-				'begin' => strtotime($date.' 07:00:00'),
+				'begin' => strtotime($date.' 00:00:00'),
 				'end' => strtotime($date.' 11:30:00'),
 				'label' => '早上'
 				),
@@ -88,34 +88,34 @@ class Sign_model extends CI_Model {
 	 * public 接口
 	 **********************************************************************************************/
 
+	/**
+	 * 签到状态: -1(不可签到) 0(签到失败) 1(签到成功) 2(可签到) 3(审核中)
+	 */
 	public function sign_statu($username)
 	{
 		if ( ! $label = $this->is_signable())
 		{
-			return '非签到时间';
+			return -1;
 		}
-		$where = array('label' => $label);
+		$where = array(
+			'username' => $username,
+			'label' => $label
+		);
 		if ($this->db->where($where)
 			->get('sign_application')
 			->result_array())
 		{
-			return '审核中';
+			return 3;
 		}
 		if ($results = $this->db->where($where)
 			->get('sign_log')
 			->result_array())
 		{
 			$log = $results[0];
-			if ($log['result'] == 1)
-			{
-				return '已签到';
-			}
-			else
-			{
-				return '签到失败';
-			}
+			return $log['result'];
 		}
-		return '可签到';
+
+		return 2;
 	}
 
 	public function count($day)
