@@ -28,12 +28,12 @@ class Sign extends CI_Controller {
 		try
 		{	
 			$this->load->model('Sign_model', 'sign');
-			$this->sign->register();	 		
+			$this->sign->register();
 		}
-		catch (Exception $e)
+		catch(Exception $e)
 		{
-			output_data($e->getCode(), $e->getMessage(), array());
-			return;
+			set_message($e->getCode() == 0 ? 'error' : 'success', $e->getCode() == 0 ? '失败' : '成功', $e->getMessage());
+			echo "<script>window.location.href='../User/home'</script>";
 		}
 		
 	}
