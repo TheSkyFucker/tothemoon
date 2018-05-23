@@ -5,10 +5,13 @@
 				<!--toggle button start-->
 				<button id="showLeftPush"><i class="fa fa-bars"></i></button>
 				<!--toggle button end-->
-				<div class="profile_details_left"><!--notifications of menu start -->
-					<ul class="nofitications-dropdown">
+				<div class="profile_details_left">
+					<!--notifications of menu start -->
+					<ul class="nofitications-dropdown" style="height: 65px">
+						<!--
 						<li class="dropdown head-dpdn">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">4</span></a>
+
 							<ul class="dropdown-menu">
 								<li>
 									<div class="notification_header">
@@ -137,6 +140,7 @@
 							</ul>
 						</li>	
 					</ul>
+					-->
 					<div class="clearfix"> </div>
 				</div>
 				<!--notification menu end -->
@@ -145,7 +149,7 @@
 			<div class="header-right">
 				
 				
-				<!--search-box-->
+				<!--search-box
 				<div class="search-box">
 					<form class="input">
 						<input class="sb-search-input input__field--madoka" placeholder="Search..." type="search" id="input-31" />
@@ -155,17 +159,18 @@
 							</svg>
 						</label>
 					</form>
-				</div><!--//end-search-box-->
+				</div>
+				end-search-box-->
 				
 				<div class="profile_details">		
 					<ul>
 						<li class="dropdown profile_details_drop">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 								<div class="profile_img">	
-									<span class="prfil-img"><img src="../../assets/images/2.jpg" alt=""> </span> 
+									<span class="prfil-img"><img src="../../assets/images/kdy.jpg" style="width: 55px; height: 55px;" alt=""> </span> 
 									<div class="user-name">
-										<p>Admin Name</p>
-										<span>Administrator</span>
+										<p><?= $this->session->userdata('profile')['username'] ?></p>
+										<span><?php if ($this->session->userdata('profile')['role'] == 1) echo "摸鱼选手"; else echo "正式选手" ?></span>
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
 									<i class="fa fa-angle-up lnr"></i>
@@ -173,10 +178,12 @@
 								</div>	
 							</a>
 							<ul class="dropdown-menu drp-mnu">
-								<li> <a href="#"><i class="fa fa-cog"></i> Settings</a> </li> 
-								<li> <a href="#"><i class="fa fa-user"></i> My Account</a> </li>
+								<li> <a href="#"><i class="fa fa-user"></i> Profile </a> </li>
+<!--
+								<li> <a href="#"><i class="fa fa-cog"></i> Settings </a> </li> 
 								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li> 
 								<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+-->
 							</ul>
 						</li>
 					</ul>

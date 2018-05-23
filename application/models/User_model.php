@@ -208,7 +208,7 @@ class User_model extends CI_Model {
 
 		//get profile
 		$form = array('username' => $user['username']);
-		$ret = $this->profile($form);
+		$this->session->set_userdata('profile', $this->profile($form));
 		$this->session->set_userdata('token', $new_data['token']);
 
 	}
@@ -345,28 +345,6 @@ class User_model extends CI_Model {
 			}
 		}
 		
-		//get sign
-		$this->load->model('Sign_model', 'sign');
-		$sign_log = $this->sign->log($user['username']);
-		$user['sign_history'] = array();
-		foreach ($sign_log as $log)
-		{
-			if ($log['result'] == 1)
-			{
-				$msg = $log['label']." ".substr($log['date'], 11)." 签到成功";
-			}
-			else if ($log['result'] == 0)
-			{
-				$msg = $log['label']." ".substr($log['date'], 11)." 签到被无情拒绝";
-			}
-			else
-			{
-				$msg = "未知结果，请联系管理员。";
-			}
-			array_push($user['sign_history'], $msg);
-		}
-		$user['sign_statu'] = $this->sign->sign_statu($user['username']);
-
 		//get position
 		$this->load->model('Position_model', 'position');
 		$where = array('username' => $user['username']);
