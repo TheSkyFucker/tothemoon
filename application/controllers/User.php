@@ -42,6 +42,8 @@ class User extends CI_Controller {
 	 */
 	public function seat()
 	{
+		$this->load->model('Position_model', 'position');
+		$this->session->set_userdata('position', $this->position->profile());
 		$this->load->view('seat.html');
 	}
 

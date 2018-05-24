@@ -98,13 +98,35 @@ class Position_model extends CI_Model {
 	/**
 	 * 位置信息
 	 */
-	public function profile($form)
+	public function profile($form = null)
 	{
+		//config
+		$ip_head = '59.77.134.';
+		$ip_table = array(0, 
+			38, 37, 39, 36, 40, 41, 
+			26, 25, 27, 24, 28, 29, 
+			14, 13, 15, 12, 16, 17,
+			44, 43, 45, 42, 46, 47,
+			32, 31, 33, 30, 34, 35,
+			20, 19, 21, 18, 22, 23
+			);
+
 		//all
-		if ( ! $form['id'])
+		if ( ! $form)
 		{
 			$results = $this->db->get('position_user')->result_array();
-			return $results;
+			for ($i = 1; $i <= 36; $i++)
+			{
+				$ret[$i] = array(
+					'username' => '-',
+					'ip' => $ip_head.$ip_table[$i]
+					);
+			}
+			foreach ($results as $position)
+			{
+				$ret[$position['id']]['username'] = $position['username'];
+			}
+			return $ret;
 		}
 
 		//one

@@ -23,226 +23,87 @@
 		<!-- main content start-->
 		<div id="page-wrapper">
 
-	
+			<?php
+			$positions = $this->session->userdata('position');
+			$this->session->unset_userdata('position');
+			?>
 			<div class="main-page">	
 			<p>会议室门 </p>
-			<br>
-<!--				<div class="col-md-3 widget widget1 sub_home" style="width: 200px; height: 700px; float left">
-		        	<div class="r3_counter_box" style="width: auto; height: 100%; ">
-		        		<a href="../Sign/register">
-		                    <i class="pull-left fa fa-user dollar2 icon-rounded" style="background: green"></i>
-						</a>
-		            </div>
-				</div>-->
-				<div class="clearfix">
-					<div class="col-md-3 widget widget1 sub_home" style="width: 300px; height: 300px">
-			        	<div class="r3_counter_box" style="width: auto; height: 100%; ">
-			        		<center>
-			                    <div style="height: 90px; width: 298px; padding: 10px">
-									<div class="dropdown head-dpdn" style="height: auto; width: 270px; ma">
-										<span class="dropdown head-dpdn" style="float: left; margin-left: 40px;">
-														<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 0px">
-															<span class="prfil-img">
-																<img src="../../assets/images/kdy.jpg" style="width: 60px; height: 60px; border: 1px solid gray" alt=""> 
-															</span> 
-														</a>
-
-														<ul class="dropdown-menu" style="width: 500px; height: 500px">
-
-														</ul>
-										</span>
-										<span class="dropdown head-dpdn" style="float: left; margin-left: 40px;">
-														<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 0px">
-															<span class="prfil-img">
-																<img src="../../assets/images/kdy.jpg" style="width: 60px; height: 60px; border: 1px solid gray" alt=""> 
-															</span> 
-														</a>
-
-														<ul class="dropdown-menu" style="width: 500px; height: 500px">
-														</ul>
-										</span>
-									</div>
-								</div>
-
-			                    <div style="height: 90px; width: 298px; padding: 10px">
-									<div class="dropdown head-dpdn" style="height: auto; width: 270px; ma">
-										<span class="dropdown head-dpdn" style="float: left; margin-left: 0px;">
-														<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 0px">
-															<span class="prfil-img">
-																<img src="../../assets/images/kdy.jpg" style="width: 60px; height: 60px; border: 1px solid gray" alt=""> 
-															</span> 
-														</a>
-
-														<ul class="dropdown-menu" style="width: 500px; height: 500px">
-
-														</ul>
-										</span>
-										<span class="dropdown head-dpdn" style="float: left; margin-left: 115px;">
-														<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 0px">
-															<span class="prfil-img">
-																<img src="../../assets/images/kdy.jpg" style="width: 60px; height: 60px; border: 1px solid gray" alt=""> 
-															</span> 
-														</a>
-
-														<ul class="dropdown-menu" style="width: 500px; height: 500px">
-														</ul>
-										</span>
-									</div>
-								</div>
-
-			                    <div style="height: 90px; width: 298px; padding: 10px">
-									<div class="dropdown head-dpdn" style="height: auto; width: 270px; ma">
-										<span class="dropdown head-dpdn" style="float: left; margin-left: 40px;">
-														<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 0px">
-															<span class="prfil-img">
-																<img src="../../assets/images/kdy.jpg" style="width: 60px; height: 60px; border: 1px solid gray" alt=""> 
-															</span> 
-														</a>
-
-														<ul class="dropdown-menu" style="width: 500px; height: 500px">
-
-														</ul>
-										</span>
-										<span class="dropdown head-dpdn open" style="float: left; margin-left: 40px;">
-														<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 0px">
-															<span class="prfil-img">
-																<img src="../../assets/images/kdy.jpg" style="width: 60px; height: 60px; border: 1px solid gray" alt=""> 
-															</span> 
-														</a>
-
-														<ul class="dropdown-menu" style="width: 500px; height: auto">
-															<li>
-																<div class="notification_header" style="font-size: 18px">
-																	<strong>Position 3</strong>
-																</div>
-															</li>
-															<li>
-																<div class="task-info" style="margin-left: 10px; font-size: 18px"> 
-																<strong>Owner：</strong><br>
-																<strong>Ip：</strong>
-																</div>
-															</li>
-															<li>
-																<div class="notification_bottom">
-																	<a href="#">Take it !</a>
-																</div> 
-															</li>
-														</ul>
-										</span>
-									</div>
-								</div>
-							</center>
-			            </div>
-					</div>
-
-
-
-					<div class="col-md-3 widget widget1 sub_home" style="width: 300px; height: 300px">
-			        	<div class="r3_counter_box" style="width: auto; height: 100%; ">
-
-
-			        		<center>
-			                    <div style="height: 90px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 50px;"></i>
-
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px;"></i>
-								</div>
-			                    <div style="height: 90px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 5px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 100px;"></i>
-								</div>
-			                    <div style="height: 80px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 50px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px;"></i>
-								</div>
-							</center>
-			            </div>
-					</div>
-
-					<div class="col-md-3 widget widget1 sub_home" style="width: 300px; height: 300px">
-			        	<div class="r3_counter_box" style="width: auto; height: 100%; ">
-			        		<center>
-			                    <div style="height: 90px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 50px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px;"></i>
-								</div>
-			                    <div style="height: 90px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 5px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 100px;"></i>
-								</div>
-			                    <div style="height: 80px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 50px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px;"></i>
-								</div>
-							</center>
-			            </div>
-					</div>
-
-				
-				</div>
-
+			
+			<?php
+			for ($row = 0; $row < 2; $row++)
+			{
+			?>
 				<div class="clearfix" style="margin-top: 20px">
-
-					<div class="col-md-3 widget widget1 sub_home" style="width: 300px; height: 300px">
-			        	<div class="r3_counter_box" style="width: auto; height: 100%; ">
-			        		<center>
-			                    <div style="height: 90px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 50px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px;"></i>
-								</div>
-			                    <div style="height: 90px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 5px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 100px;"></i>
-								</div>
-			                    <div style="height: 80px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 50px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px;"></i>
-								</div>
-							</center>
-			            </div>
-					</div>
-
-					<div class="col-md-3 widget widget1 sub_home" style="width: 300px; height: 300px">
-			        	<div class="r3_counter_box" style="width: auto; height: 100%; ">
-			        		<center>
-			                    <div style="height: 90px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 50px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px;"></i>
-								</div>
-			                    <div style="height: 90px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 5px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 100px;"></i>
-								</div>
-			                    <div style="height: 80px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 50px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px;"></i>
-								</div>
-							</center>
-			            </div>
-					</div>
-
-					<div class="col-md-3 widget widget1 sub_home" style="width: 300px; height: 300px">
-			        	<div class="r3_counter_box" style="width: auto; height: 100%; ">
-			        		<center>
-			                    <div style="height: 90px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 50px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px;"></i>
-								</div>
-			                    <div style="height: 90px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 5px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 100px;"></i>
-								</div>
-			                    <div style="height: 80px; width: 298px">
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px; margin-left: 50px;"></i>
-			                    	<i class="pull-left fa fa-user dollar2 icon-rounded" style="background: gray; margin: 10px;"></i>
-								</div>
-							</center>
-			            </div>
-					</div>
 				
+				<?php
+				for ($col = 0; $col < 3; $col++)
+				{
+				?>
+					<div class="col-md-3 widget widget1 sub_home" style="width: 300px; height: 300px">
+			        	<div class="r3_counter_box" style="width: auto; height: 100%; ">
+			        		<center>
+							
+							<?php
+							for ($i = 0; $i < 3; $i++)
+							{
+								if ($i == 1) { $mg[0] = 0; $mg[1] = 115; }
+								else { $mg[0] = $mg[1] = 40; }
+							?>
+
+			                    <div style="height: 90px; width: 298px; padding: 10px">
+									<div class="dropdown head-dpdn" style="height: auto; width: 270px; ">
+
+									<?php
+									for ($j = 0; $j < 2; $j++)
+									{
+										$id = $row * 18 + $col * 6 + $i * 2 + $j + 1;
+									?>
+										<span class="dropdown head-dpdn" style="float: left; margin-left: <?=$mg[$j]?>px;">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="padding: 0px">
+												<span class="prfil-img">
+													<img src="../../assets/images/<?=$positions[$id]['username'] == '-' ? 'blank.jpg' : 'kdy.jpg'?>" style="width: 60px; height: 60px; border: 1px solid gray" alt=""> 
+												</span> 
+											</a>
+											<ul class="dropdown-menu" style="width: 500px; height: auto">
+												<li>
+													<div class="notification_header" style="font-size: 18px">
+														<strong>Position <?=$id?></strong>
+													</div>
+												</li>
+												<li>
+													<div class="task-info" style="margin-left: 10px; font-size: 18px"> 
+														<strong>Owner：</strong><?=$positions[$id]['username']?><br>
+														<strong>Ip：</strong><?=$positions[$id]['ip']?>
+													</div>
+												</li>
+												<li>
+													<div class="notification_bottom">
+														<a href="#">Take it !</a>
+														</div> 
+												</li>
+											</ul>
+										</span>
+									<?php
+									}
+									?>
+									
+									</div>
+								</div>
+							<?php
+							}
+							?>
+							</center>
+			            </div>
+					</div>
+				<?php
+				}
+				?>
+
 				</div>
-
-
+			<?php
+			}
+			?>
         	</div>
         </div>
 
