@@ -169,8 +169,37 @@
 								<div class="profile_img">	
 									<span class="prfil-img"><img src="../../assets/images/kdy.jpg" style="width: 55px; height: 55px;" alt=""> </span> 
 									<div class="user-name">
-										<p><?= $this->session->userdata('profile')['username'] ?></p>
-										<span><?php if ($this->session->userdata('profile')['role'] == 1) echo "摸鱼选手"; else echo "正式选手" ?></span>
+										<p>
+											<?php
+												if ( ! $this->session->has_userdata('token')) 
+												{
+													$username = "未登录";
+												}
+												else
+												{
+													$username = $this->session->userdata('profile')['username'];
+												}
+												echo $username;
+											?>
+										</p>
+										<span>
+										<?php
+											if ( ! $this->session->has_userdata('token'))
+											{
+												$role = -1;
+											}
+											else 
+											{
+												$role = $this->session->userdata('profile')['role'];
+											}
+											$arr = array(
+												'-1' => '吃瓜选手',
+												'0' => '摸鱼选手',
+												'1' => '萌新选手',
+												'5' => '正式选手'
+												);
+											echo isset($arr[$role]) ? $arr[$role] : '未知选手';
+										?></span>
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
 									<i class="fa fa-angle-up lnr"></i>

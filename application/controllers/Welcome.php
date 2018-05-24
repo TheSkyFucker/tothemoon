@@ -20,8 +20,6 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		//$this->load->view('welcome_message');
-//		$this->load->view('test');
-		$this->load->view('signup.html');
+		echo "<script>window.location.href='index.php/User/login'</script>";
 	}
 }

@@ -56,24 +56,28 @@ class User_model extends CI_Model {
 	{
 
 		//check token
+		$timeout = false;
 		$where = array('token' => $token);
 		if ( ! $result = $this->db->where($where)
 			->get('token_user')
 			->result_array())
 		{
-			throw new Exception('会话已过期，请重新登陆', 401);
+			$timeout = true;
 		}
 		$user = $result[0];
 		if ($this->is_timeout($user['last_visit']))
 		{
-			throw new Exception('会话已过期，请重新登陆', 401);
+			$timeout = true;
 		}
-		else 
+		if ($timeout)
 		{
-			//刷新访问时间
-			$new_data = array('last_visit' => date('Y-m-d H:i:s',time()));
-			$this->db->update('token_user', $new_data, $where);
+			$this->session->unset_userdata();
+			throw new Exception('会话已过期，请重新登陆');
 		}
+
+		//刷新访问时间
+		$new_data = array('last_visit' => date('Y-m-d H:i:s',time()));
+		$this->db->update('token_user', $new_data, $where);
 
 		//check level
 		if (isset($level_limit))
