@@ -20,6 +20,6 @@ class Welcome extends CI_Controller {
 	 */
 	public function index()
 	{
-		echo "<script>window.location.href='index.php/User/login'</script>";
+		echo "<script>window.location.href='/User/login'</script>";
 	}
 }
