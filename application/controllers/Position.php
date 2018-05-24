@@ -23,6 +23,9 @@ class Position extends CI_Controller {
 	 */
 	public function register()
 	{
+
+		echo "233";
+		return ;
 		//config
 		$rules = array(
 			array(
