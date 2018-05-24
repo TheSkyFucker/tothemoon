@@ -114,7 +114,6 @@ class Position_model extends CI_Model {
 		//all
 		if ( ! $form)
 		{
-			$results = $this->db->get('position_user')->result_array();
 			for ($i = 1; $i <= 36; $i++)
 			{
 				$ret[$i] = array(
@@ -122,15 +121,21 @@ class Position_model extends CI_Model {
 					'ip' => $ip_head.$ip_table[$i]
 					);
 			}
+			$results = $this->db->get('position_user')->result_array();
 			foreach ($results as $position)
 			{
-				$ret[$position['id']]['username'] = $position['username'];
+				$where = array('username' => $position['username']);
+				$realname = $this->db->select('realname')
+					->where($where)
+					->get('user_base')
+					->result_array()[0]['realname'];
+				$ret[$position['id']]['username'] = $position['username'].' ( '.$realname.' ) ';
 			}
 			return $ret;
 		}
 
 		//one
-		$where = array('id' => $form['id']);
+		/*$where = array('id' => $form['id']);
 		if ( ! $results = $this->db->where($where)
 			->get('position_user')
 			->result_array())
@@ -158,7 +163,7 @@ class Position_model extends CI_Model {
 			}
 			array_push($position['history'], $msg);
 		}
-		return $position;
+		return $position;*/
 
 	}
 

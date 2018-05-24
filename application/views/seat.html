@@ -79,8 +79,22 @@
 												</li>
 												<li>
 													<div class="notification_bottom">
-														<a href="#">Take it !</a>
-														</div> 
+														<?php 
+														if ($positions[$id]['username'] == '-') 
+														{
+														?>
+															<a href="#">Take it !</a>
+														<?php
+														}
+														else
+														{
+														?>
+															<a href="#">( ﹁ ﹁ ) !</a>
+														<?php
+														}
+														?>
+													
+													</div> 
 												</li>
 											</ul>
 										</span>
