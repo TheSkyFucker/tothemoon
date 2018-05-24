@@ -207,8 +207,21 @@
 								</div>	
 							</a>
 							<ul class="dropdown-menu drp-mnu">
+							<?php
+								if ($this->session->has_userdata('token'))
+								{
+							?>
 								<li> <a href="#"><i class="fa fa-user"></i> Profile </a> </li>
 								<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+							<?php
+								}
+								else
+								{
+							?>								
+								<li> <a href="../User/login"><i class="fa fa-user"></i> Login </a> </li>
+							<?php 
+								}
+							?>
 <!--
 								<li> <a href="#"><i class="fa fa-cog"></i> Settings </a> </li> 
 								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li> 
