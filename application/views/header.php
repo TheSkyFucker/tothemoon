@@ -4,11 +4,13 @@
 				
 				<!--toggle button start-->
 				<button id="showLeftPush"><i class="fa fa-bars"></i></button>
+
 				<!--toggle button end-->
 				<div class="profile_details_left">
+
 					<!--notifications of menu start -->
+					<!--
 					<ul class="nofitications-dropdown" style="height: 65px">
-						<!--
 						<li class="dropdown head-dpdn">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-envelope"></i><span class="badge">4</span></a>
 
@@ -212,7 +214,7 @@
 								{
 							?>
 								<li> <a href="#"><i class="fa fa-user"></i> Profile </a> </li>
-								<li> <a href="#"><i class="fa fa-sign-out"></i> Logout</a> </li>
+								<li> <a href="../User/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							<?php
 								}
 								else

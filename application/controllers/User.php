@@ -10,6 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class User extends CI_Controller {
 
 
+
 	/*****************************************************************************************************
 	 * 接口函数 for all
 	 *****************************************************************************************************/
@@ -34,6 +35,14 @@ class User extends CI_Controller {
 			$this->session->set_userdata('sign_button', $this->sign->sign_statu($username));
 		}
 		$this->load->view('home.html');
+	}
+
+	/**
+	 * 布局
+	 */
+	public function seat()
+	{
+		$this->load->view('seat.html');
 	}
 
 	/**
@@ -144,6 +153,16 @@ class User extends CI_Controller {
 		//return
 		set_message('success', '成功', '已提交申请');
 		$this->load->view('signup.html');
+	}
+
+	/**
+	 * 退出登陆
+	 */
+	public function logout( )
+	{
+		$this->session->sess_destroy();
+		set_message('success', '成功', '退出成功');
+		echo "<script>window.location.href='home'</script>";		
 	}
 
 	/**

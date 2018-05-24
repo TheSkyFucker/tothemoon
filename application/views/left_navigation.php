@@ -14,7 +14,12 @@
               <li class="header">Navigation</li>
               <li class="treeview">
                 <a href="../User/home">
-                <i class="fa fa-dashboard"></i> <span>主页</span>
+                  <i class="fa fa-dashboard"></i> <span>主页</span>
+                </a>
+              </li>
+              <li class="treeview">
+                <a href="../User/seat">
+                  <i class="fa fa-users"></i> <span>布局</span>
                 </a>
               </li>
               <!-- 
@@ -100,7 +105,6 @@
               -->
               <li class="header">Manager</li>
               <?php 
-              print_r($this->session->userdata('profile'));
                 if ($this->session->has_userdata('token') && $this->session->userdata('profile')['level'] >= 10)
                 {
               ?>

@@ -71,7 +71,7 @@ class User_model extends CI_Model {
 		}
 		if ($timeout)
 		{
-			$this->session->unset_userdata();
+			$this->session->sess_destroy();
 			throw new Exception('会话已过期，请重新登陆');
 		}
 
@@ -334,6 +334,7 @@ class User_model extends CI_Model {
 			->result_array())
 		{
 			$user['is_manager'] = false;
+			$user['level'] = 0;
 		}
 		else 
 		{
@@ -341,6 +342,7 @@ class User_model extends CI_Model {
 			if (strtotime($manager['deadline']) < time())
 			{
 				$user['is_manager'] = false;
+				$user['level'] = 0;
 			}
 			else 
 			{

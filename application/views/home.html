@@ -26,6 +26,8 @@
 
 
 			<div class="main-page">
+				
+<div style="width:1100px; float: left">
 
 				<div class="col_3">
 		        	<div class="col-md-3 widget widget1 sub_home" style="width: auto; ">
@@ -41,7 +43,7 @@
 		        	</div>
 
 		        	<div class="col-md-3 widget widget1 sub_home" style="width: auto;">
-		        		<div class="r3_counter_box" style="width: 850px; height: 175px;">
+		        		<div class="r3_counter_box" style="width: 860px; height: 175px;">
 		                    <div class="stats">
 		                      <h5><strong style="font-size: 75px">&nbsp;It has happened before ,</strong></h5>
 		                      <span style="font-size: 30px">&nbsp;&nbsp;and it will happen again !</span><br>
@@ -99,7 +101,19 @@
 					<div class="col-md-3 widget widget1 sub_home" style="width: 100px; height: 102px">
 		        		<div class="r3_counter_box" style="width: 98px; height: 100px; ">
 		        		<a href="#">
-		                    <i class="pull-left fa fa-ban dollar2 icon-rounded" style="background: black"></i>
+		                    <i class="pull-left fa fa-times dollar2 icon-rounded" style="background: black"></i>
+						</a>
+		                </div>
+					</div>
+					<?php
+					}
+					else if ($sign_button == 3)
+					{
+					?>
+					<div class="col-md-3 widget widget1 sub_home" style="width: 100px; height: 102px">
+		        		<div class="r3_counter_box" style="width: 98px; height: 100px; ">
+		        		<a href="#">
+		                    <i class="pull-left fa fa-spinner dollar2 icon-rounded" ></i>
 						</a>
 		                </div>
 					</div>
@@ -109,8 +123,8 @@
 
 
 
-		        	<div class="col-md-3 widget widget1">
-		        		<div class="r3_counter_box">
+		        	<div class="col-md-3 widget widget1" style="width: 310px">
+		        		<div class="r3_counter_box" style="width: auto">
 		                    <i class="pull-left fa fa-flag dollar2 icon-rounded" style="background: #ff4a43"></i>
 		                    <div class="stats">
 		                    	<h5><strong>
@@ -121,8 +135,8 @@
 		                </div>
 		        	</div>
 
-		        	<div class="col-md-3 widget widget1">
-		        		<div class="r3_counter_box">
+		        	<div class="col-md-3 widget widget1" style="width: 310px">
+		        		<div class="r3_counter_box" style="width: auto">
 		                    <i class="pull-left fa fa-user user2 icon-rounded"></i>
 		                    <div class="stats">
 		                      	<h5><strong>
@@ -133,8 +147,8 @@
 		                </div>
 		        	</div>
 
-		        	<div class="col-md-3 widget widget1">
-		        		<div class="r3_counter_box">
+		        	<div class="col-md-3 widget widget1" style="width: 310px">
+		        		<div class="r3_counter_box" style="width: auto">
 		                    <i class="pull-left fa fa-users dollar1 icon-rounded"></i>
 		                    <div class="stats">
 		                      	<h5><strong>
@@ -148,10 +162,46 @@
 				
 				<div class="clearfix"> </div>
 
-				<div class="row-one widgettable">
+</div>
+<div style="width: auto; height: 200px; margin-left: auto">
+<div class="col-sm-4 w3-agile-crd widgettable" style="width: 365px; height: auto;">
+                            <div class="card" style="width: auto; height: 300px; margin-left:-15px;">
+                                <div class="card-body card-padding">
+                                    <div class="">
+                                        <header class="widget-header">
+                                            <h4 class="widget-title">Recent contests ( last 3 ) <span style="font-size: 10px"> ← 这个也是假的</span> </h4>
+                                        </header>
+                                        <hr class="widget-separator">
+                                        <div class="widget-body">
+                                            <div class="streamline">
+
+                                                <div class="sl-item sl-success">
+                                                    <div class="sl-content">
+                                                        <small class="text-muted">aaaa</small>
+                                                        <p>vvvv</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="sl-item sl-success">
+                                                    <div class="sl-content">
+                                                        <small class="text-muted">aaaa</small>
+                                                        <p>vvvv</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+</div>
+
+				<div class="row-one widgettable" style="margin-top: 120px">
 
 
-	        		<div class="col-md-6 content-top-2 card">
+	        		<div class="col-md-6 content-top-2 card" style="width: 800px">
 						<div class="agileinfo-cdr">
 							<div class="card-header">
 	                        	<h3>Today sign</h3>
@@ -162,51 +212,40 @@
 						</div>
 					</div>
 					
-					<div class="col-md-2 stat">
+					<div class="col-md-2 stat" style="width: auto">
 						
-						<div class="content-top-1">
-							<div class="col-md-6 top-content">
-								<h5>Morning</h5>
+						<div class="content-top-1" style="width: 265px">
+							<div class="col-md-6 top-content" style="width: auto;">
+								<h5>早上 ( 8:00 ~ 11:30 )</h5>
 								<label><?= $this->session->userdata('today')['morning'] ?></label>
 							</div>
-							<div class="col-md-6 top-content1">	   
-								<div id="demo-pie-1" class="pie-title-center" data-percent="45"> <span class="pie-value"></span> </div>
-							</div>
+
 						 	<div class="clearfix"> </div>
 						</div>
 						
-						<div class="content-top-1">
-							<div class="col-md-6 top-content">
-								<h5>Afternoon</h5>
+						<div class="content-top-1" style="width: 265px">
+							<div class="col-md-6 top-content" style="width: auto;">
+								<h5>下午 ( 14:00 ~ 16:10 )</h5>
 								<label><?= $this->session->userdata('today')['afternoon'] ?></label>
 							</div>
-							
-							<div class="col-md-6 top-content1">	   
-								<div id="demo-pie-2" class="pie-title-center" data-percent="75"> <span class="pie-value"></span> </div>
-							</div>
-						 	
 						 	<div class="clearfix"> </div>
 						</div>
 
-						<div class="content-top-1">
-							<div class="col-md-6 top-content">
-								<h5>Evening</h5>
+						<div class="content-top-1" style="width: 265px">
+							<div class="col-md-6 top-content" style="width: auto;">
+								<h5>晚上 ( 19:00 ~ 20:30 )</h5>
 								<label><?= $this->session->userdata('today')['evening'] ?></label>
 							</div>
-							<div class="col-md-6 top-content1">	   
-								<div id="demo-pie-3" class="pie-title-center" data-percent="90"> <span class="pie-value"></span> </div>
-							</div>
-							 
 							 <div class="clearfix"> </div>
 						</div>
 						
 					</div>
-                    	<div class="col-sm-4 w3-agile-crd widgettable">
-                            <div class="card">
+						<div class="col-sm-4 w3-agile-crd widgettable" style="width: 385px; height: auto;">
+                            <div class="card" style="width: auto; height: 408px; margin-left:5px;">
                                 <div class="card-body card-padding">
                                     <div class="">
                                         <header class="widget-header">
-                                            <h4 class="widget-title">Sign History ( last 5 )</h4>
+                                            <h4 class="widget-title">Sign History ( last 5 ) <span style="font-size: 10px"> ← 这个倒是真的</span> </h4>
                                         </header>
                                         <hr class="widget-separator">
                                         <div class="widget-body">
@@ -317,7 +356,7 @@
                 legendsize: "140",
                 legendposition: 'bottom',
                 xaxislabel: 'Hours',
-                title: 'Today sign',
+                title: '别看了这个是假的，还没写好 ( ﹁ ﹁ )',
                 yaxislabel: ''
             });
         });
