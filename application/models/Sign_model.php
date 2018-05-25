@@ -24,7 +24,7 @@ class Sign_model extends CI_Model {
 			array(
 				'begin' => strtotime($date.' 14:00:00'),
 				'end' => strtotime($date.' 16:10:00'),
-				'label' => '中午'
+				'label' => '下午'
 				),
 			array(
 				'begin' => strtotime($date.' 19:00:00'),
