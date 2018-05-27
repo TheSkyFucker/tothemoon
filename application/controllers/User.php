@@ -283,19 +283,6 @@ class User extends CI_Controller {
 	 */
 	public function profile()
 	{
-		try
-		{
-			$form = array('username' => $this->input->get('username'));
-			$this->load->model('User_model', 'user');
-			$data = $this->user->profile($form);
-		}
-		catch(Exception $e)
-		{
-			output_data($e->getCode(), $e->getMessage(), array());
-			return;
-		}
-
-		//return
-		output_data(1, '查询成功', $data);
+		$this->load->view('user_profile.html');
 	}
 }
