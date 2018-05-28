@@ -306,6 +306,19 @@ class Sign_model extends CI_Model {
 		return $ret;
 	}
 
+	public function log_of_user($username)
+	{
+		$page_size = 10;
+		if ( ! $page = $this->input->get('page'))
+		{
+			$page = 1;
+		}
+/*		return $this->db->limit($page_size, ($page - 1) * $page_size)
+			->where(array('username' => $username))
+			->*/
+
+	}
+
 	/**********************************************************************************************
 	 * 接口 for 前端
 	 **********************************************************************************************/

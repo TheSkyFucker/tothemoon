@@ -72,12 +72,78 @@
 					<!-- middle: detail info-->
 					<div class="col-md-6 general-grids grids-right widget-shadow" style="width: 800px; height: 740px">
 <!--						<h4 class="title2">Horizontal Tabs:</h4>-->
-						<ul id="myTabs" class="nav nav-tabs" role="tablist"> <li role="presentation" class=""><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false">?</a></li> <li role="presentation" class="active"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="true">?</a></li> <li role="presentation" class="dropdown"> <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents" aria-expanded="false">? <span class="caret"></span></a> <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents"> <li class=""><a href="#dropdown1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1" aria-expanded="false">?</a></li> <li class=""><a href="#dropdown2" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2" aria-expanded="false">?</a></li> </ul> </li> </ul>
+						<ul id="myTabs" class="nav nav-tabs" role="tablist"> 
+							<li role="presentation" class="active">
+								<a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+									全部签到记录
+								</a>
+							</li> 
+							<li role="presentation" class="">
+								<a href="#profile" id="profile-tab" role="tab" data-toggle="tab" aria-controls="profile" aria-expanded="false">
+									?
+								</a>
+							</li> 
+							<li role="presentation" class="dropdown"> 
+								<a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents" aria-expanded="false">
+									? 
+									<span class="caret"></span>
+								</a> 
+								<ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents"> 
+									<li class="">
+										<a href="#dropdown1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1" aria-expanded="false">
+											?
+										</a>
+									</li> 
+									<li class="">
+										<a href="#dropdown2" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2" aria-expanded="false">
+											?
+										</a>
+									</li> 
+								</ul> 
+							</li> 
+						</ul>
 						<div id="myTabContent" class="tab-content scrollbar1"> 
-							<div role="tabpanel" class="tab-pane fade" id="home" aria-labelledby="home-tab"> 
-								<p>敬请期待</p> 
+							<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
+							
+								<div class="col-md-6 panel-grids" style="width: 100%; margin-top:20px; padding-left: 0px">
+									<div class="panel panel-success" style="margin-bottom: 0px"> 
+										<div class="panel-heading" style="height: 35px; padding: 10px"> 
+											<h3 class="panel-title">
+												2018-05-12 早上 20:23:57
+											</h3> 
+										</div> 
+										<div class="panel-body" style="height: 0px; padding: 0px"> </div> 
+									</div>
+								</div>
+
+								<div class="col-md-6 panel-grids" style="width: 100%; margin-top:20px; padding-left: 0px">
+									<div class="panel panel-primary" style="margin-bottom: 0px"> 
+										<div class="panel-heading" style="height: 35px; padding: 10px"> 
+											<h3 class="panel-title">
+												2018-05-12 晚上 
+											</h3> 
+											<h3 class="panel-title" style="float: right;">
+												20:23:57
+											</h3>
+										</div> 
+										<div class="panel-body" style="height: 0px; padding: 0px"> </div> 
+									</div>
+								</div>
+
+								<div class="col-md-6 panel-grids" style="width: 100%; margin-top:20px; padding-left: 0px">
+									<div class="panel panel-warning" style="margin-bottom: 0px"> 
+										<div class="panel-heading" style="height: 35px; padding: 10px"> 
+											<h3 class="panel-title">
+												2018-05-12 下午 20:23:57
+											</h3> 
+										</div> 
+										<div class="panel-body" style="height: 0px; padding: 0px"> </div> 
+										</div> 
+									</div>
+								</div>
+
 							</div> 
-							<div role="tabpanel" class="tab-pane fade active in" id="profile" aria-labelledby="profile-tab"> 
+							<div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab"> 
 								<p>敬请期待</p> 
 							</div> 
 							<div role="tabpanel" class="tab-pane fade" id="dropdown1" aria-labelledby="dropdown1-tab"> 
@@ -90,70 +156,104 @@
 					</div>
 					<!-- middle: detail info-->
 
-					<!-- right-up: my activiry -->
-					<div class="col-md-6 general-grids grids-right widget-shadow" style="width: 300px; height: 350px; padding: 20px">
-						<h4 class="title2" style="margin-bottom: 15px"><strong>Relevant Activties</strong></h4>
-						<ul id="myTabs" class="nav nav-tabs" role="tablist"> 
-							<li role="presentation" class="active" style="height: auto; width: auto">
-								<a href="#coming" id="coming-tab" role="tab" data-toggle="tab" aria-controls="coming" aria-expanded="true"
-									style="height: 35px; padding-top: 3px">
-									Coming
-								</a>
-							</li> 
-							<li role="presentation" class="">
-								<a href="#finished" id="finished-tab" role="tab" data-toggle="tab" aria-controls="finished" aria-expanded="false" 
-									style="height: 35px; padding-top: 3px">
-									Finished
-								</a>
-							</li> 
-						</ul>
-						<div id="myTabContent" class="tab-content scrollbar1"> 
-							<div role="tabpanel" class="tab-pane fade active in" id="coming" aria-labelledby="coming-tab"> 
-								<p> 
-									即将到来 
-								</p> 
-							</div> 
-							<div role="tabpanel" class="tab-pane fade" id="finished" aria-labelledby="profile-tab"> 
-								<p>
-									已经完成
-								</p> 
-							</div> 
-						</div>
-					</div>					
-					<!-- right-up: my activiry -->
+					<div style="float: left; width: 320px; margin-left: 20px">
+						<!-- right-up: my activiry -->
+						<div class="col-md-6 general-grids grids-right widget-shadow" style="width: 300px; height: 350px; padding: 20px;">
+							<h4 class="title2" style="margin-bottom: 15px"><strong>Relevant Activties</strong></h4>
+							<ul id="myTabs" class="nav nav-tabs" role="tablist"> 
+								<li role="presentation" class="active" style="height: auto; width: auto">
+									<a href="#coming" id="coming-tab" role="tab" data-toggle="tab" aria-controls="coming" aria-expanded="true"
+										style="height: 35px; padding-top: 3px">
+										Coming
+									</a>
+								</li> 
+								<li role="presentation" class="">
+									<a href="#finished" id="finished-tab" role="tab" data-toggle="tab" aria-controls="finished" aria-expanded="false" 
+										style="height: 35px; padding-top: 3px">
+										Finished
+									</a>
+								</li> 
+							</ul>
+							<div id="myTabContent" class="tab-content scrollbar1"> 
+								<div role="tabpanel" class="tab-pane fade active in" id="coming" aria-labelledby="coming-tab"> 
+									<p> 
+										即将到来 
+									</p> 
+								</div> 
+								<div role="tabpanel" class="tab-pane fade" id="finished" aria-labelledby="profile-tab"> 
+									<p>
+										已经完成
+									</p> 
+								</div> 
+							</div>
+						</div>			
+						<!-- right-up: my activiry -->
 
-					<!-- right-down: my movement -->
-					<div class="col-md-6 general-grids grids-right widget-shadow" style="width: 300px; height: 350px; margin-top: 40px; padding: 20px">
-						<h4 class="title2"><strong>Movement</strong></h4>
-						<ul id="myTabs" class="nav nav-tabs" role="tablist"> 
-							<li role="presentation" class="active" style="height: auto; width: auto">
-								<a href="#all" id="all-tab" role="tab" data-toggle="tab" aria-controls="all" aria-expanded="true"
-									style="height: 35px; padding-top: 3px">
-									All
-								</a>
-							</li> 
-							<li role="presentation" class="">
-								<a href="#sign" id="sign-tab" role="tab" data-toggle="tab" aria-controls="sign" aria-expanded="false" 
-									style="height: 35px; padding-top: 3px">
-									Sign
-								</a>
-							</li> 
-						</ul>
-						<div id="myTabContent" class="tab-content scrollbar1"> 
-							<div role="tabpanel" class="tab-pane fade active in" id="all" aria-labelledby="all-tab"> 
-								<p> 
-									汇总
-								</p> 
-							</div> 
-							<div role="tabpanel" class="tab-pane fade" id="sign" aria-labelledby="sign-tab"> 
-								<p>
-									签到
-								</p> 
-							</div> 
-						</div>
-					</div>					
-					<!-- right-down: my movement -->
+						<!-- right-down: my movement -->
+						<div class="col-md-6 general-grids grids-right widget-shadow" style="width: 300px; height: auto; margin-top: 40px; padding: 20px">
+							<h4 class="title2"><strong>Movement</strong></h4>
+							<ul id="myTabs" class="nav nav-tabs" role="tablist"> 
+								<li role="presentation" class="active" style="height: auto; width: auto">
+									<a href="#all" id="all-tab" role="tab" data-toggle="tab" aria-controls="all" aria-expanded="true"
+										style="height: 35px; padding-top: 3px">
+										All
+									</a>
+								</li> 
+								<li role="presentation" class="">
+									<a href="#sign" id="sign-tab" role="tab" data-toggle="tab" aria-controls="sign" aria-expanded="false" 
+										style="height: 35px; padding-top: 3px">
+										Sign
+									</a>
+								</li> 
+							</ul>
+							<div id="myTabContent" class="tab-content scrollbar1" style="height: auto"> 
+								<div role="tabpanel" class="tab-pane fade" id="all" aria-labelledby="all-tab"> 
+									<p> 
+										汇总
+									</p> 
+								</div> 
+								<div role="tabpanel" class="tab-pane fade active in" id="sign" aria-labelledby="sign-tab"> 
+									<p>
+				                            <div class="card" style="width: auto; height: auto; margin-left:5px;">
+				                                <div class="card-body card-padding" style="padding-left: 5px;">
+				                                    <div class="">
+				                                        <header class="widget-header">
+				                                        </header>
+				                                        <div class="widget-body">
+				                                            <div class="streamline" style="height: auto">
+				                                                <div class="sl-item sl-success" style="height: auto">
+				                                                    <div class="sl-content">
+				                                                        <small class="text-muted">时间</small>
+				                                                        <p>签到</p>
+				                                                    </div>
+				                                                </div>
+				                                                <div class="sl-item sl-success">
+				                                                    <div class="sl-content">
+				                                                        <small class="text-muted">时间</small>
+				                                                        <p>签到</p>
+				                                                    </div>
+				                                                </div>
+				                                                <div class="sl-item sl-success">
+				                                                    <div class="sl-content">
+				                                                        <small class="text-muted">时间</small>
+				                                                        <p>签到</p>
+				                                                    </div>
+				                                                </div>
+																...
+				                                            </div>
+				                                        </div>
 
+				                                    </div>
+				                                </div>
+				                            </div>
+									</p> 
+								</div> 
+							</div>
+						</div>	
+					
+						<!-- right-down: my movement -->
+					</div>	
+						<div class="clearfix"> </div>
 
 				</div>						
         	</div>
