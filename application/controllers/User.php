@@ -287,7 +287,11 @@ class User extends CI_Controller {
 		{		
 			$form['username'] = $this->input->get('username');
 			$this->load->model('User_model', 'user');
-			$this->session->set_userdata('data', $this->user->profile($form));
+			$data = $this->user->profile($form);
+			$username = $data['username'];
+			$this->load->model('Sign_model', 'sign');
+			$data['sign_history'] = $this->sign->history($username);
+			$this->session->set_userdata('data', $data);
 		}
 		catch (Exception $e)
 		{

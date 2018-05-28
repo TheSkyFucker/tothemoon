@@ -227,9 +227,33 @@ class Sign_model extends CI_Model {
 		return $ret;
 	}
 
-	public history()
-	{
-		
+	public function history($username)
+	{	
+		//config
+		$days = array();
+		$ret['days'] = 0;
+		$ret['morning'] = 0;
+		$ret['afternoon'] = 0;
+		$ret['evening'] = 0;
+		$ret['last_sign'] = '2000-00-00';
+
+		//get data
+		$where = array('username' => $username, 'result' => 1);
+		if ($logs = $this->db->where($where)
+			->get('sign_log')
+			->result_array())
+		{
+			foreach ($logs as $log) 
+			{
+				$day = substr($log['label'], 0, 10);
+				if ( ! in_array($day, $days))
+				{
+					$ret['days']++;
+					array_push($days, $day);
+				}		
+			}
+		}
+		return $ret;
 	}
 
 	/**********************************************************************************************

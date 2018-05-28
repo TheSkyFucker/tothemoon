@@ -40,13 +40,13 @@
 								<p style="font-size: 17px"> <strong><?=$user['role'] == 1 ? '萌新选手' : '正式选手'?></strong><br>
 									<?=$user['grade']?> 级，<?=$user['college']?>, <?=$user['major']?><br>
 								    <strong><?=substr($user['register'], 0, 10)?></strong> 来到 <strong>tTMoon</strong> <br>
-								   	迄今共有 <strong>233</strong> 天的回忆<br>
+								   	迄今共有 <strong><?=$user['sign_history']['days']?></strong> 天的回忆<br>
 								   	在这里度过了<br>
-								    <strong>22</strong> 个清晨 <br>
-								    <strong>33</strong> 个午后 <br>
-								    <strong>144</strong> 个凉夜 <br>
+								    <strong><?=$user['sign_history']['morning']?></strong> 个清晨 <br>
+								    <strong><?=$user['sign_history']['afternoon']?></strong> 个午后 <br>
+								    <strong><?=$user['sign_history']['evening']?></strong> 个凉夜 <br>
 								    累计参与了 <strong>?</strong> 次活动 <br>
-								    <strong>2018/05/27 早上</strong> 刚来玩过<br>
+								    <strong><?=$user['sign_history']['last_sign']?> 早上</strong> 刚来玩过<br>
 								</p>
 								<p style="font-size: 10px; color: gray" >
 									<br>
