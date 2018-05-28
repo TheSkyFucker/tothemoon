@@ -308,15 +308,31 @@ class Sign_model extends CI_Model {
 
 	public function log_of_user($username)
 	{
+		//set page_size & page
 		$page_size = 10;
 		if ( ! $page = $this->input->get('page'))
 		{
 			$page = 1;
 		}
-/*		return $this->db->limit($page_size, ($page - 1) * $page_size)
-			->where(array('username' => $username))
-			->*/
+		$ret['page'] = $page;
+		$ret['page_size'] = $page_size;
 
+		//get total & max_page
+       	$where = array(
+       		'username' => $username,
+       		'result' => 1
+       		);
+       	$ret['total'] = $this->db->where($where)->count_all_results('sign_log');
+		$ret['max_page'] = (int)(($ret['total'] - 1) / $ret['page_size']) + 1;
+
+		//get logs
+		$ret['logs'] = $this->db->limit($page_size, ($page - 1) * $page_size)
+			->where($where)
+			->order_by('date', 'DESC')
+			->get('sign_log')
+			->result_array();
+
+		return $ret;
 	}
 
 	/**********************************************************************************************

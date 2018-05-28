@@ -210,10 +210,11 @@
 							</a>
 							<ul class="dropdown-menu drp-mnu">
 							<?php
-								if ($this->session->has_userdata('token'))
-								{
+							if ($this->session->has_userdata('token'))
+							{
+								$user = $this->session->userdata('profile');
 							?>
-								<li> <a href="#"><i class="fa fa-user"></i> Profile </a> </li>
+								<li> <a href="../User/profile?username=<?=$user['username']?>"><i class="fa fa-user"></i> Profile </a> </li>
 								<li> <a href="../User/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							<?php
 								}

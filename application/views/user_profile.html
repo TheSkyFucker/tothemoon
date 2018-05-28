@@ -45,12 +45,68 @@
 								    <strong><?=$user['sign_history']['morning']?></strong> 个清晨 <br>
 								    <strong><?=$user['sign_history']['afternoon']?></strong> 个午后 <br>
 								    <strong><?=$user['sign_history']['evening']?></strong> 个凉夜 <br>
-								    累计参与了 <strong>?</strong> 次活动 <br>
-								    <strong><?=$user['sign_history']['last_sign']?></strong> 刚来玩过<br>
+								    <!--累计参与了 <strong>***</strong> 次活动 --><br>
+								    
+								    <?php
+								    $date = strtotime(substr($user['sign_history']['last_sign'], 0, 10));
+								    $today = strtotime(date('Y-m-d', time()));
+								    if ($date == $today)
+								    {
+								    	$date = '今天';
+								    }
+								    else if ($date == $today - 86400)
+								    {
+								    	$date = '昨天';
+								    }
+								    else if ($date == $today - 86400 * 2)
+								    {
+								    	$date = '前天';
+								    }
+								    else if ($date < $today - 86400 * 6)
+								    {
+								    	$date = NULL;
+								    }
+								    else
+								    {
+								    	for ($i = 3; $i < 7; $i++)
+								    	{
+								    		if ($date == $today - 86400 * $i)
+								    		{
+												$date = $i.' 天前';
+								    		}
+								    	}
+								    }
+									if ($date)
+									{
+								    ?>
+								    	<strong><?=$date?></strong>  刚刚来玩过<br>
+								    <?php
+								    }
+								    else
+								    {
+								    ?>
+								    	好像已经好久没来玩了呢 ...<br>								    
+								    <?php
+								    }
+								    ?>
+
 								</p>
 								<p style="font-size: 10px; color: gray" >
 									<br>
-									<strong>ta</strong> 的故事还在继续...
+									<?php
+									if ($date)
+									{
+									?>
+										<strong>ta</strong> 的故事还在继续...
+									<?php
+									}
+									else
+									{
+									?>
+										<strong>ta</strong> 的故事似乎停滞了...
+									<?php
+									}
+									?>
 								</p>
 								<ul class="malorum-icons">
 									<li><a href="#"><i class="fa fa-facebook"> </i>
@@ -75,7 +131,7 @@
 						<ul id="myTabs" class="nav nav-tabs" role="tablist"> 
 							<li role="presentation" class="active">
 								<a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
-									全部签到记录
+									签到记录 ( <?=$user['sign_logs']['total']?> )
 								</a>
 							</li> 
 							<li role="presentation" class="">
@@ -102,45 +158,88 @@
 								</ul> 
 							</li> 
 						</ul>
-						<div id="myTabContent" class="tab-content scrollbar1"> 
+						<div id="myTabContent" class="tab-content scrollbar1" style="height: auto"> 
 							<div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
-							
-								<div class="col-md-6 panel-grids" style="width: 100%; margin-top:20px; padding-left: 0px">
-									<div class="panel panel-success" style="margin-bottom: 0px"> 
-										<div class="panel-heading" style="height: 35px; padding: 10px"> 
-											<h3 class="panel-title">
-												2018-05-12 早上 20:23:57
-											</h3> 
-										</div> 
-										<div class="panel-body" style="height: 0px; padding: 0px"> </div> 
+								<?php
+								$logs = $user['sign_logs']['logs'];
+								$page = $user['sign_logs']['page'];
+								$max_page = $user['sign_logs']['max_page'];
+								foreach ($logs as $log)
+								{
+									$label = substr($log['label'], 11);
+									if ($label == '早上')
+									{
+										$col = 'success';
+									}
+									else if ($label == '下午')
+									{
+										$col = 'warning';
+									}
+									else if ($label == '晚上')
+									{
+										$col = 'info';
+									}
+									$date = strtotime(substr($log['date'], 0, 10));
+									$today = strtotime(date('Y-m-d', time()));
+									if ($date == $today)
+									{
+										$date = '今天';
+									}
+									else if ($date == $today - 86400)
+									{
+										$date = '昨天';
+									}
+									else if ($date == $today - 86400 * 2)
+									{
+										$date = '前天';
+									}
+									else
+									{
+										$date = date('Y-m-d', $date);
+									}
+									for ($i = 0; $i < 2; $i++)
+									{
+								?>
+									<div class="col-md-6 panel-grids" style="width: 100%; margin-top:20px; padding-left: 0px; padding-right: 0px">
+										<div class="panel panel-<?=$col?>" style="margin-bottom: 0px"> 
+											<div class="panel-heading" style="height: 35px; padding: 10px"> 
+												<h3 class="panel-title">
+													<?=$date.' '.$label?>
+												</h3> 
+												<h3 class="panel-title" style="float: right;">
+													<?=substr($log['date'], 11)?>
+												</h3>
+											</div> 
+											<div class="panel-body" style="height: 0px; padding: 0px"> </div> 
+										</div>
 									</div>
-								</div>
-
-								<div class="col-md-6 panel-grids" style="width: 100%; margin-top:20px; padding-left: 0px">
-									<div class="panel panel-primary" style="margin-bottom: 0px"> 
-										<div class="panel-heading" style="height: 35px; padding: 10px"> 
-											<h3 class="panel-title">
-												2018-05-12 晚上 
-											</h3> 
-											<h3 class="panel-title" style="float: right;">
-												20:23:57
-											</h3>
-										</div> 
-										<div class="panel-body" style="height: 0px; padding: 0px"> </div> 
-									</div>
-								</div>
-
-								<div class="col-md-6 panel-grids" style="width: 100%; margin-top:20px; padding-left: 0px">
-									<div class="panel panel-warning" style="margin-bottom: 0px"> 
-										<div class="panel-heading" style="height: 35px; padding: 10px"> 
-											<h3 class="panel-title">
-												2018-05-12 下午 20:23:57
-											</h3> 
-										</div> 
-										<div class="panel-body" style="height: 0px; padding: 0px"> </div> 
-										</div> 
-									</div>
-								</div>
+								<?php
+									}
+								}
+								?>
+								<div class="col-md-6 panel-grids" style="width: 100%; margin-top:15px; padding-left: 0px; padding-right: 0px; font-size: 13px; color: gray">
+									总 <?=$max_page?> 页，当前第 <?=$page?> 页
+								</div>								
+								<?php
+								if ($page > 1)
+								{
+								?>
+					        		<a href="profile?username=<?=$_GET['username']?>&page=<?=$page - 1?>" style="position: absolute; top: 695px; left: 30px;">
+					                    <i class="fa fa-angle-left" style="font-size: 30px"></i>
+									</a>
+								<?php
+								}
+								?>
+								<?php
+								if ($page < $max_page)
+								{
+								?>
+					        		<a href="profile?username=<?=$_GET['username']?>&page=<?=$page + 1?>" style="position: absolute; top: 695px; left: 760px;">
+					                    <i class="fa fa-angle-right" style="font-size: 30px"></i>
+									</a>
+								<?php
+								}
+								?>
 
 							</div> 
 							<div role="tabpanel" class="tab-pane fade" id="profile" aria-labelledby="profile-tab"> 
@@ -177,12 +276,12 @@
 							<div id="myTabContent" class="tab-content scrollbar1"> 
 								<div role="tabpanel" class="tab-pane fade active in" id="coming" aria-labelledby="coming-tab"> 
 									<p> 
-										即将到来 
+										...
 									</p> 
 								</div> 
 								<div role="tabpanel" class="tab-pane fade" id="finished" aria-labelledby="profile-tab"> 
 									<p>
-										已经完成
+										...
 									</p> 
 								</div> 
 							</div>
@@ -190,7 +289,7 @@
 						<!-- right-up: my activiry -->
 
 						<!-- right-down: my movement -->
-						<div class="col-md-6 general-grids grids-right widget-shadow" style="width: 300px; height: auto; margin-top: 40px; padding: 20px">
+						<div class="col-md-6 general-grids grids-right widget-shadow" style="width: 300px; height: auto; margin-top: 40px; padding: 20px; min-height: 350px">
 							<h4 class="title2"><strong>Movement</strong></h4>
 							<ul id="myTabs" class="nav nav-tabs" role="tablist"> 
 								<li role="presentation" class="active" style="height: auto; width: auto">
@@ -209,11 +308,13 @@
 							<div id="myTabContent" class="tab-content scrollbar1" style="height: auto"> 
 								<div role="tabpanel" class="tab-pane fade" id="all" aria-labelledby="all-tab"> 
 									<p> 
-										汇总
+										...
 									</p> 
 								</div> 
 								<div role="tabpanel" class="tab-pane fade active in" id="sign" aria-labelledby="sign-tab"> 
 									<p>
+										...
+									<!--
 				                            <div class="card" style="width: auto; height: auto; margin-left:5px;">
 				                                <div class="card-body card-padding" style="padding-left: 5px;">
 				                                    <div class="">
@@ -246,6 +347,7 @@
 				                                    </div>
 				                                </div>
 				                            </div>
+				                            -->
 									</p> 
 								</div> 
 							</div>
