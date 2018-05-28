@@ -83,6 +83,39 @@ class Sign_model extends CI_Model {
 	
 	}
 
+	private function later($label1, $label2)
+	{
+		$day1 = strtotime(substr($label1, 0, 10));
+		$day2 = strtotime(substr($label2, 0, 10));
+		$time1 = substr($label1, 11);
+		if ($time1 == '早上')
+		{
+			$time1 = 1;
+		}
+		else if ($time1 == '下午')
+		{
+			$time1 = 2;
+		}
+		else if ($time1 == '晚上')
+		{
+			$time1 = 3;
+		}
+		$time2 = substr($label2, 11);
+		if ($time2 == '早上')
+		{
+			$time2 = 1;
+		}
+		else if ($time2 == '下午')
+		{
+			$time2 = 2;
+		}
+		else if ($time2 == '晚上')
+		{
+			$time2 = 3;
+		}
+		return $day1 == $day2 ? $time1 > $time2 : $day1 > $day2;
+	}
+
 
 	/**********************************************************************************************
 	 * public 接口
@@ -235,7 +268,7 @@ class Sign_model extends CI_Model {
 		$ret['morning'] = 0;
 		$ret['afternoon'] = 0;
 		$ret['evening'] = 0;
-		$ret['last_sign'] = '2000-00-00';
+		$ret['last_sign'] = '2000-00-00 早上';
 
 		//get data
 		$where = array('username' => $username, 'result' => 1);
@@ -250,7 +283,24 @@ class Sign_model extends CI_Model {
 				{
 					$ret['days']++;
 					array_push($days, $day);
-				}		
+				}
+				$temp = substr($log['label'], 11);
+				if ($this->later($log['label'], $ret['last_sign']))
+				{
+					$ret['last_sign'] = $log['label'];
+				}
+				if ($temp == '早上')
+				{
+					$ret['morning']++;
+				}
+				else if ($temp == '下午')
+				{
+					$ret['afternoon']++;
+				}
+				else if ($temp == '晚上') 
+				{
+					$ret['evening']++;
+				}
 			}
 		}
 		return $ret;
