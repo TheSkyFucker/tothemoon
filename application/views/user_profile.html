@@ -24,23 +24,29 @@
 			<div id="page-wrapper">
 
 				<div class="main-page">
-				
-					<div class="col-md-4 chart-layer1-right"> 
+					
+					<!-- left: user base info -->
+					<div class="col-md-4 chart-layer1-right" style="width: auto"> 
 						<div class="user-marorm" style="width: 400px">
-							<div class="malorum-top" >				
+							<div class="malorum-top" style="min-height: 200px">				
 							</div>
-							<div class="malorm-bottom" style="height: auto">
-								<span class="malorum-pro"> </span>
-								<h2>andwho（郑浩晖）</h2>
-								<p style="font-size: 17px"> <strong>萌新选手</strong><br>
-									15级，数学与计算机科学学院，计算机类<br>
-								    <strong>2018/05/06</strong> 来到 <strong>tTMoon</strong> <br>
-								    迄今在这里度过了<br>
+							<div class="malorm-bottom" style="min-height: 541px">
+								<span class="malorum-pro" style=" background: url('../../assets/images/kdy.jpg'); background-size: 100%"> </span>
+								<?php 
+									$user = $this->session->userdata('data');
+									$this->session->unset_userdata('data');
+								?>
+								<h2><?=$user['username'].' ( '.$user['realname'].' ) '?></h2>
+								<p style="font-size: 17px"> <strong><?=$user['role'] == 1 ? '萌新选手' : '正式选手'?></strong><br>
+									<?=$user['grade']?> 级，<?=$user['college']?>, <?=$user['major']?><br>
+								    <strong><?=substr($user['register'], 0, 10)?></strong> 来到 <strong>tTMoon</strong> <br>
+								   	迄今共有 <strong>233</strong> 天的回忆<br>
+								   	在这里度过了<br>
 								    <strong>22</strong> 个清晨 <br>
 								    <strong>33</strong> 个午后 <br>
 								    <strong>144</strong> 个凉夜 <br>
-								    累计参与了 <strong>20</strong> 次活动 <br>
-								    最近一次来玩是在 <strong>2018/05/27 早上</strong> <br>
+								    累计参与了 <strong>?</strong> 次活动 <br>
+								    <strong>2018/05/27 早上</strong> 刚来玩过<br>
 								</p>
 								<p style="font-size: 10px; color: gray" >
 									<br>
@@ -61,6 +67,93 @@
 					   	</div>					
 						<div class="clearfix"> </div>
 					</div>
+					<!-- left: user base info -->
+
+					<!-- middle: detail info-->
+					<div class="col-md-6 general-grids grids-right widget-shadow" style="width: 800px; height: 740px">
+<!--						<h4 class="title2">Horizontal Tabs:</h4>-->
+						<ul id="myTabs" class="nav nav-tabs" role="tablist"> <li role="presentation" class=""><a href="#home" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false">?</a></li> <li role="presentation" class="active"><a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile" aria-expanded="true">?</a></li> <li role="presentation" class="dropdown"> <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown" aria-controls="myTabDrop1-contents" aria-expanded="false">? <span class="caret"></span></a> <ul class="dropdown-menu" aria-labelledby="myTabDrop1" id="myTabDrop1-contents"> <li class=""><a href="#dropdown1" role="tab" id="dropdown1-tab" data-toggle="tab" aria-controls="dropdown1" aria-expanded="false">?</a></li> <li class=""><a href="#dropdown2" role="tab" id="dropdown2-tab" data-toggle="tab" aria-controls="dropdown2" aria-expanded="false">?</a></li> </ul> </li> </ul>
+						<div id="myTabContent" class="tab-content scrollbar1"> 
+							<div role="tabpanel" class="tab-pane fade" id="home" aria-labelledby="home-tab"> 
+								<p>敬请期待</p> 
+							</div> 
+							<div role="tabpanel" class="tab-pane fade active in" id="profile" aria-labelledby="profile-tab"> 
+								<p>敬请期待</p> 
+							</div> 
+							<div role="tabpanel" class="tab-pane fade" id="dropdown1" aria-labelledby="dropdown1-tab"> 
+								<p>敬请期待</p> 
+							</div> 
+							<div role="tabpanel" class="tab-pane fade" id="dropdown2" aria-labelledby="dropdown2-tab"> 
+								<p>敬请期待</p> 
+							</div> 
+						</div>
+					</div>
+					<!-- middle: detail info-->
+
+					<!-- right-up: my activiry -->
+					<div class="col-md-6 general-grids grids-right widget-shadow" style="width: 300px; height: 350px; padding: 20px">
+						<h4 class="title2" style="margin-bottom: 15px"><strong>Relevant Activties</strong></h4>
+						<ul id="myTabs" class="nav nav-tabs" role="tablist"> 
+							<li role="presentation" class="active" style="height: auto; width: auto">
+								<a href="#coming" id="coming-tab" role="tab" data-toggle="tab" aria-controls="coming" aria-expanded="true"
+									style="height: 35px; padding-top: 3px">
+									Coming
+								</a>
+							</li> 
+							<li role="presentation" class="">
+								<a href="#finished" id="finished-tab" role="tab" data-toggle="tab" aria-controls="finished" aria-expanded="false" 
+									style="height: 35px; padding-top: 3px">
+									Finished
+								</a>
+							</li> 
+						</ul>
+						<div id="myTabContent" class="tab-content scrollbar1"> 
+							<div role="tabpanel" class="tab-pane fade active in" id="coming" aria-labelledby="coming-tab"> 
+								<p> 
+									即将到来 
+								</p> 
+							</div> 
+							<div role="tabpanel" class="tab-pane fade" id="finished" aria-labelledby="profile-tab"> 
+								<p>
+									已经完成
+								</p> 
+							</div> 
+						</div>
+					</div>					
+					<!-- right-up: my activiry -->
+
+					<!-- right-down: my movement -->
+					<div class="col-md-6 general-grids grids-right widget-shadow" style="width: 300px; height: 350px; margin-top: 40px; padding: 20px">
+						<h4 class="title2"><strong>Movement</strong></h4>
+						<ul id="myTabs" class="nav nav-tabs" role="tablist"> 
+							<li role="presentation" class="active" style="height: auto; width: auto">
+								<a href="#all" id="all-tab" role="tab" data-toggle="tab" aria-controls="all" aria-expanded="true"
+									style="height: 35px; padding-top: 3px">
+									All
+								</a>
+							</li> 
+							<li role="presentation" class="">
+								<a href="#sign" id="sign-tab" role="tab" data-toggle="tab" aria-controls="sign" aria-expanded="false" 
+									style="height: 35px; padding-top: 3px">
+									Sign
+								</a>
+							</li> 
+						</ul>
+						<div id="myTabContent" class="tab-content scrollbar1"> 
+							<div role="tabpanel" class="tab-pane fade active in" id="all" aria-labelledby="all-tab"> 
+								<p> 
+									汇总
+								</p> 
+							</div> 
+							<div role="tabpanel" class="tab-pane fade" id="sign" aria-labelledby="sign-tab"> 
+								<p>
+									签到
+								</p> 
+							</div> 
+						</div>
+					</div>					
+					<!-- right-down: my movement -->
+
 
 				</div>						
         	</div>

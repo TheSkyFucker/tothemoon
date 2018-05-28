@@ -313,20 +313,6 @@ class User_model extends CI_Model {
 		$user = array_merge($user, $user_detail);
 		unset($user['password']);
 
-		//check sex
-		if ($user['sex'] == 0)
-		{
-			$user['sex'] = '女';
-		}
-		else if ($user['sex'] == 1)
-		{
-			$user['sex'] = '男';
-		}
-		else
-		{
-			$user['sex'] = '?';			
-		}
-
 		//check manger
 		$where = array('username' => $user['username']);
 		if ( ! $results = $this->db->where($where)

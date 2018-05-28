@@ -283,6 +283,17 @@ class User extends CI_Controller {
 	 */
 	public function profile()
 	{
+		try
+		{		
+			$form['username'] = $this->input->get('username');
+			$this->load->model('User_model', 'user');
+			$this->session->set_userdata('data', $this->user->profile($form));
+		}
+		catch (Exception $e)
+		{
+			set_message($e->getCode() == 0 ? 'error' : 'success', $e->getCode() == 0 ? '失败' : '成功', $e->getMessage());
+			echo "<script>window.location.href='home'</script>";
+		}
 		$this->load->view('user_profile.html');
 	}
 }
