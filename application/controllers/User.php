@@ -365,4 +365,64 @@ class User extends CI_Controller {
 		set_message('success', '成功', '修改成功	');
 		$this->load->view('user_setting.html');
 	}
+
+
+	/**
+	 * 上传头像
+	 */
+	public function upload_avatar()
+	{
+		// if ($_SERVER['REQUEST_METHOD'] == "OPTIONS") 
+		// {
+		// 	return;
+		// }
+
+		// //config
+		// $members = array('Utoken', 'Uusername', 'Uiconpath');
+
+		// //get username
+		// $post['Utoken'] = get_token();
+		// $this->load->model('User_model', 'user');
+		// $user_info = $this->user->get($post);
+		// $username = $user_info['Uusername'];
+		// $post['Uusername'] = $username;
+
+		// //upload config
+		// $config['upload_path'] = './uploads/user_icon/';
+		// $config['allowed_types'] = 'gif|jpg|png';
+		// $config['file_name'] = $username;
+		// $config['overwrite'] = TRUE;
+		// $config['max_size'] = 10000;
+		// $config['max_width'] = 1024;
+		// $config['max_height'] = 768;
+
+		// //upload
+		// try
+		// {
+		// 	$this->load->library('upload', $config);
+
+		// 	if ( ! $this->upload->do_upload('userfile'))
+  //       	{
+  //           	$error = array('error' => $this->upload->display_errors());
+  //           	output_data(0, '上传失败', $error);
+	 //        }
+  //   		else
+  //       	{	
+  //       		$data = array('upload_data' => $this->upload->data());
+		// 		$this->load->helper('url');
+  //           	$data['icon_path'] = base_url() . 'uploads/user_icon/' . $data['upload_data']['file_name'];
+  //           	$post['Uiconpath'] = $data['icon_path'];
+
+  //           	$this->load->model('User_model', 'user');
+  //           	$this->user->upload_icon(filter($post, $members));
+  //           	output_data(1, '上传成功', $data);
+  //       	}
+		// }
+		// catch(Exception $e)
+		// {
+		// 	output_data($e->getCode(), $e->getMessage(), array());
+		// 	return;
+		// }		
+	}
+
 }

@@ -337,10 +337,11 @@ class User_model extends CI_Model {
 			}
 		}
 		
-		//get position
+		//get position & avatar
 		$this->load->model('Position_model', 'position');
 		$where = array('username' => $user['username']);
 		$user['position'] = $this->position->position($where);
+
 		return $user;
 	}
 

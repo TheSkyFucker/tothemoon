@@ -169,7 +169,30 @@
 						<li class="dropdown profile_details_drop">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 								<div class="profile_img">	
-									<span class="prfil-img"><img src="../../assets/images/kdy.jpg" style="width: 55px; height: 55px;" alt=""> </span> 
+									<?php
+									if ( ! $this->session->has_userdata('token'))
+									{
+										$avatar = '../../assets/images/kdy.jpg';
+									}
+									else
+									{
+										$user = $this->session->userdata('profile');
+										$where = array('username' => $user['username']);
+										if ($this->db->where($where)->get('user_avatar')->result_array())
+										{
+											$avatar = '../../assets/images/'.$user['username'].'jpg';
+										}
+										else
+										{
+											$avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$user['qq'].'&s=100';
+										}
+									}
+									?>
+
+									<span class="prfil-img">
+										<img src="<?=$avatar?>" style="width: 55px; height: 55px;" alt=""> 
+									</span> 
+
 									<div class="user-name">
 										<p>
 											<?php
