@@ -362,6 +362,8 @@ class User extends CI_Controller {
 		}
 
 		//return
+		$where = array('username' => $this->session->userdata('profile')['username']);
+		$this->session->set_userdata('profile', $this->user->profile($where));
 		set_message('success', '成功', '修改成功	');
 		$this->load->view('user_setting.html');
 	}
