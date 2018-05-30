@@ -301,4 +301,68 @@ class User extends CI_Controller {
 		}
 		$this->load->view('user_profile.html');
 	}
+
+	/**
+	 * 修改信息
+	 */
+	public function setting()
+	{
+		//config
+		$rules = array(
+			array(
+				'field' => 'qq',
+				'label' => 'qq',
+				'rules' => 'min_length[3]|max_length[16]|numeric'
+				)
+		);
+		$members = array();
+		foreach ($rules as $rule)
+		{
+			array_push($members, $rule['field']);
+		}
+
+		//register
+		try
+		{	
+
+			//get form
+			$this->load->helper('form');
+			if ( ! $form = get_post())
+			{
+				$this->load->view('user_setting.html');
+				return;
+			}
+			$this->load->library('form_validation');
+
+			//check form			
+			$this->form_validation->set_data($form);
+			$this->form_validation->set_rules($rules);
+			if ( ! $this->form_validation->run())
+			{
+				foreach ($rules as  $rule)
+				{
+					if (form_error($rule['field']))
+					{
+						throw new Exception(strip_tags(form_error($rule['field'])));
+					}
+				}
+			}
+
+
+			//register
+			$this->load->model('User_model','user');
+			$this->user->setting(filter($form, $members));
+			
+		}
+		catch (Exception $e)
+		{
+			set_message('error', '失败', $e->getMessage());
+			$this->load->view('user_setting.html');
+			return;
+		}
+
+		//return
+		set_message('success', '成功', '修改成功	');
+		$this->load->view('user_setting.html');
+	}
 }

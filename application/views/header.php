@@ -214,7 +214,18 @@
 							{
 								$user = $this->session->userdata('profile');
 							?>
-								<li> <a href="../User/profile?username=<?=$user['username']?>"><i class="fa fa-user"></i> Profile </a> </li>
+								<li> 
+									<a href="../User/profile?username=<?=$user['username']?>">
+										<i class="fa fa-user"></i> 
+										Profile 
+									</a> 
+								</li>
+								<li> 
+									<a href="../User/setting">
+										<i class="fa fa-cog"></i>
+										Setting
+									</a> 
+								</li> 
 								<li> <a href="../User/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
 							<?php
 								}
@@ -226,7 +237,6 @@
 								}
 							?>
 <!--
-								<li> <a href="#"><i class="fa fa-cog"></i> Settings </a> </li> 
 								<li> <a href="#"><i class="fa fa-suitcase"></i> Profile</a> </li> 
 -->
 							</ul>

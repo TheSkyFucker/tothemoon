@@ -343,4 +343,36 @@ class User_model extends CI_Model {
 		$user['position'] = $this->position->position($where);
 		return $user;
 	}
+
+	/**
+	 * 修改信息
+	 */
+	public function setting($form)
+	{
+		//check user
+		$token = get_token();
+		$username = $this->check_user($token);
+
+		//check form
+		$changed = false;
+		if ($form['qq'])
+		{
+			$changed = true;
+		}
+		if ( ! $changed)
+		{
+			throw new Exception("未提交任何修改", 0);
+		}
+
+		//change
+		if ($form['qq'])
+		{
+			$where = array('username' => $username);
+			$new_data = array('qq' => $form['qq']);
+			$this->db->update('user_base', $new_data, $where);
+			$changed = true;
+		}
+		
+
+	}
 }
