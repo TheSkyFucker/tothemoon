@@ -180,7 +180,7 @@
 										$where = array('username' => $user['username']);
 										if ($this->db->where($where)->get('user_avatar')->result_array())
 										{
-											$avatar = '../../assets/images/'.$user['username'].'jpg';
+											$avatar = '../../assets/uploads/user_avatar/'.$user['username'].'.jpg';
 										}
 										else
 										{
