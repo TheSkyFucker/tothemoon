@@ -31,11 +31,20 @@
 							<div class="malorum-top" style="min-height: 200px">				
 							</div>
 							<div class="malorm-bottom" style="min-height: 541px">
-								<span class="malorum-pro" style=" background: url('../../assets/images/kdy.jpg'); background-size: 100%"> </span>
 								<?php 
 									$user = $this->session->userdata('data');
 									$this->session->unset_userdata('data');
+									$where = array('username' => $user['username']);
+									if ($this->db->where($where)->get('user_avatar')->result_array())
+									{
+										$avatar = '../../assets/uploads/user_avatar/'.$user['username'].'.jpg';
+									}
+									else
+									{
+										$avatar = 'http://q1.qlogo.cn/g?b=qq&nk='.$user['qq'].'&s=100';
+									}
 								?>
+								<span class="malorum-pro" style=" background: url('<?=$avatar?>'); background-size: 100%"> </span>
 								<h2><?=$user['username'].' ( '.$user['realname'].' ) '?></h2>
 								<p style="font-size: 17px"> <strong><?=$user['role'] == 1 ? '萌新选手' : '正式选手'?></strong><br>
 									<?=$user['grade']?> 级，<?=$user['college']?>, <?=$user['major']?><br>
