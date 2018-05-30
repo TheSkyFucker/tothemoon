@@ -374,11 +374,6 @@ class User extends CI_Controller {
 	 */
 	public function upload_avatar()
 	{
-		if ($_SERVER['REQUEST_METHOD'] == "OPTIONS")
-		{
-			return;
-		}
-
 		//upload
 		try
 		{
@@ -422,5 +417,34 @@ class User extends CI_Controller {
 		set_message('success', '成功', '上传成功');
 		echo "<script>window.location.href='setting'</script>";
 	}
+
+	/**
+	 * 删除头像
+	 */
+	public function delete_avatar()
+	{
+		//delete
+		try
+		{
+			if ( ! $this->session->has_userdata('profile'))
+			{
+				throw new Exception("请登陆");
+			}
+			$username = $this->session->userdata('profile')['username'];
+            $this->load->model('User_model', 'user');
+            $where = array('username' => $username);
+            $this->db->delete('user_avatar', $where);
+		}
+		catch(Exception $e)
+		{
+			set_message($e->getCode() == 0 ? 'error' : 'success', $e->getCode() == 0 ? '失败' : '成功', $e->getMessage());
+			echo "<script>window.location.href='setting'</script>";
+			return;
+		}
+		set_message('success', '成功', '删除成功');
+		echo "<script>window.location.href='setting'</script>";
+
+	}
+
 
 }

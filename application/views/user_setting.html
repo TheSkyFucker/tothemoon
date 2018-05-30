@@ -41,7 +41,10 @@
 						</div>
 					</form>
 
-					<form action="upload_avatar" class="form-horizontal" method="post" enctype="multipart/form-data" style="margin-top: 40px">
+					<div class="clearfix"></div>
+					<h5 style="margin-top: 30px">Avatar Information :</h5>
+
+					<form action="upload_avatar" class="form-horizontal" method="post" enctype="multipart/form-data" style="">
                         <div class="file">
                         <span style="color:gray; font-size: 10px">后缀必须为 .jpg</span><input type="file" name="userfile" id="" required="" /> 
 
@@ -51,6 +54,13 @@
 							<div class="clearfix"> </div>
 						</div>
                     </form>
+					<form action="delete_avatar" method="post">
+						<div class="sub_home">
+							<input type="submit" value="Delete">
+							<div class="clearfix"> </div>
+						</div>
+					</form>
+					
 				</div>
 			</div>
 		</div>
