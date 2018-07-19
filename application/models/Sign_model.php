@@ -18,17 +18,17 @@ class Sign_model extends CI_Model {
 		$options = array(
 			array(
 				'begin' => strtotime($date.' 08:00:00'),
-				'end' => strtotime($date.' 11:30:00'),
+				'end' => strtotime($date.' 09:00:00'),
 				'label' => '早上'
 				),
 			array(
-				'begin' => strtotime($date.' 14:00:00'),
-				'end' => strtotime($date.' 16:10:00'),
+				'begin' => strtotime($date.' 13:00:00'),
+				'end' => strtotime($date.' 13:50:00'),
 				'label' => '下午'
 				),
 			array(
-				'begin' => strtotime($date.' 19:00:00'),
-				'end' => strtotime($date.'20:30:00'),
+				'begin' => strtotime($date.' 18:30:00'),
+				'end' => strtotime($date.'19:30:00'),
 				'label' => '晚上'
 				)
 			);
