@@ -54,7 +54,7 @@ class Sign extends CI_Controller {
 		catch(Exception $e)
 		{
 			set_message($e->getCode() == 0 ? 'error' : 'success', $e->getCode() == 0 ? '失败' : '成功', $e->getMessage());
-			echo "<script>window.location.href='home'</script>";
+			echo "<script>window.location.href='../User/home'</script>";
 		}
 
 	}
@@ -132,6 +132,26 @@ class Sign extends CI_Controller {
 		}
 		output_data(1, '获取成功', $data);		
 
+	}
+
+	/**
+	 * 通过所有签到申请
+	 */
+	public function pass_all()
+	{
+		//config
+		
+		//pass
+		try
+		{
+			$this->load->model('Sign_model', 'sign');
+			$this->sign->pass_all();
+		}
+		catch (Exception $e)
+		{
+			set_message($e->getCode() == 0 ? 'error' : 'success', $e->getCode() == 0 ? '失败' : '成功', $e->getMessage());
+			echo "<script>window.location.href='application_list'</script>";
+		}
 	}
 
 }

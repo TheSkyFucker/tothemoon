@@ -482,6 +482,39 @@ class Sign_model extends CI_Model {
 	}
 
 	/**
+	 * 一键通过所有签到申请
+	 */
+	public function pass_all()
+	{
+		//config
+		$level_limit = 10;
+
+		//check token
+		$token = get_token();
+		$this->load->model('User_model', 'user');
+		$username = $this->user->check_user($token, $level_limit);
+
+		//get all id
+		$applications = $this->db->get('sign_application')
+			->result_array();
+		if ($applications)
+		{
+			foreach ($applications as $application) 
+			{
+				$application['result'] = 1;
+				$this->db->insert('sign_log', $application);
+				$this->update_visit($application);
+				$where = array('id' => $application['id']);
+				$this->db->delete('sign_application', $where);
+			}
+		}
+
+		//finish
+		throw new Exception("全部通过", 1);
+		
+	}
+
+	/**
 	 * 仪表盘
 	 */
 	/*public function dashboard()
